@@ -14,25 +14,75 @@
 
   body {
     background: #0a0a0a;
-    background-image: 
-      repeating-linear-gradient(0deg, rgba(230,126,34,0.02) 0px, rgba(230,126,34,0.02) 1px, transparent 1px, transparent 4px),
-      radial-gradient(circle at 30% 40%, rgba(230,126,34,0.04) 0%, transparent 70%);
     font-family: 'Special Elite', 'Share Tech Mono', 'Courier New', monospace;
     min-height: 100vh;
     color: #c8bcac;
     padding: 0 20px;
+    position: relative;
   }
 
-  /* ========== ВИНТАЖНЫЕ ЭФФЕКТЫ ========== */
-  .noise {
+  /* ========== ЭФФЕКТ МОНИТОРА / КИНЕСКОПА ========== */
+  /* 1. Сканирующая полоска */
+  .scan-line {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: repeating-radial-gradient(circle at 20% 30%, rgba(0,0,0,0.05) 0px, rgba(0,0,0,0.05) 2px, transparent 2px, transparent 4px);
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%);
+    animation: scan 8s linear infinite;
+    pointer-events: none;
+    z-index: 9997;
+  }
+
+  @keyframes scan {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+  }
+
+  /* 2. Эффект "сетки" / пиксельной шероховатости */
+  .crt::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(0deg, rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 1px, transparent 1px, transparent 2px);
     pointer-events: none;
     z-index: 9998;
+  }
+
+  /* 3. Эффект "выцветания по краям" (виньетка) */
+  .crt::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0) 50%, rgba(0,0,0,0.5) 100%);
+    pointer-events: none;
+    z-index: 9998;
+  }
+
+  /* 4. Тряска/дрожание для эффекта старого монитора */
+  @keyframes flicker {
+    0% { opacity: 0.97; }
+    5% { opacity: 0.99; }
+    10% { opacity: 0.94; }
+    15% { opacity: 0.98; }
+    20% { opacity: 0.96; }
+    100% { opacity: 0.98; }
+  }
+
+  .crt {
+    animation: flicker 0.15s infinite;
+  }
+
+  /* 5. Старый шрифт с тенью-гало */
+  .old-screen-text {
+    text-shadow: 0px 0px 3px rgba(230,126,34,0.3);
   }
 
   /* ========== ВЕРТИКАЛЬНАЯ ПОЛОСА ========== */
@@ -44,7 +94,7 @@
     width: 35px;
     background: linear-gradient(180deg, #b85c0a 0%, #e67e22 30%, #b85c0a 70%, #7a3a0a 100%);
     z-index: 1000;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+    box-shadow: 2px 0 8px rgba(0,0,0,0.6);
   }
 
   .vertical-stripe .stripe-text {
@@ -66,6 +116,7 @@
     margin: 0 auto;
     position: relative;
     padding-left: 45px;
+    z-index: 1;
   }
 
   /* ========== ШАПКА - ВИНТАЖ ========== */
@@ -85,7 +136,7 @@
     letter-spacing: 3px;
     color: #e67e22;
     font-family: 'Press Start 2P', monospace;
-    background: rgba(230,126,34,0.15);
+    background: rgba(230,126,34,0.12);
     padding: 4px 8px;
     display: inline-block;
     border-left: 2px solid #e67e22;
@@ -138,7 +189,7 @@
     color: #6a6a5a;
   }
 
-  /* ========== НАВИГАЦИЯ - ВЕРТИКАЛЬНАЯ (РАБОТАЕТ) ========== */
+  /* ========== НАВИГАЦИЯ - ВЕРТИКАЛЬНАЯ ========== */
   .side-nav {
     position: fixed;
     right: 20px;
@@ -497,9 +548,11 @@
   }
 </style>
 </head>
-<body>
+<body class="crt">
 
-<div class="noise"></div>
+<!-- ЭФФЕКТЫ СТАРОГО МОНИТОРА -->
+<div class="scan-line"></div>
+
 <div class="vertical-stripe">
   <div class="stripe-text">КГБ КПМ // КРАСНАЯ ЛИНИЯ</div>
 </div>
@@ -642,7 +695,4 @@
     </div>
 
     <div id="tab-operation" class="tab-content">
-      <div class="warning-footer" style="margin-bottom: 15px;">ОПЕРАЦИЯ «ГЕНСЕК» // СВЕДЕНИЯ О ЗАГОВОРЕ // УР. ДОСТУПА: ГЛАВА КГБ</div>
-      <div class="card"><div class="card-header"><div class="header-icon">⚙</div><div class="header-text">ПРЕДЫСТОРИЯ: КОРБУТ И ФЭЙСЯО</div></div><div class="card-body"><div style="font-size: 12px;">Чеслав Корбут и Фэйсяо познакомились в первые годы после катастрофы. Три зафиксированных разговора, ставших поворотными.</div></div></div>
-      <div class="dialogue-block"><div class="dialogue-header">РАЗГОВОР I // ТОННЕЛЬ «ДЗЕРЖИНСКАЯ–КРАСНЫЕ ВОРОТА»</div><div class="dialogue-line"><span class="speaker">КОРБУТ:</span> Вы понимаете, что Москвин ведёт линию к стене?</div><div class="dialogue-line"><span class="speaker">ФЭЙСЯО:</span> Это не моя проблема.</div><div class="dialogue-line"><span class="speaker">КОРБУТ:</span> Пока не ваша. Но станет.</div></div>
-      <div class="dialogue-block"><div class="dialogue-header">РАЗГОВОР II // КАБИНЕТ НА «ДЗЕРЖИНСКОЙ»</div><div class="dialogue-line"><span class="speaker">КОРБУТ:</span> Вы знаете, чем вы отличаетесь от других?</div><div class="dialogue-line"><span class="speaker">ФЭЙСЯО:</span> Тем, что говорю это вам в лицо.</div><div class="
+      <div class="warning-footer
