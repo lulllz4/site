@@ -92,8 +92,8 @@
 
   @keyframes horizontalJitter {
     0% { transform: translateX(0px); }
-    25% { transform: translateX(0.15px); }
-    75% { transform: translateX(-0.1px); }
+    33% { transform: translateX(0.05px); }
+    66% { transform: translateX(-0.05px); }
     100% { transform: translateX(0px); }
   }
 
@@ -107,7 +107,8 @@
     justify-content: center;
     box-shadow: inset 0 0 25px rgba(0,0,0,0.8);
     overflow: hidden;
-    animation: horizontalJitter 0.2s ease-in-out infinite;
+    animation: horizontalJitter 3s ease-in-out infinite;
+
   }
 
   .photo-container img {
