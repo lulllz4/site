@@ -643,5 +643,27 @@
     </div>
   </div>
 
-  <div class="footer">
-    <span>КГБ КПМ
+<div class="footer">
+    <span>КГБ КПМ // ФОРМА КГБ-7А // 2033</span>
+    <span>НЕСАНКЦИОНИРОВАННЫЙ ДОСТУП — РАССТРЕЛ</span>
+    <span>ДОС-КЛ-2033-009</span>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.querySelectorAll('.nav-btn');
+    buttons.forEach(button => {
+      button.addEventListener('click', function() {
+        const tabId = this.getAttribute('data-tab');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+        document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active-tab'));
+        document.getElementById('tab-' + tabId).classList.add('active-tab');
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
