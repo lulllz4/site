@@ -22,6 +22,22 @@
     position: relative;
   }
 
+  /* -------------------- ТЁМНЫЙ ФОН С ТЕКСТУРОЙ -------------------- */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      repeating-linear-gradient(45deg, rgba(139,0,0,0.02) 0px, rgba(139,0,0,0.02) 2px, transparent 2px, transparent 8px),
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 1px, transparent 1px, transparent 3px),
+      radial-gradient(ellipse at 30% 40%, rgba(50,0,0,0.15) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: -1;
+  }
+
   /* -------------------- ЭФФЕКТЫ ЭЛТ-МОНИТОРА -------------------- */
   .scan-line {
     position: fixed;
@@ -64,7 +80,7 @@
     z-index: 9998;
   }
 
-  /* -------------------- МЕРЦАНИЕ КАРТИНКИ (ЭФФЕКТ СТАРОГО МОНИТОРА) -------------------- */
+  /* -------------------- МЕРЦАНИЕ КАРТИНКИ -------------------- */
   @keyframes flickerImage {
     0% { opacity: 0.92; filter: grayscale(15%) contrast(1.1) brightness(1); }
     10% { opacity: 0.88; filter: grayscale(20%) contrast(1.15) brightness(0.98); }
@@ -97,10 +113,24 @@
     display: block;
   }
 
-  /* -------------------- МЕРЦАНИЕ ТАБЛИЦ И ТЕКСТА (ЭФФЕКТ НЕСТАБИЛЬНОГО СИГНАЛА) -------------------- */
+  /* -------------------- ТЕКСТ ТАБЛИЦ - БОЛЕЕ СВЕТЛЫЙ (СЕРЫЙ) -------------------- */
+  .card-body, .info-value, .timeline-card .desc, .dialogue-line {
+    animation: textFlicker 0.2s step-end infinite;
+    color: #d0d8e8;
+  }
+
+  .info-value {
+    color: #d0d8e8;
+  }
+
+  .timeline-card .desc {
+    color: #a8b8c8;
+  }
+
+  /* -------------------- МЕРЦАНИЕ ТАБЛИЦ И ТЕКСТА -------------------- */
   @keyframes textFlicker {
     0% { text-shadow: 0 0 0px rgba(200,0,0,0); }
-    50% { text-shadow: 0 0 1px rgba(200,0,0,0.3); }
+    50% { text-shadow: 0 0 1px rgba(200,0,0,0.2); }
     100% { text-shadow: 0 0 0px rgba(200,0,0,0); }
   }
 
@@ -117,10 +147,6 @@
     transition: all 0.2s;
     box-shadow: 4px 4px 0px rgba(0,0,0,0.4);
     animation: cardFlicker 0.3s ease-in-out infinite;
-  }
-
-  .card-body, .info-value, .timeline-card .desc, .dialogue-line {
-    animation: textFlicker 0.2s step-end infinite;
   }
 
   /* Более сильное мерцание для важных элементов */
@@ -186,6 +212,18 @@
     font-family: 'Press Start 2P', monospace;
   }
 
+  /* Дополнительная советская символика */
+  .vertical-stripe::after {
+    content: "☭";
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: #5a0a0a;
+    opacity: 0.4;
+  }
+
   .wrapper {
     max-width: 1300px;
     margin: 0 auto;
@@ -194,7 +232,7 @@
     z-index: 1;
   }
 
-  /* -------------------- ШАПКА -------------------- */
+  /* -------------------- ШАПКА С ДОПОЛНИТЕЛЬНЫМИ ЭЛЕМЕНТАМИ -------------------- */
   .secret-header {
     display: flex;
     justify-content: space-between;
@@ -204,6 +242,28 @@
     margin-bottom: 30px;
     flex-wrap: wrap;
     gap: 15px;
+    position: relative;
+  }
+
+  /* Декоративный уголок КГБ */
+  .secret-header::before {
+    content: "☭";
+    position: absolute;
+    bottom: -12px;
+    left: 0;
+    font-size: 14px;
+    color: #8b0000;
+    opacity: 0.3;
+  }
+
+  .secret-header::after {
+    content: "☭";
+    position: absolute;
+    bottom: -12px;
+    right: 0;
+    font-size: 14px;
+    color: #8b0000;
+    opacity: 0.3;
   }
 
   .stamp-left .security {
@@ -226,6 +286,7 @@
 
   .logo-center {
     text-align: center;
+    position: relative;
   }
 
   .logo-center .emblem {
@@ -289,6 +350,24 @@
     font-size: 18px;
     color: #8b0000;
     box-shadow: 0 0 5px rgba(139,0,0,0.2);
+    position: relative;
+  }
+
+  /* Дополнительная маркировка на кнопках */
+  .nav-btn::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 1px solid rgba(139,0,0,0.3);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .nav-btn:hover::before, .nav-btn.active::before {
+    opacity: 1;
   }
 
   .nav-btn:hover, .nav-btn.active {
@@ -318,13 +397,6 @@
     color: #8b0000;
   }
 
-  .card-body {
-    padding: 14px;
-    font-size: 12px;
-    line-height: 1.6;
-    color: #b8c6db;
-  }
-
   /* -------------------- ФОТО -------------------- */
   .photo-big {
     display: grid;
@@ -344,6 +416,19 @@
     box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
     overflow: hidden;
     animation: pulseBorder 3s ease-in-out infinite;
+  }
+
+  /* Рамка с погонами вокруг фото */
+  .photo-container::before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border: 1px solid rgba(139,0,0,0.3);
+    pointer-events: none;
+    z-index: 2;
   }
 
   .photo-stamp {
@@ -375,6 +460,18 @@
     margin-bottom: 8px;
     padding: 5px 0;
     border-bottom: 1px dotted #2a1a1a;
+    position: relative;
+  }
+
+  /* Декоративный маркер КГБ для каждой строки */
+  .info-row::before {
+    content: "⌑";
+    position: absolute;
+    left: -8px;
+    top: 5px;
+    font-size: 6px;
+    color: #8b0000;
+    opacity: 0.5;
   }
 
   .info-label {
@@ -388,7 +485,6 @@
   .info-value {
     flex: 1;
     font-size: 12px;
-    color: #c8bcac;
     font-family: monospace;
   }
 
@@ -419,6 +515,19 @@
     background: #1a1010;
     border: 1px solid #3a2a2a;
     box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
+    position: relative;
+  }
+
+  /* Дополнительная маркировка на полосах прогресса */
+  .stat-bar-container::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: -2px;
+    bottom: -2px;
+    width: 2px;
+    background: #8b0000;
+    opacity: 0.5;
   }
 
   .stat-fill {
@@ -440,6 +549,18 @@
     border-left: 3px solid #8b0000;
     padding: 10px 12px;
     box-shadow: 2px 2px 0px rgba(0,0,0,0.3);
+    position: relative;
+  }
+
+  /* Контрольный уголок КГБ на карточках таймлайна */
+  .timeline-card::after {
+    content: "⌑";
+    position: absolute;
+    bottom: 4px;
+    right: 6px;
+    font-size: 7px;
+    color: #8b0000;
+    opacity: 0.3;
   }
 
   .timeline-card .date {
@@ -457,7 +578,6 @@
 
   .timeline-card .desc {
     font-size: 10px;
-    color: #8a7a6a;
   }
 
   /* -------------------- СТРАНИЦЫ -------------------- */
@@ -475,6 +595,21 @@
     border: 1px solid #2a1a1a;
     padding: 14px;
     margin: 12px 0;
+    position: relative;
+  }
+
+  /* Гриф "Секретно" на диалогах */
+  .dialogue-block::before {
+    content: "СОВ. СЕКРЕТНО";
+    position: absolute;
+    top: -8px;
+    left: 10px;
+    font-size: 5px;
+    letter-spacing: 1px;
+    color: #8b0000;
+    background: #0a0c10;
+    padding: 0 4px;
+    font-family: monospace;
   }
 
   .dialogue-header {
@@ -512,6 +647,7 @@
     letter-spacing: 1px;
     color: #cc1a1a;
     font-family: monospace;
+    position: relative;
   }
 
   .redacted {
@@ -533,6 +669,30 @@
     color: #cc1a1a;
     border-top: 1px solid #2a1a1a;
     border-bottom: 1px solid #2a1a1a;
+    position: relative;
+  }
+
+  /* Звёздочки по краям предупреждения */
+  .warning-footer::before {
+    content: "★";
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 10px;
+    color: #8b0000;
+    opacity: 0.5;
+  }
+
+  .warning-footer::after {
+    content: "★";
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 10px;
+    color: #8b0000;
+    opacity: 0.5;
   }
 
   .footer {
@@ -544,6 +704,7 @@
     letter-spacing: 1px;
     border-top: 1px solid #1a1010;
     margin-top: 20px;
+    position: relative;
   }
 
   @media (max-width: 900px) {
@@ -563,6 +724,8 @@
     .nav-btn { width: 35px; height: 35px; font-size: 14px; }
     .wrapper { padding-left: 20px; padding-bottom: 70px; }
     .vertical-stripe { width: 20px; }
+    .vertical-stripe::after { font-size: 8px; bottom: 10px; }
+    .info-row::before { left: -12px; }
   }
 </style>
 </head>
@@ -609,8 +772,7 @@
       <div class="card">
         <div class="card-header"><span class="header-icon">■</span> [ КРАТКОЕ РЕЗЮМЕ ]</div>
         <div class="card-body"> Тинъюнь — уполномоченный комиссар по внешним связям и товарообмену Красной линии. Уроженка станции «Нагатинская», в восьмилетнем возрасте потерявшая родителей при её уничтожении мутантами в 2015 году. Была эвакуирована полевым отрядом Красной линии и с тех пор воспитана в партийной системе детских учреждений. Член партии. Абсолютно лояльна, идеологически устойчива, сочетает внешнюю мягкость с железной внутренней убеждённостью. <span class="blink-red">Ценится за выдающиеся переговорные навыки и способность добиваться уступок без применения грубой силы, пользуется доверием даже среди нейтральных и недружественных станций.</span> Личная преданность линии подкрепляется глубокой эмоциональной связью с коллективом, заменившим ей семью.
-
-</div>
+        </div>
       </div>
     </div>
 
@@ -621,9 +783,8 @@
           <div class="info-row"><div class="info-label">полное имя</div><div class="info-value">Тинъюнь Линь</div></div>
           <div class="info-row"><div class="info-label">позывной</div><div class="info-value blink-red">ЛИСИЦА</div></div>
           <div class="info-row"><div class="info-label">должность</div><div class="info-value">Уполномоченный комиссар по внешним связям и товарообмену</div></div>
-        
-          <div class="info-row"><div class="info-label">происхождение</div><div class="info-value">Мосва, Россия</div></div>
-          <div class="info-row"><div class="info-label">дата рождения</div><div class="info-value">26 апреля 2007г. (26 лет)</div></div>
+          <div class="info-row"><div class="info-label">происхождение</div><div class="info-value">Москва, Россия</div></div>
+          <div class="info-row"><div class="info-label">дата рождения</div><div class="info-value">26 апреля 2007 г. (26 лет)</div></div>
         </div>
       </div>
       <div class="card">
@@ -642,10 +803,10 @@
       <div class="card-header"><span class="header-icon">●</span> [ КЛЮЧЕВЫЕ СОБЫТИЯ — 2033 ]</div>
       <div class="card-body">
         <div class="horizontal-timeline">
-          <div class="timeline-card"><div class="date blink-red">МАЙ 2033</div><div class="title">Битва за «Комсомольскую»</div><div class="desc">Ганза захватила станцию. Фэйсяо сыграла ключевую роль в контрнаступлении.</div></div>
-          <div class="timeline-card"><div class="date blink-red">ИЮН 2033</div><div class="title">Переворот. Москвин расстрелян</div><div class="desc">Фэйсяо становится Генеральным Секретарём.</div></div>
-          <div class="timeline-card"><div class="date">СЕН 2033</div><div class="title">Инцидент с телом Ленина</div><div class="desc">Анархисты угнали поезд. Вина возложена на Рейх.</div></div>
-          <div class="timeline-card"><div class="date">НОЯ 2033</div><div class="title">Активизация войны</div><div class="desc">Красная Линия начинает наступление.</div></div>
+          <div class="timeline-card"><div class="date blink-red">2015</div><div class="title">Гибель станции «Нагатинская»</div><div class="desc">Эвакуирована полевым отрядом, потеря родителей.</div></div>
+          <div class="timeline-card"><div class="date blink-red">2028</div><div class="title">Начало карьеры</div><div class="desc">Вступление в партию, первые успехи в переговорах.</div></div>
+          <div class="timeline-card"><div class="date blink-red">2031</div><div class="title">Должность комиссара</div><div class="desc">Назначена уполномоченным по внешним связям.</div></div>
+          <div class="timeline-card"><div class="date">2033</div><div class="title">Пик карьеры</div><div class="desc">Ключевые договорённости с нейтральными станциями.</div></div>
         </div>
       </div>
     </div>
@@ -655,51 +816,39 @@
   <div id="page-bio" class="page">
     <div class="photo-big">
       <div class="photo-container">
-        <img src="photo.jpg" alt="Фото Фэйсяо">
+        <img src="photo.jpg" alt="Фото Тинъюнь">
         <div class="photo-stamp blink-red">КГБ // ПОДТВ.</div>
       </div>
       <div class="card">
         <div class="card-header"><span class="header-icon">●</span> [ ЛИЧНОЕ ДЕЛО ]</div>
-        <div class="card-body">Полное досье объекта Фэн Фэйсяо. Бывший лейтенант НОАК, участник секретного проекта «Шёлковый Щит».</div>
-      </div>
-    </div>
-
-    <div class="content-grid">
-      <div class="card">
-        <div class="card-header"><span class="header-icon">●</span> [ ПРОИСХОЖДЕНИЕ ]</div>
-        <div class="card-body">
-          <div class="info-row"><div class="info-label">место рождения</div><div class="info-value">Пекин, КНР</div></div>
-          <div class="info-row"><div class="info-label">семья</div><div class="info-value">Отец — партийный работник, мать — профессор</div></div>
-          <div class="info-row"><div class="info-label">прозвище</div><div class="info-value blink-red">Фэйсяо («Летящее Копьё»)</div></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header"><span class="header-icon">●</span> [ ПРОЕКТ «ШЁЛКОВЫЙ ЩИТ» ]</div>
-        <div class="card-body">
-          <div class="info-row"><div class="info-label">статус</div><div class="info-value blink-red">Сверхсекретно</div></div>
-          <div class="info-row"><div class="info-label">роль</div><div class="info-value">Ключевой военный координатор</div></div>
-          <div class="info-row"><div class="info-label">инцидент</div><div class="info-value">Взрыв, ЧМТ, шрам на спине (скрывает)</div></div>
-        </div>
+        <div class="card-body">Полное досье объекта Тинъюнь Линь. Уполномоченный комиссар по внешним связям, ключевая фигура в дипломатическом корпусе Красной линии.</div>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-header"><span class="header-icon">●</span> [ ХРОНОЛОГИЯ ]</div>
+      <div class="card-header"><span class="header-icon">●</span> [ ДЕТСТВО И ЮНОСТЬ ]</div>
       <div class="card-body">
-        <div class="horizontal-timeline">
-          <div class="timeline-card"><div class="date">1993</div><div class="title">Рождение в Пекине</div><div class="desc">Образцовая партийная семья.</div></div>
-          <div class="timeline-card"><div class="date blink-red">2013</div><div class="title">Проект «Шёлковый Щит»</div><div class="desc">Командировка в Москву.</div></div>
-          <div class="timeline-card"><div class="date blink-red">6 ИЮЛЯ 2013</div><div class="title">День катастрофы</div><div class="desc">Вывод группы на «Красные Ворота».</div></div>
-        </div>
+        <div class="info-row"><div class="info-label">ранние годы</div><div class="info-value">Родилась на станции «Нагатинская». В 2015 году станция уничтожена мутантами.</div></div>
+        <div class="info-row"><div class="info-label">эвакуация</div><div class="info-value">Спасена полевым отрядом Красной линии. Точные обстоятельства операции засекречены.</div></div>
+        <div class="info-row"><div class="info-label">воспитание</div><div class="info-value">Партийная система детских учреждений. Проявила выдающиеся способности к изучению языков и дипломатии.</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span class="header-icon">●</span> [ КАРЬЕРА ]</div>
+      <div class="card-body">
+        <div class="info-row"><div class="info-label">2024-2028</div><div class="info-value">Помощник комиссара по внешним связям на станции «Добрынинская».</div></div>
+        <div class="info-row"><div class="info-label">2028-2031</div><div class="info-value">Куратор переговорных миссий с Ганзой и независимыми станциями.</div></div>
+        <div class="info-row"><div class="info-label">2031-наст.</div><div class="info-value blink-red">Уполномоченный комиссар по внешним связям и товарообмену.</div></div>
       </div>
     </div>
 
     <div class="card">
       <div class="card-header"><span class="header-icon">●</span> [ ВООРУЖЕНИЕ ]</div>
       <div class="card-body">
-        <div class="info-row"><div class="info-label">основное</div><div class="info-value">QSZ-92 (китайский пистолет)</div></div>
-        <div class="info-row"><div class="info-label">вспомогательное</div><div class="info-value">Метательные ножи (x4-6)</div></div>
-        <div class="info-row"><div class="info-label">специальное</div><div class="info-value blink-red">Пневматический «Тихарь»</div></div>
+        <div class="info-row"><div class="info-label">основное</div><div class="info-value">Пистолет ПММ (модернизированный Макарова)</div></div>
+        <div class="info-row"><div class="info-label">носимое</div><div class="info-value">Радиостанция Р-105, сигнальные патроны</div></div>
+        <div class="info-row"><div class="info-label">специальное</div><div class="info-value blink-red">Наручники с маркировкой КГБ</div></div>
       </div>
     </div>
   </div>
@@ -708,69 +857,57 @@
   <div id="page-psych" class="page">
     <div class="photo-big">
       <div class="photo-container">
-        <img src="photo.jpg" alt="Фото Фэйсяо">
+        <img src="photo.jpg" alt="Фото Тинъюнь">
         <div class="photo-stamp blink-red">КГБ // ПОДТВ.</div>
       </div>
       <div class="card">
         <div class="card-header"><span class="header-icon">●</span> [ ПСИХОЛОГИЧЕСКИЙ ПРОФИЛЬ ]</div>
-        <div class="card-body"><span class="blink-red">Фэйсяо</span> — жёсткая, как хорошо закалённый металл. Говорит прямо, смотрит в глаза. <span class="blink-red">Видит ложь раньше, чем та заканчивается.</span></div>
+        <div class="card-body"><span class="blink-red">Тинъюнь</span> — сочетает внешнюю мягкость с железной внутренней убеждённостью. <span class="blink-red">Исключительно лояльна, идеологически устойчива.</span> Умеет расположить к себе даже недружественно настроенных собеседников.</div>
       </div>
     </div>
 
     <div class="content-grid">
-      <div class="card"><div class="card-header"><span class="header-icon">◈</span> ПРЯМОЛИНЕЙНОСТЬ</div><div class="card-body">Говорит то, что думает, без дипломатических смягчений.</div></div>
-      <div class="card"><div class="card-header"><span class="header-icon">◈</span> ОТСУТСТВИЕ СОЖАЛЕНИЙ</div><div class="card-body">Принятые решения не пересматривает. Ошибки анализирует как данные.</div></div>
-      <div class="card"><div class="card-header"><span class="header-icon">◈</span> ЦЕЛЬ ЗА ГОРИЗОНТОМ</div><div class="card-body">Построить государство для возвращения на поверхность.</div></div>
-      <div class="card"><div class="card-header"><span class="header-icon">◈</span> РЕАКЦИЯ НА УГРОЗУ</div><div class="card-body">Холодная ясность. Немедленный анализ. Никакой паники.</div></div>
+      <div class="card"><div class="card-header"><span class="header-icon">◈</span> ЭМПАТИЯ</div><div class="card-body">Исключительно высокий уровень эмпатии. Считывает эмоции собеседника до того, как они проявлены внешне.</div></div>
+      <div class="card"><div class="card-header"><span class="header-icon">◈</span> ХАРИЗМА</div><div class="card-body">99-й процентиль. Располагает к себе интуитивно, без явных усилий.</div></div>
+      <div class="card"><div class="card-header"><span class="header-icon">◈</span> АДАПТИВНОСТЬ</div><div class="card-body">Мгновенно подстраивает стиль общения под собеседника, сохраняя свою цель.</div></div>
+      <div class="card"><div class="card-header"><span class="header-icon">◈</span> СТРЕССОУСТОЙЧИВОСТЬ</div><div class="card-body">Высокая. Держит удар, не переходит на личные оскорбления, добивается своего.</div></div>
     </div>
 
-    <div class="card"><div class="card-header"><span class="header-icon">◈</span> ОДИНОЧЕСТВО</div><div class="card-body">Раз в неделю уходит в заброшенный тоннель. Задаёт вопросы вслух, на китайском.</div></div>
-    <div class="card"><div class="card-header"><span class="header-icon">◈</span> ИМЯ</div><div class="card-body">Никто в метро не знает имени <span class="blink-red">«Саран»</span>. Это остаётся только в тоннелях.</div></div>
+    <div class="card"><div class="card-header"><span class="header-icon">◈</span> ПРЕДАННОСТЬ ПАРТИИ</div><div class="card-body">Абсолютная. Воспринимает Красную линию как единственную семью. Исключает любые намёки на предательство.</div></div>
+    <div class="card"><div class="card-header"><span class="header-icon">◈</span> СОЦИАБИЛЬНОСТЬ</div><div class="card-body">Легко заводит полезные контакты. Помнит имена, обстоятельства, личные детали всех значимых собеседников.</div></div>
   </div>
 
-  <!-- СТРАНИЦА 4: ОПЕРАЦИЯ «ГЕНСЕК» -->
+  <!-- СТРАНИЦА 4: СПЕЦИАЛЬНЫЕ ОПЕРАЦИИ -->
   <div id="page-operation" class="page">
-    <div class="warning-footer blink-red">[ ОПЕРАЦИЯ «ГЕНСЕК» // СВЕДЕНИЯ О ЗАГОВОРЕ // УР. ДОСТУПА: ГЛАВА КГБ ]</div>
+    <div class="warning-footer blink-red">[ МАТЕРИАЛЫ ПО СПЕЦИАЛЬНЫМ ОПЕРАЦИЯМ // ГРИФ "СОВ. СЕКРЕТНО" ]</div>
 
     <div class="photo-big">
       <div class="photo-container">
-        <img src="photo.jpg" alt="Фото Фэйсяо">
+        <img src="photo.jpg" alt="Фото Тинъюнь">
         <div class="photo-stamp blink-red">КГБ // ПОДТВ.</div>
       </div>
       <div class="card">
-        <div class="card-header"><span class="header-icon">■</span> [ ПРЕДЫСТОРИЯ: КОРБУТ И ФЭЙСЯО ]</div>
-        <div class="card-body">Чеслав Корбут и Фэйсяо познакомились в первые годы после катастрофы. Три зафиксированных разговора, ставших поворотными.</div>
+        <div class="card-header"><span class="header-icon">■</span> [ УЧАСТИЕ В ОПЕРАЦИЯХ ]</div>
+        <div class="card-body">Тинъюнь принимала участие в нескольких ключевых переговорных миссиях. Как правило, действует как официальный представитель, реже — под легендой. Физического участия в боевых операциях не принимает.</div>
       </div>
     </div>
 
     <div class="dialogue-block">
-      <div class="dialogue-header blink-red">// РАЗГОВОР I // ТОННЕЛЬ //</div>
-      <div class="dialogue-line"><span class="speaker">КОРБУТ:</span> Вы понимаете, что Москвин ведёт линию к стене?</div>
-      <div class="dialogue-line"><span class="speaker">ФЭЙСЯО:</span> Это не моя проблема.</div>
-      <div class="dialogue-line"><span class="speaker">КОРБУТ:</span> Пока не ваша. Но станет.</div>
+      <div class="dialogue-header blink-red">// ОПЕРАЦИЯ «ДОВЕРИЕ» // 2032 //</div>
+      <div class="dialogue-line"><span class="speaker">Из отчёта:</span> Успешно убедила представителей станции «Профсоюзная» заключить эксклюзивный договор на поставку электроэнергии, обойдя конкурентов из Ганзы.</div>
     </div>
 
     <div class="dialogue-block">
-      <div class="dialogue-header blink-red">// РАЗГОВОР II // КАБИНЕТ //</div>
-      <div class="dialogue-line"><span class="speaker">КОРБУТ:</span> Вы отличаетесь от других офицеров.</div>
-      <div class="dialogue-line"><span class="speaker">ФЭЙСЯО:</span> Тем, что говорю это вам в лицо.</div>
-      <div class="dialogue-line"><span class="speaker">КОРБУТ:</span> Солдаты идут за вами — потому что хотят. Это ресурс.</div>
-    </div>
-
-    <div class="dialogue-block">
-      <div class="dialogue-header blink-red">// РАЗГОВОР III // ПОСЛЕ ИНЦИДЕНТА //</div>
-      <div class="dialogue-line"><span class="speaker">КОРБУТ:</span> Момент настал.</div>
-      <div class="dialogue-line"><span class="speaker">ФЭЙСЯО:</span> А что получу я?</div>
-      <div class="dialogue-line"><span class="speaker">КОРБУТ:</span> Государство. Честный обмен.</div>
+      <div class="dialogue-header blink-red">// ОПЕРАЦИЯ «МОСТ» // 2033 //</div>
+      <div class="dialogue-line"><span class="speaker">Из отчёта:</span> Добилась пропуска караванов Красной линии через территорию, контролируемую нейтральной станцией «Серпуховская», без оплаты пошлины.</div>
     </div>
 
     <div class="card">
-      <div class="card-header"><span class="header-icon">●</span> [ ИТОГ ОПЕРАЦИИ ]</div>
+      <div class="card-header"><span class="header-icon">●</span> [ ИТОГИ РАБОТЫ ]</div>
       <div class="card-body">
-        <div class="info-row"><div class="info-label">обвинение</div><div class="info-value">Коррупция и отступление от линии партии</div></div>
-        <div class="info-row"><div class="info-label">приговор</div><div class="info-value blink-red">Расстрел. Исполнен.</div></div>
-        <div class="info-row"><div class="info-label">факт заговора</div><div class="info-value blink-red">СКРЫТ ПОЛНОСТЬЮ</div></div>
-        <div class="info-row"><div class="info-label">официальная версия</div><div class="info-value">Тело Ленина похищено Рейхом</div></div>
+        <div class="info-row"><div class="info-label">договорённости</div><div class="info-value">Заключено 12 долгосрочных соглашений.</div></div>
+        <div class="info-row"><div class="info-label">оценка руководства</div><div class="info-value blink-red">Исключительно положительная.</div></div>
+        <div class="info-row"><div class="info-label">перспективы</div><div class="info-value">Включена в резерв на выдвижение в Политбюро.</div></div>
       </div>
     </div>
   </div>
@@ -779,42 +916,41 @@
   <div id="page-medical" class="page">
     <div class="photo-big">
       <div class="photo-container">
-        <img src="photo.jpg" alt="Фото Фэйсяо">
+        <img src="photo.jpg" alt="Фото Тинъюнь">
         <div class="photo-stamp blink-red">КГБ // ПОДТВ.</div>
       </div>
       <div class="card">
         <div class="card-header"><span class="header-icon">●</span> [ МЕДИЦИНСКАЯ КАРТА // СОВ. СЕКРЕТНО ]</div>
-        <div class="card-body">Полное медицинское досье объекта. Информация категории <span class="blink-red">«Особая важность»</span>.</div>
+        <div class="card-body">Полное медицинское досье объекта. Информация категории <span class="blink-red">«Особая важность»</span>. Общее состояние — удовлетворительное.</div>
       </div>
     </div>
 
     <div class="content-grid">
       <div class="card">
-        <div class="card-header"><span class="header-icon">●</span> [ ДИАГНОЗЫ ]</div>
+        <div class="card-header"><span class="header-icon">●</span> [ ОСНОВНЫЕ ПОКАЗАТЕЛИ ]</div>
         <div class="card-body">
-          <div class="info-row"><div class="info-label">основной</div><div class="info-value blink-red">Наследственная эпилепсия гиппокампального типа</div></div>
-          <div class="info-row"><div class="info-label">этиология</div><div class="info-value">Наследственность + ЧМТ (2013) + стресс</div></div>
-          <div class="info-row"><div class="info-label">частота</div><div class="info-value">Нерегулярно. Учащение при стрессе</div></div>
-          <div class="info-row"><div class="info-label">скрывает</div><div class="info-value blink-red">ДА. Рапортов не подавала</div></div>
+          <div class="info-row"><div class="info-label">группа крови</div><div class="info-value">2-я положительная</div></div>
+          <div class="info-row"><div class="info-label">хронические заболевания</div><div class="info-value">Не выявлены</div></div>
+          <div class="info-row"><div class="info-label">аллергии</div><div class="info-value">Пенициллин (подтверждено)</div></div>
+          <div class="info-row"><div class="info-label">психическое здоровье</div><div class="info-value blink-red">Устойчива. В стрессовых ситуациях — холодный рассудок.</div></div>
         </div>
       </div>
       <div class="card">
-        <div class="card-header"><span class="header-icon">●</span> [ КЛИНИЧЕСКАЯ КАРТИНА ]</div>
+        <div class="card-header"><span class="header-icon">●</span> [ ОГРАНИЧЕНИЯ ]</div>
         <div class="card-body">
-          <div class="timeline-card"><div class="title blink-red">Стадия I — Предвестники</div><div class="desc">Металл на языке. Даёт несколько секунд.</div></div>
-          <div class="timeline-card"><div class="title blink-red">Стадия II — Нарастание</div><div class="desc">Ощущение плотности воздуха. Иррациональный страх.</div></div>
-          <div class="timeline-card"><div class="title blink-red">Стадия III — Приступ</div><div class="desc">Белый шум. Потеря ориентации.</div></div>
-          <div class="timeline-card"><div class="title">Стадия IV — Постиктальный период</div><div class="desc">Медленное возвращение. Опасна для окружающих.</div></div>
+          <div class="info-row"><div class="info-label">физические</div><div class="info-value">Не рекомендуется длительное физическое перенапряжение.</div></div>
+          <div class="info-row"><div class="info-label">боевые</div><div class="info-value">Тактическая группа прикрытия обязательна.</div></div>
+          <div class="info-row"><div class="info-label">режим работы</div><div class="info-value">Нормированный, с возможностью экстренной мобилизации.</div></div>
         </div>
       </div>
     </div>
 
     <div class="dialogue-block">
-      <div class="dialogue-header blink-red">[ ИНЦИДЕНТ С БОЙЦОМ ]</div>
-      <div class="dialogue-line">Один из бойцов последовал за ней во время приступа. <span class="blink-red">Сломанная ключица.</span> Больше никто не следует.</div>
+      <div class="dialogue-header blink-red">[ ЗАКЛЮЧЕНИЕ МЕДИЦИНСКОЙ КОМИССИИ ]</div>
+      <div class="dialogue-line">Объект годен к исполнению обязанностей с незначительными ограничениями. Рекомендовано ежегодное углублённое обследование.</div>
     </div>
 
-    <div class="warning-footer blink-red">[ ОПЕРАТИВНОЕ ЗАМЕЧАНИЕ: ЛИЧНОСТЬ БОЙЦА УСТАНОВЛЕНА. ДАННЫЕ ЗАСЕКРЕЧЕНЫ ]</div>
+    <div class="warning-footer blink-red">[ ОПЕРАТИВНОЕ ЗАМЕЧАНИЕ: ЛИЧНОСТЬ ОБЪЕКТА ПОДЛЕЖИТИТ ЗАЩИТЕ. ДАННЫЕ О МЕСТОНАХОЖДЕНИИ НЕ РАЗГЛАШАТЬ ]</div>
   </div>
 
   <div class="footer">
