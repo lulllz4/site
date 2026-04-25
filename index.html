@@ -21,8 +21,7 @@
     position: relative;
   }
 
-  /* ========== ЭФФЕКТ МОНИТОРА / КИНЕСКОПА ========== */
-  /* 1. Сканирующая полоска */
+  /* ========== ЭФФЕКТ СТАРОГО МОНИТОРА ========== */
   .scan-line {
     position: fixed;
     top: 0;
@@ -40,7 +39,6 @@
     100% { transform: translateY(100%); }
   }
 
-  /* 2. Эффект "сетки" / пиксельной шероховатости */
   .crt::before {
     content: "";
     position: fixed;
@@ -53,7 +51,6 @@
     z-index: 9998;
   }
 
-  /* 3. Эффект "выцветания по краям" (виньетка) */
   .crt::after {
     content: "";
     position: fixed;
@@ -66,7 +63,6 @@
     z-index: 9998;
   }
 
-  /* 4. Тряска/дрожание для эффекта старого монитора */
   @keyframes flicker {
     0% { opacity: 0.97; }
     5% { opacity: 0.99; }
@@ -78,11 +74,6 @@
 
   .crt {
     animation: flicker 0.15s infinite;
-  }
-
-  /* 5. Старый шрифт с тенью-гало */
-  .old-screen-text {
-    text-shadow: 0px 0px 3px rgba(230,126,34,0.3);
   }
 
   /* ========== ВЕРТИКАЛЬНАЯ ПОЛОСА ========== */
@@ -119,7 +110,7 @@
     z-index: 1;
   }
 
-  /* ========== ШАПКА - ВИНТАЖ ========== */
+  /* ========== ШАПКА ========== */
   .secret-header {
     display: flex;
     justify-content: space-between;
@@ -189,7 +180,7 @@
     color: #6a6a5a;
   }
 
-  /* ========== НАВИГАЦИЯ - ВЕРТИКАЛЬНАЯ ========== */
+  /* ========== НАВИГАЦИЯ ========== */
   .side-nav {
     position: fixed;
     right: 20px;
@@ -231,7 +222,7 @@
     border-color: #f39c12;
   }
 
-  /* ========== СЕТКА КОНТЕНТА ========== */
+  /* ========== КАРТОЧКИ ========== */
   .content-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -239,7 +230,6 @@
     margin-bottom: 20px;
   }
 
-  /* ========== КАРТОЧКИ - ВИНТАЖНЫЕ ========== */
   .card {
     background: #0f0f0f;
     border: 1px solid #2a2a2a;
@@ -277,7 +267,7 @@
     padding: 14px;
   }
 
-  /* ========== ФОТО-ОБЛАСТЬ ========== */
+  /* ========== ФОТО ========== */
   .photo-big {
     grid-column: span 2;
     display: grid;
@@ -319,7 +309,7 @@
     background: rgba(0,0,0,0.7);
   }
 
-  /* ========== ИНФО-СТРОКИ ========== */
+  /* ========== ИНФО ========== */
   .info-row {
     display: flex;
     flex-wrap: wrap;
@@ -345,7 +335,7 @@
     font-family: monospace;
   }
 
-  /* ========== ПОЛЗУНКИ (ВИНТАЖНЫЕ) ========== */
+  /* ========== ПОЛЗУНКИ ========== */
   .stat-item {
     margin-bottom: 14px;
   }
@@ -384,7 +374,7 @@
     position: relative;
   }
 
-  /* ========== ГОРИЗОНТАЛЬНЫЙ ТАЙМЛАЙН ========== */
+  /* ========== ТАЙМЛАЙН ========== */
   .horizontal-timeline {
     display: flex;
     overflow-x: auto;
@@ -420,7 +410,7 @@
     line-height: 1.5;
   }
 
-  /* ========== ТАБЫ СОДЕРЖИМОГО ========== */
+  /* ========== ТАБЫ ========== */
   .tab-container {
     margin-top: 20px;
   }
@@ -515,10 +505,7 @@
 
   /* ========== АДАПТИВ ========== */
   @media (max-width: 900px) {
-    .content-grid {
-      grid-template-columns: 1fr;
-    }
-    .photo-big {
+    .content-grid, .photo-big {
       grid-template-columns: 1fr;
     }
     .side-nav {
@@ -550,7 +537,6 @@
 </head>
 <body class="crt">
 
-<!-- ЭФФЕКТЫ СТАРОГО МОНИТОРА -->
 <div class="scan-line"></div>
 
 <div class="vertical-stripe">
@@ -600,7 +586,6 @@
 
   <!-- ОСНОВНАЯ СЕТКА -->
   <div class="content-grid">
-    <!-- ЛИЧНЫЕ ДАННЫЕ -->
     <div class="card">
       <div class="card-header">
         <div class="header-icon">●</div>
@@ -617,7 +602,6 @@
       </div>
     </div>
 
-    <!-- БОЕВОЙ ПРОФИЛЬ (ПОЛЗУНКИ) -->
     <div class="card">
       <div class="card-header">
         <div class="header-icon">◉</div>
@@ -660,18 +644,10 @@
     <div class="nav-btn" data-tab="medical">☠</div>
   </div>
 
-  <!-- ТАБЫ -->
+  <!-- ТАБЫ С СОДЕРЖИМЫМ -->
   <div class="tab-container">
-
     <div id="tab-overview" class="tab-content active-tab">
-      <div class="tags-cloud">
-        <span class="tag">Красная Линия</span>
-        <span class="tag">КГБ</span>
-        <span class="tag">Проект «Шёлковый Щит»</span>
-        <span class="tag">НОАК</span>
-        <span class="tag">Корбут</span>
-        <span class="tag">Москвин</span>
-      </div>
+      <div class="tags-cloud"><span class="tag">Красная Линия</span><span class="tag">КГБ</span><span class="tag">Проект «Шёлковый Щит»</span><span class="tag">НОАК</span><span class="tag">Корбут</span><span class="tag">Москвин</span></div>
       <div class="card"><div class="card-header"><div class="header-icon">▶</div><div class="header-text">ПЕКИН // ДО КАТАСТРОФЫ</div></div><div class="card-body"><div style="font-size: 12px; line-height: 1.7;">Родилась в Пекине в образцовой семье. Отец — высокопоставленный партийный работник, мать — профессор филологии. Отказалась от карьеры в кабинетах. Поступила в военное училище сама. Прозвище «Фэйсяо» (пер. «Летящее Копьё») получила от сослуживцев.</div></div></div>
       <div class="card"><div class="card-header"><div class="header-icon">▶</div><div class="header-text">6 ИЮЛЯ 2013 // ДЕНЬ КАТАСТРОФЫ</div></div><div class="card-body"><div style="font-size: 12px; line-height: 1.7;">Ядерные удары застала в московском бункере. Связь с Пекином оборвалась. Используя знания протоколов «Щита», вывела группу уцелевших коллег на станцию «Красные Ворота».</div></div></div>
       <div class="card"><div class="card-header"><div class="header-icon">▶</div><div class="header-text">ВСТУПЛЕНИЕ В КРАСНУЮ ЛИНИЮ</div></div><div class="card-body"><div style="font-size: 12px; line-height: 1.7;">Примкнула к Красной Линии из-за их идеи ленинизма в чистом виде. Военный опыт вывел на должность быстро. Обратила на себя внимание Корбута.</div></div></div>
@@ -695,4 +671,6 @@
     </div>
 
     <div id="tab-operation" class="tab-content">
-      <div class="warning-footer
+      <div class="warning-footer" style="margin-bottom: 15px;">ОПЕРАЦИЯ «ГЕНСЕК» // СВЕДЕНИЯ О ЗАГОВОРЕ // УР. ДОСТУПА: ГЛАВА КГБ</div>
+      <div class="card"><div class="card-header"><div class="header-icon">⚙</div><div class="header-text">ПРЕДЫСТОРИЯ: КОРБУТ И ФЭЙСЯО</div></div><div class="card-body"><div style="font-size: 12px;">Чеслав Корбут и Фэйсяо познакомились в первые годы после катастрофы. Три зафиксированных разговора, ставших поворотными.</div></div></div>
+      <div class="dialogue-block"><div class="dialogue-header">РАЗГОВОР I // ТОННЕЛЬ «ДЗЕРЖИНСКАЯ–КРАСНЫЕ ВОРОТА»</div><div class="dialogue-line"><span class="speaker">КОРБУТ:</span> Вы понимаете, что Москвин ведёт линию к стене?</div><div class="dialogue-line"><span class="speaker">ФЭЙСЯО:</span> Это не моя проблема.</div><div class="dialogue-line"><span class="speaker">
