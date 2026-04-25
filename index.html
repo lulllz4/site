@@ -15,35 +15,49 @@
   body {
     background: #0a0a0a;
     background-image: 
-      repeating-linear-gradient(45deg, rgba(230,126,34,0.02) 0px, rgba(230,126,34,0.02) 2px, transparent 2px, transparent 8px),
-      radial-gradient(circle at 30% 40%, rgba(230,126,34,0.05) 0%, transparent 60%);
-    font-family: 'Special Elite', 'Share Tech Mono', monospace;
+      repeating-linear-gradient(0deg, rgba(230,126,34,0.02) 0px, rgba(230,126,34,0.02) 1px, transparent 1px, transparent 4px),
+      radial-gradient(circle at 30% 40%, rgba(230,126,34,0.04) 0%, transparent 70%);
+    font-family: 'Special Elite', 'Share Tech Mono', 'Courier New', monospace;
     min-height: 100vh;
-    color: #d4c8b8;
+    color: #c8bcac;
     padding: 0 20px;
   }
 
-  /* ========== ВЕРТИКАЛЬНАЯ ПОЛОСА СЛЕВА ========== */
+  /* ========== ВИНТАЖНЫЕ ЭФФЕКТЫ ========== */
+  .noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-radial-gradient(circle at 20% 30%, rgba(0,0,0,0.05) 0px, rgba(0,0,0,0.05) 2px, transparent 2px, transparent 4px);
+    pointer-events: none;
+    z-index: 9998;
+  }
+
+  /* ========== ВЕРТИКАЛЬНАЯ ПОЛОСА ========== */
   .vertical-stripe {
     position: fixed;
     left: 0;
     top: 0;
     bottom: 0;
-    width: 40px;
-    background: linear-gradient(180deg, #e67e22 0%, #b85c0a 50%, #e67e22 100%);
+    width: 35px;
+    background: linear-gradient(180deg, #b85c0a 0%, #e67e22 30%, #b85c0a 70%, #7a3a0a 100%);
     z-index: 1000;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.5);
   }
 
   .vertical-stripe .stripe-text {
     position: absolute;
-    bottom: 40px;
+    bottom: 50px;
     left: 50%;
     transform: translateX(-50%) rotate(-90deg);
     white-space: nowrap;
-    font-size: 10px;
-    letter-spacing: 4px;
-    color: #0a0a0a;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: #1a1a1a;
     font-weight: bold;
+    font-family: 'Press Start 2P', monospace;
   }
 
   /* ========== ОСНОВНОЙ КОНТЕЙНЕР ========== */
@@ -51,23 +65,19 @@
     max-width: 1300px;
     margin: 0 auto;
     position: relative;
-    padding-left: 40px;
+    padding-left: 45px;
   }
 
-  /* ========== ШАПКА - ДРУГАЯ ========== */
+  /* ========== ШАПКА - ВИНТАЖ ========== */
   .secret-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     padding: 20px 0;
-    border-bottom: 2px dashed #e67e22;
+    border-bottom: 2px solid #e67e22;
     margin-bottom: 30px;
     flex-wrap: wrap;
     gap: 15px;
-  }
-
-  .stamp-left {
-    text-align: left;
   }
 
   .stamp-left .security {
@@ -75,15 +85,17 @@
     letter-spacing: 3px;
     color: #e67e22;
     font-family: 'Press Start 2P', monospace;
-    background: rgba(230,126,34,0.1);
+    background: rgba(230,126,34,0.15);
     padding: 4px 8px;
     display: inline-block;
+    border-left: 2px solid #e67e22;
   }
 
   .stamp-left .number {
-    font-size: 10px;
+    font-size: 9px;
     margin-top: 8px;
-    color: #888;
+    color: #6a6a5a;
+    font-family: monospace;
   }
 
   .logo-center {
@@ -91,44 +103,42 @@
   }
 
   .logo-center .emblem {
-    font-size: 36px;
-    color: #f39c12;
-    text-shadow: 0 0 10px rgba(243,156,18,0.5);
+    font-size: 32px;
+    color: #e67e22;
+    text-shadow: 2px 2px 0px #3a1a00;
   }
 
   .logo-center .title {
     font-family: 'Press Start 2P', monospace;
-    font-size: 16px;
-    letter-spacing: 3px;
+    font-size: 14px;
+    letter-spacing: 2px;
     color: #f39c12;
-    margin-top: 8px;
+    margin-top: 6px;
+    text-shadow: 1px 1px 0px #3a1a00;
   }
 
   .logo-center .sub {
-    font-size: 8px;
+    font-size: 7px;
     letter-spacing: 2px;
-    color: #888;
-  }
-
-  .stamp-right {
-    text-align: right;
+    color: #7a6a5a;
   }
 
   .stamp-right .status {
-    font-size: 10px;
-    color: #e67e22;
+    font-size: 9px;
+    color: #f39c12;
     border: 1px solid #e67e22;
-    padding: 4px 12px;
+    padding: 3px 12px;
     display: inline-block;
+    background: rgba(230,126,34,0.1);
   }
 
   .stamp-right .date {
-    font-size: 9px;
+    font-size: 8px;
     margin-top: 8px;
-    color: #888;
+    color: #6a6a5a;
   }
 
-  /* ========== НАВИГАЦИЯ - ВЕРТИКАЛЬНАЯ ========== */
+  /* ========== НАВИГАЦИЯ - ВЕРТИКАЛЬНАЯ (РАБОТАЕТ) ========== */
   .side-nav {
     position: fixed;
     right: 20px;
@@ -136,37 +146,41 @@
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
     z-index: 100;
   }
 
   .nav-btn {
-    width: 40px;
-    height: 40px;
-    background: #1a1a1a;
+    width: 45px;
+    height: 45px;
+    background: #111;
     border: 1px solid #e67e22;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s;
-    font-size: 16px;
+    transition: all 0.2s;
+    font-size: 18px;
     color: #e67e22;
+    font-family: monospace;
+    box-shadow: 0 0 5px rgba(230,126,34,0.2);
   }
 
   .nav-btn:hover {
     background: #e67e22;
     color: #0a0a0a;
-    transform: scale(1.1);
+    border-color: #f39c12;
+    box-shadow: 0 0 12px rgba(230,126,34,0.5);
   }
 
   .nav-btn.active {
     background: #e67e22;
     color: #0a0a0a;
-    box-shadow: 0 0 15px rgba(230,126,34,0.5);
+    box-shadow: 0 0 12px rgba(230,126,34,0.6);
+    border-color: #f39c12;
   }
 
-  /* ========== СЕТКА КОНТЕНТА - НОВАЯ ========== */
+  /* ========== СЕТКА КОНТЕНТА ========== */
   .content-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -174,13 +188,12 @@
     margin-bottom: 20px;
   }
 
-  /* ========== КАРТОЧКИ - НОВЫЙ ДИЗАЙН ========== */
+  /* ========== КАРТОЧКИ - ВИНТАЖНЫЕ ========== */
   .card {
-    background: rgba(17,17,17,0.8);
-    backdrop-filter: blur(2px);
+    background: #0f0f0f;
     border: 1px solid #2a2a2a;
-    transition: all 0.3s;
-    overflow: hidden;
+    transition: all 0.2s;
+    box-shadow: 3px 3px 0px rgba(0,0,0,0.5);
   }
 
   .card:hover {
@@ -188,83 +201,86 @@
   }
 
   .card-header {
-    padding: 12px 16px;
-    background: linear-gradient(90deg, #1a1a1a 0%, #0a0a0a 100%);
+    padding: 10px 14px;
+    background: #151515;
     border-left: 4px solid #e67e22;
+    border-bottom: 1px solid #2a2a2a;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
   }
 
   .card-header .header-icon {
-    font-size: 18px;
-    color: #f39c12;
+    font-size: 16px;
+    color: #e67e22;
   }
 
   .card-header .header-text {
     font-family: 'Press Start 2P', monospace;
-    font-size: 10px;
-    letter-spacing: 2px;
+    font-size: 9px;
+    letter-spacing: 1.5px;
     color: #f39c12;
   }
 
   .card-body {
-    padding: 16px;
+    padding: 14px;
   }
 
-  /* ========== БОЛЬШАЯ ФОТО-ОБЛАСТЬ ========== */
+  /* ========== ФОТО-ОБЛАСТЬ ========== */
   .photo-big {
     grid-column: span 2;
     display: grid;
-    grid-template-columns: 300px 1fr;
+    grid-template-columns: 280px 1fr;
     gap: 20px;
     margin-bottom: 20px;
   }
 
   .photo-container {
-    background: #0d0d0d;
+    background: #0a0a0a;
     border: 2px solid #2a2a2a;
     position: relative;
     aspect-ratio: 3/4;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
   }
 
   .photo-container .photo-placeholder {
     text-align: center;
     color: #e67e22;
-    opacity: 0.5;
+    opacity: 0.4;
   }
 
   .photo-container .photo-placeholder .big-icon {
-    font-size: 64px;
+    font-size: 56px;
   }
 
   .photo-stamp {
     position: absolute;
-    bottom: 10px;
-    right: 10px;
-    font-size: 8px;
+    bottom: 8px;
+    right: 8px;
+    font-size: 7px;
     color: #e67e22;
     border: 1px solid #e67e22;
-    padding: 2px 6px;
+    padding: 2px 5px;
     transform: rotate(-5deg);
+    background: rgba(0,0,0,0.7);
   }
 
-  /* ========== ИНФО-ПАНЕЛИ ========== */
+  /* ========== ИНФО-СТРОКИ ========== */
   .info-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 10px;
-    padding: 8px 0;
+    gap: 10px;
+    margin-bottom: 8px;
+    padding: 6px 0;
     border-bottom: 1px dotted #2a2a2a;
   }
 
   .info-label {
-    width: 120px;
-    font-size: 10px;
+    width: 110px;
+    font-size: 9px;
     letter-spacing: 1px;
     color: #e67e22;
     text-transform: uppercase;
@@ -272,85 +288,84 @@
 
   .info-value {
     flex: 1;
-    font-size: 13px;
-    color: #ccc;
+    font-size: 12px;
+    color: #c8bcac;
     line-height: 1.5;
+    font-family: monospace;
   }
 
-  /* ========== СТАТЫ - КРУГОВЫЕ ========== */
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    margin-top: 10px;
+  /* ========== ПОЛЗУНКИ (ВИНТАЖНЫЕ) ========== */
+  .stat-item {
+    margin-bottom: 14px;
   }
 
-  .circular-stat {
-    text-align: center;
-  }
-
-  .circular-stat .stat-circle {
-    width: 70px;
-    height: 70px;
-    margin: 0 auto 8px;
-    border-radius: 50%;
-    background: conic-gradient(#e67e22 0deg, #2a2a2a 0deg);
+  .stat-header {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-  }
-
-  .stat-circle .inner {
-    width: 55px;
-    height: 55px;
-    background: #0a0a0a;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    font-weight: bold;
-    color: #f39c12;
+    justify-content: space-between;
+    margin-bottom: 5px;
   }
 
   .stat-name {
     font-size: 9px;
     letter-spacing: 1px;
-    color: #888;
+    color: #9a8a7a;
+    text-transform: uppercase;
   }
 
-  /* ========== ТАЙМЛАЙН - ГОРИЗОНТАЛЬНЫЙ ========== */
+  .stat-value {
+    font-size: 9px;
+    color: #e67e22;
+    font-family: monospace;
+  }
+
+  .stat-bar-container {
+    height: 12px;
+    background: #1a1a1a;
+    border: 1px solid #3a3a2a;
+    position: relative;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
+  }
+
+  .stat-fill {
+    height: 100%;
+    background: repeating-linear-gradient(90deg, #e67e22 0px, #e67e22 4px, #b85c0a 4px, #b85c0a 8px);
+    width: 0%;
+    position: relative;
+  }
+
+  /* ========== ГОРИЗОНТАЛЬНЫЙ ТАЙМЛАЙН ========== */
   .horizontal-timeline {
     display: flex;
     overflow-x: auto;
-    gap: 20px;
-    padding: 10px 0;
+    gap: 15px;
+    padding: 8px 0;
   }
 
   .timeline-card {
-    min-width: 250px;
-    background: #111;
+    min-width: 240px;
+    background: #0c0c0c;
     border-left: 3px solid #e67e22;
-    padding: 12px;
+    padding: 10px 12px;
+    box-shadow: 2px 2px 0px rgba(0,0,0,0.3);
   }
 
   .timeline-card .date {
-    font-size: 10px;
+    font-size: 9px;
     color: #f39c12;
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
+    font-family: monospace;
   }
 
   .timeline-card .title {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: bold;
-    margin: 6px 0;
-    color: #ddd;
+    margin: 5px 0;
+    color: #ddd0c0;
   }
 
   .timeline-card .desc {
-    font-size: 11px;
-    color: #888;
+    font-size: 10px;
+    color: #8a7a6a;
     line-height: 1.5;
   }
 
@@ -369,25 +384,25 @@
 
   /* ========== ДИАЛОГИ ========== */
   .dialogue-block {
-    background: #0d0d0d;
+    background: #0c0c0c;
     border: 1px solid #2a2a2a;
-    padding: 16px;
+    padding: 14px;
     margin: 12px 0;
+    font-family: monospace;
   }
 
   .dialogue-header {
-    font-size: 9px;
+    font-size: 8px;
     color: #e67e22;
     letter-spacing: 2px;
-    margin-bottom: 10px;
-    border-bottom: 1px dashed #2a2a2a;
-    padding-bottom: 5px;
+    margin-bottom: 8px;
+    border-bottom: 1px dashed #3a3a2a;
+    padding-bottom: 4px;
   }
 
   .dialogue-line {
-    padding: 6px 0;
-    font-size: 12px;
-    font-family: monospace;
+    padding: 5px 0;
+    font-size: 11px;
   }
 
   .dialogue-line .speaker {
@@ -400,32 +415,35 @@
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin: 15px 0;
+    margin-bottom: 15px;
   }
 
   .tag {
-    background: rgba(230,126,34,0.1);
+    background: rgba(230,126,34,0.08);
     border: 1px solid #e67e22;
-    padding: 4px 12px;
-    font-size: 9px;
+    padding: 3px 10px;
+    font-size: 8px;
     letter-spacing: 1px;
     color: #e67e22;
+    font-family: monospace;
   }
 
-  /* ========== РЕДАКТИРОВАННЫЙ ТЕКСТ ========== */
+  /* ========== РЕДАКТИРОВАНО ========== */
   .redacted {
     background: #2a2a2a;
     color: #2a2a2a;
-    padding: 0 8px;
+    padding: 0 6px;
+    user-select: none;
   }
 
   /* ========== ПРЕДУПРЕЖДЕНИЕ ========== */
   .warning-footer {
-    margin-top: 30px;
-    padding: 12px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
     text-align: center;
-    background: linear-gradient(90deg, transparent, rgba(230,126,34,0.1), transparent);
-    font-size: 9px;
+    background: linear-gradient(90deg, transparent, rgba(230,126,34,0.08), transparent);
+    font-size: 8px;
     letter-spacing: 3px;
     color: #e67e22;
     border-top: 1px solid #2a2a2a;
@@ -437,9 +455,11 @@
     padding: 20px 0;
     display: flex;
     justify-content: space-between;
-    font-size: 8px;
-    color: #555;
+    font-size: 7px;
+    color: #5a5a4a;
     letter-spacing: 1px;
+    border-top: 1px solid #2a2a2a;
+    margin-top: 20px;
   }
 
   /* ========== АДАПТИВ ========== */
@@ -452,25 +472,36 @@
     }
     .side-nav {
       position: fixed;
-      bottom: 20px;
+      bottom: 15px;
       top: auto;
-      right: 20px;
+      right: 15px;
       flex-direction: row;
       transform: none;
+      background: rgba(10,10,10,0.8);
+      padding: 5px;
+      border-radius: 8px;
+      border: 1px solid #e67e22;
+    }
+    .nav-btn {
+      width: 35px;
+      height: 35px;
+      font-size: 14px;
     }
     .wrapper {
       padding-left: 20px;
+      padding-bottom: 70px;
     }
     .vertical-stripe {
-      width: 15px;
+      width: 20px;
     }
   }
 </style>
 </head>
 <body>
 
+<div class="noise"></div>
 <div class="vertical-stripe">
-  <div class="stripe-text">КГБ КПМ // КРАСНАЯ ЛИНИЯ // ОПЕРАТИВНОЕ ДОСЬЕ</div>
+  <div class="stripe-text">КГБ КПМ // КРАСНАЯ ЛИНИЯ</div>
 </div>
 
 <div class="wrapper">
@@ -492,14 +523,14 @@
     </div>
   </div>
 
-  <!-- БОЛЬШОЕ ФОТО И КРАТКОЕ РЕЗЮМЕ -->
+  <!-- ФОТО И РЕЗЮМЕ -->
   <div class="photo-big">
     <div class="photo-container">
       <div class="photo-placeholder">
         <div class="big-icon">★</div>
-        <div>ФОТО НЕ ДОСТУПНО</div>
+        <div style="font-size: 9px;">ФОТО НЕТ</div>
       </div>
-      <div class="photo-stamp">ПОДТВЕРЖДЕНО КГБ</div>
+      <div class="photo-stamp">КГБ // ПОДТВ.</div>
     </div>
     <div class="card">
       <div class="card-header">
@@ -507,20 +538,20 @@
         <div class="header-text">КРАТКОЕ РЕЗЮМЕ</div>
       </div>
       <div class="card-body">
-        <div style="font-size: 13px; line-height: 1.8;">
-          Фэн Фэйсяо — действующий Генеральный Секретарь ЦК Коммунистической Партии Московского Метрополитена. В прошлом лейтенант НОАК, командированная в Москву в рамках секретного российско-китайского проекта «Шёлковый Щит». После ядерной катастрофы примкнула к Красной Линии, сделала карьеру под руководством Корбута и в июне 2033 года, в результате тщательно спланированного заговора, сместила прежнего Генсека Москвина, обвинив его в коррупции и отступлении от линии партии. Расстрелян по приговору Политбюро. Сам факт заговора полностью скрыт.
+        <div style="font-size: 12px; line-height: 1.7;">
+          Фэн Фэйсяо — действующий Генеральный Секретарь ЦК Коммунистической Партии Московского Метрополитена. В прошлом лейтенант НОАК, командированная в Москву в рамках секретного российско-китайского проекта «Шёлковый Щит». После ядерной катастрофы примкнула к Красной Линии, сделала карьеру под руководством Корбута и в июне 2033 года, в результате тщательно спланированного заговора, сместила прежнего Генсека Москвина, обвинив его в коррупции. Расстрелян по приговору Политбюро. Факт заговора полностью скрыт.
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ОСНОВНАЯ СЕТКА КОНТЕНТА -->
+  <!-- ОСНОВНАЯ СЕТКА -->
   <div class="content-grid">
-    <!-- ЛЕВАЯ КОЛОНКА - ЛИЧНЫЕ ДАННЫЕ -->
+    <!-- ЛИЧНЫЕ ДАННЫЕ -->
     <div class="card">
       <div class="card-header">
         <div class="header-icon">●</div>
-        <div class="header-text">ИДЕНТИФИКАЦИЯ ОБЪЕКТА</div>
+        <div class="header-text">ИДЕНТИФИКАЦИЯ</div>
       </div>
       <div class="card-body">
         <div class="info-row"><div class="info-label">настоящее имя</div><div class="info-value">Саран Фэн</div></div>
@@ -533,72 +564,52 @@
       </div>
     </div>
 
-    <!-- ПРАВАЯ КОЛОНКА - БОЕВЫЕ ХАРАКТЕРИСТИКИ -->
+    <!-- БОЕВОЙ ПРОФИЛЬ (ПОЛЗУНКИ) -->
     <div class="card">
       <div class="card-header">
         <div class="header-icon">◉</div>
         <div class="header-text">БОЕВОЙ ПРОФИЛЬ</div>
       </div>
       <div class="card-body">
-        <div class="stats-grid">
-          <div class="circular-stat">
-            <div class="stat-circle" style="background: conic-gradient(#e67e22 0deg 346deg, #2a2a2a 346deg 360deg);"><div class="inner">96%</div></div>
-            <div class="stat-name">ФИЗПОДГОТОВКА</div>
-          </div>
-          <div class="circular-stat">
-            <div class="stat-circle" style="background: conic-gradient(#e67e22 0deg 356deg, #2a2a2a 356deg 360deg);"><div class="inner">99%</div></div>
-            <div class="stat-name">ТАКТИКА</div>
-          </div>
-          <div class="circular-stat">
-            <div class="stat-circle" style="background: conic-gradient(#e67e22 0deg 338deg, #2a2a2a 338deg 360deg);"><div class="inner">94%</div></div>
-            <div class="stat-name">РУКОПАШНЫЙ БОЙ</div>
-          </div>
-          <div class="circular-stat">
-            <div class="stat-circle" style="background: conic-gradient(#e67e22 0deg 320deg, #2a2a2a 320deg 360deg);"><div class="inner">89%</div></div>
-            <div class="stat-name">СТРЕЛЬБА</div>
-          </div>
-          <div class="circular-stat">
-            <div class="stat-circle" style="background: conic-gradient(#e67e22 0deg 317deg, #2a2a2a 317deg 360deg);"><div class="inner">88%</div></div>
-            <div class="stat-name">ПСИХ. УСТОЙЧ.</div>
-          </div>
-          <div class="circular-stat">
-            <div class="stat-circle" style="background: conic-gradient(#e67e22 0deg 349deg, #2a2a2a 349deg 360deg);"><div class="inner">97%</div></div>
-            <div class="stat-name">ХАРИЗМА</div>
-          </div>
-        </div>
+        <div class="stat-item"><div class="stat-header"><span class="stat-name">ФИЗПОДГОТОВКА</span><span class="stat-value">96%</span></div><div class="stat-bar-container"><div class="stat-fill" style="width:96%"></div></div></div>
+        <div class="stat-item"><div class="stat-header"><span class="stat-name">ТАКТИКА</span><span class="stat-value">99%</span></div><div class="stat-bar-container"><div class="stat-fill" style="width:99%"></div></div></div>
+        <div class="stat-item"><div class="stat-header"><span class="stat-name">РУКОПАШНЫЙ БОЙ</span><span class="stat-value">94%</span></div><div class="stat-bar-container"><div class="stat-fill" style="width:94%"></div></div></div>
+        <div class="stat-item"><div class="stat-header"><span class="stat-name">СТРЕЛЬБА</span><span class="stat-value">89%</span></div><div class="stat-bar-container"><div class="stat-fill" style="width:89%"></div></div></div>
+        <div class="stat-item"><div class="stat-header"><span class="stat-name">ПСИХ. УСТОЙЧИВОСТЬ</span><span class="stat-value">88%</span></div><div class="stat-bar-container"><div class="stat-fill" style="width:88%"></div></div></div>
+        <div class="stat-item"><div class="stat-header"><span class="stat-name">ХАРИЗМА / ЛИДЕРСТВО</span><span class="stat-value">97%</span></div><div class="stat-bar-container"><div class="stat-fill" style="width:97%"></div></div></div>
+        <div class="stat-item"><div class="stat-header"><span class="stat-name">СТРАТЕГ. МЫШЛЕНИЕ</span><span class="stat-value">99%</span></div><div class="stat-bar-container"><div class="stat-fill" style="width:99%"></div></div></div>
       </div>
     </div>
   </div>
 
-  <!-- КЛЮЧЕВЫЕ СОБЫТИЯ - ГОРИЗОНТАЛЬНЫЙ ТАЙМЛАЙН -->
+  <!-- КЛЮЧЕВЫЕ СОБЫТИЯ -->
   <div class="card" style="margin-bottom: 20px;">
     <div class="card-header">
       <div class="header-icon">▣</div>
-      <div class="header-text">КЛЮЧЕВЫЕ СОБЫТИЯ — 2033 ГОД</div>
+      <div class="header-text">КЛЮЧЕВЫЕ СОБЫТИЯ — 2033</div>
     </div>
     <div class="card-body">
       <div class="horizontal-timeline">
-        <div class="timeline-card"><div class="date">МАЙ 2033</div><div class="title">Битва за «Комсомольскую»</div><div class="desc">Ганза временно захватила станцию. Фэйсяо сыграла ключевую роль в контрнаступлении. Станция возвращена.</div></div>
-        <div class="timeline-card"><div class="date">ИЮН 2033</div><div class="title">Переворот. Москвин расстрелян.</div><div class="desc">Реализован план по смещению Генсека. Фэйсяо становится Генеральным Секретарём ЦК КПМ.</div></div>
-        <div class="timeline-card"><div class="date">СЕН 2033</div><div class="title">Инцидент с телом Ленина</div><div class="desc">Анархисты угнали траурный поезд. Вина публично возложена на Рейх.</div></div>
-        <div class="timeline-card"><div class="date">НОЯ 2033</div><div class="title">Активизация войны с Рейхом</div><div class="desc">Красная Линия начинает наступление. Фэйсяо координирует лично.</div></div>
+        <div class="timeline-card"><div class="date">МАЙ 2033</div><div class="title">Битва за «Комсомольскую»</div><div class="desc">Ганза захватила станцию. Фэйсяо сыграла ключевую роль в контрнаступлении.</div></div>
+        <div class="timeline-card"><div class="date">ИЮН 2033</div><div class="title">Переворот. Москвин расстрелян</div><div class="desc">Реализован план по смещению Генсека. Фэйсяо становится Генсеком.</div></div>
+        <div class="timeline-card"><div class="date">СЕН 2033</div><div class="title">Инцидент с телом Ленина</div><div class="desc">Анархисты угнали траурный поезд. Вина возложена на Рейх.</div></div>
+        <div class="timeline-card"><div class="date">НОЯ 2033</div><div class="title">Активизация войны с Рейхом</div><div class="desc">Красная Линия начинает наступление. Координация лично.</div></div>
       </div>
     </div>
   </div>
 
-  <!-- НАВИГАЦИЯ ПО ТАБАМ (СПРАВА) -->
+  <!-- НАВИГАЦИЯ -->
   <div class="side-nav">
-    <div class="nav-btn active" onclick="showTab('overview')" title="ОБЗОР">⌂</div>
-    <div class="nav-btn" onclick="showTab('bio')" title="БИОГРАФИЯ">☙</div>
-    <div class="nav-btn" onclick="showTab('psych')" title="ПСИХОЛОГИЯ">◈</div>
-    <div class="nav-btn" onclick="showTab('operation')" title="ОПЕРАЦИЯ">⚙</div>
-    <div class="nav-btn" onclick="showTab('medical')" title="МЕДИЦИНА">☠</div>
+    <div class="nav-btn active" data-tab="overview">⌂</div>
+    <div class="nav-btn" data-tab="bio">☙</div>
+    <div class="nav-btn" data-tab="psych">◈</div>
+    <div class="nav-btn" data-tab="operation">⚙</div>
+    <div class="nav-btn" data-tab="medical">☠</div>
   </div>
 
-  <!-- ТАБЫ С СОДЕРЖИМЫМ -->
+  <!-- ТАБЫ -->
   <div class="tab-container">
 
-    <!-- ОБЗОР / БИОГРАФИЯ (КОРОТКО) -->
     <div id="tab-overview" class="tab-content active-tab">
       <div class="tags-cloud">
         <span class="tag">Красная Линия</span>
@@ -607,73 +618,31 @@
         <span class="tag">НОАК</span>
         <span class="tag">Корбут</span>
         <span class="tag">Москвин</span>
-        <span class="tag">Переворот</span>
       </div>
-      <div class="card">
-        <div class="card-header"><div class="header-icon">▶</div><div class="header-text">ПЕКИН // ДО КАТАСТРОФЫ</div></div>
-        <div class="card-body"><div style="font-size: 13px; line-height: 1.8;">Родилась в Пекине в образцовой семье. Отец — высокопоставленный партийный работник, мать — профессор филологии. Отказалась от карьеры в кабинетах. Поступила в военное училище сама. Прозвище «Фэйсяо» (пер. «Летящее Копьё») получила от сослуживцев.</div></div>
-      </div>
-      <div class="card">
-        <div class="card-header"><div class="header-icon">▶</div><div class="header-text">6 ИЮЛЯ 2013 // ДЕНЬ КАТАСТРОФЫ</div></div>
-        <div class="card-body"><div style="font-size: 13px; line-height: 1.8;">Ядерные удары застала в московском бункере. Связь с Пекином оборвалась. Используя знания протоколов «Щита», вывела группу уцелевших коллег на станцию «Красные Ворота».</div></div>
-      </div>
-      <div class="card">
-        <div class="card-header"><div class="header-icon">▶</div><div class="header-text">ВСТУПЛЕНИЕ В КРАСНУЮ ЛИНИЮ</div></div>
-        <div class="card-body"><div style="font-size: 13px; line-height: 1.8;">Примкнула к Красной Линии из-за их идеи ленинизма в чистом виде. Военный опыт вывел на должность быстро. Обратила на себя внимание Корбута.</div></div>
-      </div>
+      <div class="card"><div class="card-header"><div class="header-icon">▶</div><div class="header-text">ПЕКИН // ДО КАТАСТРОФЫ</div></div><div class="card-body"><div style="font-size: 12px; line-height: 1.7;">Родилась в Пекине в образцовой семье. Отец — высокопоставленный партийный работник, мать — профессор филологии. Отказалась от карьеры в кабинетах. Поступила в военное училище сама. Прозвище «Фэйсяо» (пер. «Летящее Копьё») получила от сослуживцев.</div></div></div>
+      <div class="card"><div class="card-header"><div class="header-icon">▶</div><div class="header-text">6 ИЮЛЯ 2013 // ДЕНЬ КАТАСТРОФЫ</div></div><div class="card-body"><div style="font-size: 12px; line-height: 1.7;">Ядерные удары застала в московском бункере. Связь с Пекином оборвалась. Используя знания протоколов «Щита», вывела группу уцелевших коллег на станцию «Красные Ворота».</div></div></div>
+      <div class="card"><div class="card-header"><div class="header-icon">▶</div><div class="header-text">ВСТУПЛЕНИЕ В КРАСНУЮ ЛИНИЮ</div></div><div class="card-body"><div style="font-size: 12px; line-height: 1.7;">Примкнула к Красной Линии из-за их идеи ленинизма в чистом виде. Военный опыт вывел на должность быстро. Обратила на себя внимание Корбута.</div></div></div>
     </div>
 
-    <!-- ПОЛНАЯ БИОГРАФИЯ -->
     <div id="tab-bio" class="tab-content">
-      <div class="card">
-        <div class="card-header"><div class="header-icon">◈</div><div class="header-text">ПРОЕКТ «ШЁЛКОВЫЙ ЩИТ» // СЕКРЕТНО</div></div>
-        <div class="card-body"><div style="font-size: 13px; line-height: 1.8;">Включена в сверхсекретный российско-китайский проект «Шёлковый Щит». Командирована в Москву как ключевой военный координатор. Во время проверки произошёл взрыв. Шрам на спине, между лопаток — отпечаток горячего металла. Ударилась затылком. Факт происшествия скрывает.</div></div>
-      </div>
-      <div class="dialogue-block">
-        <div class="dialogue-header">ПРИМЕЧАНИЕ МЕД. ОТДЕЛА:</div>
-        <div class="dialogue-line">Черепно-мозговая травма зафиксирована ретроспективно. Диагноз — <span class="redacted">ЭПИЛЕПСИЯ ГИППОКАМП</span> — установлен позже. Субъект скрывал симптомы.</div>
-      </div>
+      <div class="card"><div class="card-header"><div class="header-icon">◈</div><div class="header-text">ПРОЕКТ «ШЁЛКОВЫЙ ЩИТ» // СЕКРЕТНО</div></div><div class="card-body"><div style="font-size: 12px; line-height: 1.7;">Включена в сверхсекретный российско-китайский проект «Шёлковый Щит». Командирована в Москву как ключевой военный координатор. Во время проверки произошёл взрыв. Шрам на спине, между лопаток — отпечаток горячего металла. Ударилась затылком. Факт происшествия скрывает.</div></div></div>
+      <div class="dialogue-block"><div class="dialogue-header">ПРИМЕЧАНИЕ МЕД. ОТДЕЛА:</div><div class="dialogue-line">Черепно-мозговая травма зафиксирована ретроспективно. Диагноз — <span class="redacted">ЭПИЛЕПСИЯ ГИППОКАМП</span> — установлен позже. Субъект скрывал симптомы.</div></div>
+      <div class="card"><div class="card-header"><div class="header-icon">◈</div><div class="header-text">ВООРУЖЕНИЕ</div></div><div class="card-body"><div class="info-row"><div class="info-label">основное</div><div class="info-value">QSZ-92 (китайский армейский пистолет)</div></div><div class="info-row"><div class="info-label">вспомогательное</div><div class="info-value">Метательные ножи (x4-6)</div></div><div class="info-row"><div class="info-label">специальное</div><div class="info-value">Пневматический «Тихарь»</div></div></div></div>
     </div>
 
-    <!-- ПСИХОЛОГИЧЕСКИЙ ПРОФИЛЬ -->
     <div id="tab-psych" class="tab-content">
       <div class="content-grid">
-        <div class="card"><div class="card-header"><div class="header-icon">◈</div><div class="header-text">ПРЯМОЛИНЕЙНОСТЬ</div></div><div class="card-body"><div style="font-size: 12px;">Говорит то, что думает, без смягчений. Приказы отдаёт без намёков.</div></div></div>
-        <div class="card"><div class="card-header"><div class="header-icon">◈</div><div class="header-text">ОТСУТСТВИЕ СОЖАЛЕНИЙ</div></div><div class="card-body"><div style="font-size: 12px;">Принятые решения не пересматривает. Ошибки анализирует как данные.</div></div></div>
-        <div class="card"><div class="card-header"><div class="header-icon">◈</div><div class="header-text">ЦЕЛЬ ЗА ГОРИЗОНТОМ</div></div><div class="card-body"><div style="font-size: 12px;">Построить государство для возвращения на поверхность. Не озвучивает.</div></div></div>
-        <div class="card"><div class="card-header"><div class="header-icon">◈</div><div class="header-text">РЕАКЦИЯ НА УГРОЗУ</div></div><div class="card-body"><div style="font-size: 12px;">Холодная ясность. Немедленный переход к анализу. Никакой паники.</div></div></div>
+        <div class="card"><div class="card-header"><div class="header-icon">◈</div><div class="header-text">ПРЯМОЛИНЕЙНОСТЬ</div></div><div class="card-body"><div style="font-size: 11px;">Говорит то, что думает, без смягчений. Приказы отдаёт без намёков.</div></div></div>
+        <div class="card"><div class="card-header"><div class="header-icon">◈</div><div class="header-text">ОТСУТСТВИЕ СОЖАЛЕНИЙ</div></div><div class="card-body"><div style="font-size: 11px;">Принятые решения не пересматривает. Ошибки анализирует как данные.</div></div></div>
+        <div class="card"><div class="card-header"><div class="header-icon">◈</div><div class="header-text">ЦЕЛЬ ЗА ГОРИЗОНТОМ</div></div><div class="card-body"><div style="font-size: 11px;">Построить государство для возвращения на поверхность. Не озвучивает.</div></div></div>
+        <div class="card"><div class="card-header"><div class="header-icon">◈</div><div class="header-text">РЕАКЦИЯ НА УГРОЗУ</div></div><div class="card-body"><div style="font-size: 11px;">Холодная ясность. Немедленный переход к анализу. Без паники.</div></div></div>
       </div>
-      <div class="card"><div class="card-header"><div class="header-icon">◈</div><div class="header-text">ОДИНОЧЕСТВО</div></div><div class="card-body"><div style="font-size: 13px;">Раз в неделю уходит в заброшенный тоннель. Задаёт вопросы вслух, на китайском. Единственный способ справиться с призраками прошлого.</div></div></div>
+      <div class="card"><div class="card-header"><div class="header-icon">◈</div><div class="header-text">ОДИНОЧЕСТВО</div></div><div class="card-body"><div style="font-size: 12px;">Раз в неделю уходит в заброшенный тоннель. Задаёт вопросы вслух, на китайском. Единственный способ справиться с призраками прошлого.</div></div></div>
+      <div class="card"><div class="card-header"><div class="header-icon">◈</div><div class="header-text">ИМЯ</div></div><div class="card-body"><div style="font-size: 12px;">Никто в метро не знает имени «Саран». Если кто-то услышит его — это будет постиктальный момент, в тоннеле, в темноте.</div></div></div>
     </div>
 
-    <!-- ОПЕРАЦИЯ «ГЕНСЕК» -->
     <div id="tab-operation" class="tab-content">
       <div class="warning-footer" style="margin-bottom: 15px;">ОПЕРАЦИЯ «ГЕНСЕК» // СВЕДЕНИЯ О ЗАГОВОРЕ // УР. ДОСТУПА: ГЛАВА КГБ</div>
-      <div class="card"><div class="card-header"><div class="header-icon">⚙</div><div class="header-text">ПРЕДЫСТОРИЯ: КОРБУТ И ФЭЙСЯО</div></div><div class="card-body"><div style="font-size: 13px;">Чеслав Корбут и Фэйсяо познакомились в первые годы после катастрофы. Три зафиксированных разговора, ставших поворотными.</div></div></div>
-      
-      <div class="dialogue-block"><div class="dialogue-header">РАЗГОВОР I // ТОННЕЛЬ «ДЗЕРЖИНСКАЯ–КРАСНЫЕ ВОРОТА»</div>
-        <div class="dialogue-line"><span class="speaker">КОРБУТ:</span> Вы понимаете, что Москвин ведёт линию к стене?</div>
-        <div class="dialogue-line"><span class="speaker">ФЭЙСЯО:</span> Это не моя проблема.</div>
-        <div class="dialogue-line"><span class="speaker">КОРБУТ:</span> Пока не ваша. Но станет.</div>
-      </div>
-      <div class="dialogue-block"><div class="dialogue-header">РАЗГОВОР II // КАБИНЕТ НА «ДЗЕРЖИНСКОЙ»</div>
-        <div class="dialogue-line"><span class="speaker">КОРБУТ:</span> Вы знаете, чем вы отличаетесь от других?</div>
-        <div class="dialogue-line"><span class="speaker">ФЭЙСЯО:</span> Тем, что говорю это вам в лицо.</div>
-      </div>
-      <div class="dialogue-block"><div class="dialogue-header">РАЗГОВОР III // ПОСЛЕ ИНЦИДЕНТА С ПОЕЗДОМ ЛЕНИНА</div>
-        <div class="dialogue-line"><span class="speaker">КОРБУТ:</span> Момент настал.</div>
-        <div class="dialogue-line"><span class="speaker">ФЭЙСЯО:</span> А что получу я?</div>
-        <div class="dialogue-line"><span class="speaker">КОРБУТ:</span> Государство, которым можно управлять.</div>
-      </div>
-      
-      <div class="card"><div class="card-header"><div class="header-icon">⚙</div><div class="header-text">ИТОГ ОПЕРАЦИИ</div></div><div class="card-body">
-        <div class="info-row"><div class="info-label">обвинение</div><div class="info-value">Коррупция и отступление от линии партии</div></div>
-        <div class="info-row"><div class="info-label">приговор</div><div class="info-value">Расстрел. Исполнен.</div></div>
-        <div class="info-row"><div class="info-label">факт заговора</div><div class="info-value">СКРЫТ ПОЛНОСТЬЮ</div></div>
-        <div class="info-row"><div class="info-label">официальная версия</div><div class="info-value">Тело Ленина похищено Четвёртым Рейхом</div></div>
-      </div></div>
-    </div>
-
-    <!-- МЕДИЦИНСКАЯ КАРТА -->
-    <div id="tab-medical" class="tab-content">
-      <div class="card"><div class="card-header"><div class="header-icon">☠
+      <div class="card"><div class="card-header"><div class="header-icon">⚙</div><div class="header-text">ПРЕДЫСТОРИЯ: КОРБУТ И ФЭЙСЯО</div></div><div class="card-body"><div style="font-size: 12px;">Чеслав Корбут и Фэйсяо познакомились в первые годы после катастрофы. Три зафиксированных разговора, ставших поворотными.</div></div></div>
+      <div class="dialogue-block"><div class="dialogue-header">РАЗГОВОР I // ТОННЕЛЬ «ДЗЕРЖИНСКАЯ–КРАСНЫЕ ВОРОТА»</div><div class="dialogue-line"><span class="speaker">КОРБУТ:</span> Вы понимаете, что Москвин ведёт линию к стене?</div><div class="dialogue-line"><span class="speaker">ФЭЙСЯО:</span> Это не моя проблема.</div><div class="dialogue-line"><span class="speaker">КОРБУТ:</span> Пока не ваша. Но станет.</div></div>
+      <div class="dialogue-block"><div class="dialogue-header">РАЗГОВОР II // КАБИНЕТ НА «ДЗЕРЖИНСКОЙ»</div><div class="dialogue-line"><span class="speaker">КОРБУТ:</span> Вы знаете, чем вы отличаетесь от других?</div><div class="dialogue-line"><span class="speaker">ФЭЙСЯО:</span> Тем, что говорю это вам в лицо.</div><div class="
