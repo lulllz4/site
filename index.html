@@ -90,13 +90,14 @@
     100% { opacity: 0.96; filter: grayscale(12%) contrast(1.05) brightness(0.98); }
   }
 
-  @keyframes horizontalJitter {
+@keyframes horizontalJitter {
     0% { transform: translateX(0px); }
-    50% { transform: translateX(0.2px); }
+    25% { transform: translateX(0.15px); }
+    75% { transform: translateX(-0.1px); }
     100% { transform: translateX(0px); }
-  }
+}
 
-  .photo-container {
+.photo-container {
     background: #050608;
     border: 2px solid #2a1a1a;
     position: relative;
@@ -106,22 +107,20 @@
     justify-content: center;
     box-shadow: inset 0 0 25px rgba(0,0,0,0.8);
     overflow: hidden;
-    animation: pulseBorder 3s ease-in-out infinite;
-  }
+    animation: pulseBorder 3s ease-in-out infinite, horizontalJitter 0.2s ease-in-out infinite;
+}
 
-  .photo-container img {
+.photo-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
-    animation: flickerImage 2s ease-in-out infinite, horizontalJitter 0.15s linear infinite;
+    animation: flickerImage 2s ease-in-out infinite;
     display: block;
-    
-    /* Эффект плохого качества */
     image-rendering: pixelated;
     image-rendering: crisp-edges;
     filter: blur(0.3px) contrast(1.15) brightness(0.94) grayscale(8%);
-  }
+}
 
   /* Полосы поверх картинки (эффект ЭЛТ) */
   .photo-container::after {
