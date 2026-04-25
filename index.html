@@ -261,16 +261,14 @@
     align-items: center;
     justify-content: center;
     box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+    overflow: hidden;
   }
 
-  .photo-placeholder {
-    text-align: center;
-    color: #e67e22;
-    opacity: 0.4;
-  }
-
-  .photo-placeholder .big-icon {
-    font-size: 56px;
+  .photo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 
   .photo-stamp {
@@ -283,6 +281,7 @@
     padding: 2px 5px;
     transform: rotate(-5deg);
     background: rgba(0,0,0,0.7);
+    z-index: 2;
   }
 
   .info-row {
@@ -512,7 +511,7 @@
   <div id="page-main" class="page active-page">
     <div class="photo-big">
       <div class="photo-container">
-        <div class="photo-placeholder"><div class="big-icon">★</div><div style="font-size: 9px;">ФОТО НЕТ</div></div>
+        <img src="photo.jpg" alt="Фото Фэйсяо">
         <div class="photo-stamp">КГБ // ПОДТВ.</div>
       </div>
       <div class="card">
@@ -562,7 +561,7 @@
   <div id="page-bio" class="page">
     <div class="photo-big">
       <div class="photo-container">
-        <div class="photo-placeholder"><div class="big-icon">★</div><div style="font-size: 9px;">ФОТО НЕТ</div></div>
+        <img src="photo.jpg" alt="Фото Фэйсяо">
         <div class="photo-stamp">КГБ // ПОДТВ.</div>
       </div>
       <div class="card">
@@ -615,7 +614,7 @@
   <div id="page-psych" class="page">
     <div class="photo-big">
       <div class="photo-container">
-        <div class="photo-placeholder"><div class="big-icon">★</div><div style="font-size: 9px;">ФОТО НЕТ</div></div>
+        <img src="photo.jpg" alt="Фото Фэйсяо">
         <div class="photo-stamp">КГБ // ПОДТВ.</div>
       </div>
       <div class="card">
@@ -640,10 +639,10 @@
     <div class="warning-footer">ОПЕРАЦИЯ «ГЕНСЕК» // СВЕДЕНИЯ О ЗАГОВОРЕ // УР. ДОСТУПА: ГЛАВА КГБ</div>
 
     <div class="photo-big">
-<div class="photo-container">
-  <img src="photo.jpg" style="width:100%; height:100%; object-fit:cover; object-position:center;">
-  <div class="photo-stamp">КГБ // ПОДТВ.</div>
-</div>
+      <div class="photo-container">
+        <img src="photo.jpg" alt="Фото Фэйсяо">
+        <div class="photo-stamp">КГБ // ПОДТВ.</div>
+      </div>
       <div class="card">
         <div class="card-header"><span class="header-icon">■</span> ПРЕДЫСТОРИЯ: КОРБУТ И ФЭЙСЯО</div>
         <div class="card-body">Чеслав Корбут и Фэйсяо познакомились в первые годы после катастрофы. Три зафиксированных разговора, ставших поворотными.</div>
@@ -686,7 +685,7 @@
   <div id="page-medical" class="page">
     <div class="photo-big">
       <div class="photo-container">
-        <div class="photo-placeholder"><div class="big-icon">★</div><div style="font-size: 9px;">ФОТО НЕТ</div></div>
+        <img src="photo.jpg" alt="Фото Фэйсяо">
         <div class="photo-stamp">КГБ // ПОДТВ.</div>
       </div>
       <div class="card">
@@ -700,4 +699,51 @@
         <div class="card-header"><span class="header-icon">🏥</span> ДИАГНОЗЫ</div>
         <div class="card-body">
           <div class="info-row"><div class="info-label">основной</div><div class="info-value">Наследственная эпилепсия гиппокампального типа</div></div>
-          <div class="info-row"><div class="info-label">этиология</div><div class="info-value">Наследственность + Ч
+          <div class="info-row"><div class="info-label">этиология</div><div class="info-value">Наследственность + ЧМТ (2013) + стресс</div></div>
+          <div class="info-row"><div class="info-label">частота</div><div class="info-value">Нерегулярно. Учащение при стрессе</div></div>
+          <div class="info-row"><div class="info-label">скрывает</div><div class="info-value">ДА. Рапортов не подавала</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span class="header-icon">⚠️</span> КЛИНИЧЕСКАЯ КАРТИНА</div>
+        <div class="card-body">
+          <div class="timeline-card"><div class="title">Стадия I — Предвестники</div><div class="desc">Металл на языке. Даёт несколько секунд.</div></div>
+          <div class="timeline-card"><div class="title">Стадия II — Нарастание</div><div class="desc">Ощущение плотности воздуха. Иррациональный страх.</div></div>
+          <div class="timeline-card"><div class="title">Стадия III — Приступ</div><div class="desc">Белый шум. Потеря ориентации.</div></div>
+          <div class="timeline-card"><div class="title">Стадия IV — Постиктальный период</div><div class="desc">Медленное возвращение. Опасна для окружающих.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dialogue-block">
+      <div class="dialogue-header">ИНЦИДЕНТ С БОЙЦОМ</div>
+      <div class="dialogue-line">Один из бойцов последовал за ней во время приступа. Сломанная ключица. Больше никто не следует.</div>
+    </div>
+
+    <div class="warning-footer">ИНЦИДЕНТ В ОФИЦИАЛЬНЫЙ РАПОРТ НЕ ВКЛЮЧЁН // ЛИЧНОСТЬ БОЙЦА ЗАСЕКРЕЧЕНА</div>
+  </div>
+
+  <div class="footer">
+    <span>КГБ КПМ // ФОРМА КГБ-7А // 2033</span>
+    <span>НЕСАНКЦИОНИРОВАННЫЙ ДОСТУП — РАССТРЕЛ</span>
+    <span>ДОС-КЛ-2033-009</span>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.querySelectorAll('.nav-btn');
+    buttons.forEach(button => {
+      button.addEventListener('click', function() {
+        const pageId = this.getAttribute('data-page');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+        document.querySelectorAll('.page').forEach(page => page.classList.remove('active-page'));
+        document.getElementById('page-' + pageId).classList.add('active-page');
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
