@@ -21,7 +21,7 @@
     position: relative;
   }
 
-  /* ========== НОВЫЙ ФОН С ТЕКСТУРОЙ ========== */
+  /* ========== ФОН С ТЕКСТУРОЙ ========== */
   body {
     background-image: 
       repeating-linear-gradient(45deg, rgba(30,30,40,0.3) 0px, rgba(30,30,40,0.3) 1px, transparent 1px, transparent 8px),
@@ -30,7 +30,6 @@
     background-attachment: fixed;
   }
 
-  /* Дополнительный слой для винтажности */
   .vintage-overlay {
     position: fixed;
     top: 0;
@@ -49,8 +48,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%);
-    animation: scan 8s linear infinite;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0) 100%);
+    animation: scan 10s linear infinite;
     pointer-events: none;
     z-index: 9997;
   }
@@ -67,7 +66,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: repeating-linear-gradient(0deg, rgba(0,0,0,0.08) 0px, rgba(0,0,0,0.08) 1px, transparent 1px, transparent 2px);
+    background: repeating-linear-gradient(0deg, rgba(0,0,0,0.06) 0px, rgba(0,0,0,0.06) 1px, transparent 1px, transparent 2px);
     pointer-events: none;
     z-index: 9998;
   }
@@ -79,25 +78,35 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(ellipse at center, rgba(0,0,0,0) 50%, rgba(0,0,0,0.4) 100%);
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0) 55%, rgba(0,0,0,0.35) 100%);
     pointer-events: none;
     z-index: 9998;
   }
 
-  /* ========== МЕРЦАНИЕ КАРТИНКИ ========== */
+  /* ========== МЕРЦАНИЕ КАРТИНКИ - МЯГЧЕ ========== */
   @keyframes flickerImage {
-    0% { opacity: 0.94; filter: grayscale(10%) contrast(1.08); }
-    25% { opacity: 0.90; filter: grayscale(15%) contrast(1.12); }
-    50% { opacity: 0.97; filter: grayscale(8%) contrast(1.05); }
-    75% { opacity: 0.89; filter: grayscale(18%) contrast(1.15); }
-    100% { opacity: 0.94; filter: grayscale(10%) contrast(1.08); }
+    0% { opacity: 0.96; filter: grayscale(12%) contrast(1.05) brightness(0.98); }
+    50% { opacity: 0.93; filter: grayscale(15%) contrast(1.08) brightness(0.96); }
+    100% { opacity: 0.96; filter: grayscale(12%) contrast(1.05) brightness(0.98); }
   }
 
   @keyframes horizontalJitter {
     0% { transform: translateX(0px); }
-    20% { transform: translateX(0.3px); }
-    60% { transform: translateX(-0.2px); }
+    50% { transform: translateX(0.2px); }
     100% { transform: translateX(0px); }
+  }
+
+  .photo-container {
+    background: #050608;
+    border: 2px solid #2a1a1a;
+    position: relative;
+    aspect-ratio: 3/4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 25px rgba(0,0,0,0.8);
+    overflow: hidden;
+    animation: pulseBorder 3s ease-in-out infinite;
   }
 
   .photo-container img {
@@ -105,11 +114,33 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
-    animation: flickerImage 0.2s steps(2, jump-end) infinite, horizontalJitter 0.1s linear infinite;
+    animation: flickerImage 2s ease-in-out infinite, horizontalJitter 0.15s linear infinite;
     display: block;
+    
+    /* Эффект плохого качества */
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    filter: blur(0.3px) contrast(1.15) brightness(0.94) grayscale(8%);
   }
 
-  /* ========== ТЕКСТ ТАБЛИЦ - СВЕТЛЫЙ (СЕРЫЙ ДЛЯ КОНТРАСТА) ========== */
+  /* Полосы поверх картинки (эффект ЭЛТ) */
+  .photo-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(0deg, 
+      rgba(0,0,0,0) 0px, 
+      rgba(0,0,0,0.08) 1px, 
+      rgba(0,0,0,0) 2px,
+      rgba(0,0,0,0.05) 3px);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* ========== ТЕКСТ — БЕЗ МЕРЦАНИЯ ========== */
   .card-body {
     padding: 14px;
     font-size: 12px;
@@ -129,12 +160,7 @@
     color: #b8cad8;
   }
 
-  /* ========== МЕРЦАНИЕ КАРТОЧЕК ========== */
-  @keyframes cardFlicker {
-    0% { border-color: #2a1a1a; background: rgba(8, 10, 14, 0.9); box-shadow: 2px 2px 0px rgba(0,0,0,0.5); }
-    100% { border-color: #3a2020; background: rgba(10, 12, 16, 0.85); box-shadow: 4px 4px 0px rgba(0,0,0,0.4); }
-  }
-
+  /* Карточки — без мерцания */
   .card {
     background: rgba(10, 12, 16, 0.85);
     border: 1px solid #2a1a1a;
@@ -142,21 +168,21 @@
     box-shadow: 4px 4px 0px rgba(0,0,0,0.4);
   }
 
-  /* ========== СИЛЬНОЕ МЕРЦАНИЕ ДЛЯ ВАЖНЫХ ЭЛЕМЕНТОВ ========== */
+  /* ========== МЕРЦАНИЕ ТОЛЬКО ДЛЯ ВАЖНЫХ ЭЛЕМЕНТОВ ========== */
   @keyframes strongFlicker {
     0% { opacity: 0.95; text-shadow: 0 0 0px #8b0000; }
-    50% { opacity: 0.80; text-shadow: 0 0 3px #ff0000; }
+    50% { opacity: 0.82; text-shadow: 0 0 2px #cc1a1a; }
     100% { opacity: 0.95; text-shadow: 0 0 0px #8b0000; }
   }
 
   @keyframes ledBlink {
-    0%, 100% { background: #cc1a1a; box-shadow: 0 0 1px #cc1a1a; }
-    50% { background: #ff4444; box-shadow: 0 0 6px #ff4444; }
+    0%, 100% { background: #cc1a1a; box-shadow: 0 0 2px #cc1a1a; }
+    50% { background: #ff4444; box-shadow: 0 0 8px #ff4444; }
   }
 
   @keyframes pulseBorder {
     0%, 100% { border-color: rgba(139,0,0,0.3); box-shadow: 0 0 0px rgba(139,0,0,0.2); }
-    50% { border-color: rgba(200,0,0,0.8); box-shadow: 0 0 8px rgba(200,0,0,0.5); }
+    50% { border-color: rgba(200,0,0,0.7); box-shadow: 0 0 6px rgba(200,0,0,0.4); }
   }
 
   .blink-red, .status, .warning-footer, .tag, .photo-stamp {
@@ -174,7 +200,7 @@
     box-shadow: 0 0 2px red;
   }
 
-  /* ========== ВЕРТИКАЛЬНАЯ ПОЛОСА С СИМВОЛИКОЙ ========== */
+  /* ========== ВЕРТИКАЛЬНАЯ ПОЛОСА ========== */
   .vertical-stripe {
     position: fixed;
     left: 0;
@@ -217,7 +243,7 @@
     z-index: 1;
   }
 
-  /* ========== ШАПКА С УГОЛКАМИ ========== */
+  /* ========== ШАПКА ========== */
   .secret-header {
     display: flex;
     justify-content: space-between;
@@ -240,33 +266,10 @@
     border-width: 0;
   }
 
-  .secret-header .corner-tl {
-    top: 0;
-    left: 0;
-    border-top-width: 2px;
-    border-left-width: 2px;
-  }
-
-  .secret-header .corner-tr {
-    top: 0;
-    right: 0;
-    border-top-width: 2px;
-    border-right-width: 2px;
-  }
-
-  .secret-header .corner-bl {
-    bottom: 0;
-    left: 0;
-    border-bottom-width: 2px;
-    border-left-width: 2px;
-  }
-
-  .secret-header .corner-br {
-    bottom: 0;
-    right: 0;
-    border-bottom-width: 2px;
-    border-right-width: 2px;
-  }
+  .secret-header .corner-tl { top: 0; left: 0; border-top-width: 2px; border-left-width: 2px; }
+  .secret-header .corner-tr { top: 0; right: 0; border-top-width: 2px; border-right-width: 2px; }
+  .secret-header .corner-bl { bottom: 0; left: 0; border-bottom-width: 2px; border-left-width: 2px; }
+  .secret-header .corner-br { bottom: 0; right: 0; border-bottom-width: 2px; border-right-width: 2px; }
 
   .stamp-left .security {
     font-size: 9px;
@@ -390,19 +393,6 @@
     margin-bottom: 25px;
   }
 
-  .photo-container {
-    background: #050608;
-    border: 2px solid #2a1a1a;
-    position: relative;
-    aspect-ratio: 3/4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: inset 0 0 25px rgba(0,0,0,0.8);
-    overflow: hidden;
-    animation: pulseBorder 3s ease-in-out infinite;
-  }
-
   .photo-container .kgb-stamp {
     position: absolute;
     top: 10px;
@@ -413,7 +403,7 @@
     padding: 2px 8px;
     font-family: monospace;
     background: rgba(0,0,0,0.6);
-    z-index: 2;
+    z-index: 3;
   }
 
   .photo-stamp {
@@ -426,7 +416,7 @@
     padding: 3px 8px;
     transform: rotate(-5deg);
     background: rgba(0,0,0,0.8);
-    z-index: 2;
+    z-index: 3;
     font-family: monospace;
   }
 
