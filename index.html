@@ -473,7 +473,6 @@
     overflow: hidden;
   }
 
-  /* Анимация бегущих полосок для статов */
   .stat-fill {
     height: 100%;
     background: repeating-linear-gradient(90deg, #8b0000 0px, #8b0000 4px, #cc1a1a 4px, #cc1a1a 8px);
@@ -600,6 +599,9 @@
     padding: 25px 0;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
     font-size: 7px;
     color: #6a5a4a;
     letter-spacing: 1.5px;
@@ -768,15 +770,15 @@
   }
 
   /* ========== КНОПКА АКТИВАЦИИ ЗВУКА ========== */
-.sound-unlock {
+  .sound-unlock {
     position: fixed;
     bottom: 20px;
     left: 20px;
-    font-size: 14px;
+    font-size: 11px;
     color: #cc1a1a;
     z-index: 10000;
     background: rgba(0,0,0,0.85);
-    padding: 12px 20px;
+    padding: 10px 16px;
     cursor: pointer;
     font-family: monospace;
     border: 2px solid #8b0000;
@@ -784,14 +786,115 @@
     transition: all 0.2s;
     font-weight: bold;
     letter-spacing: 1.5px;
-}
+  }
 
-.sound-unlock:hover {
+  .sound-unlock:hover {
     background: #8b0000;
     color: #0a0c10;
     border-color: #ff4444;
     box-shadow: 0 0 10px rgba(200,0,0,0.5);
-}
+  }
+
+  /* Крупнее на ПК */
+  @media (min-width: 901px) {
+    .sound-unlock {
+      font-size: 16px;
+      padding: 14px 24px;
+      bottom: 30px;
+      left: 30px;
+    }
+  }
+
+  /* ========== ЭКСТРЕННАЯ КНОПКА ========== */
+  .emergency-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: #1a0000;
+    border: 2px solid #8b0000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 14px;
+    font-weight: bold;
+    color: #8b0000;
+    z-index: 10001;
+    transition: all 0.2s;
+    box-shadow: 0 0 5px rgba(139,0,0,0.3);
+  }
+
+  .emergency-btn:hover {
+    background: #8b0000;
+    color: #fff;
+    box-shadow: 0 0 15px rgba(200,0,0,0.6);
+    transform: scale(1.05);
+  }
+
+  .emergency-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(139,0,0,0.95);
+    z-index: 20000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .emergency-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+  }
+
+  .emergency-text {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 24px;
+    color: #fff;
+    text-align: center;
+    letter-spacing: 4px;
+    animation: emergencyBlink 0.5s step-end infinite;
+    text-shadow: 0 0 10px #ff0000;
+  }
+
+  .emergency-sub {
+    font-family: monospace;
+    font-size: 12px;
+    margin-top: 20px;
+    color: #ffaaaa;
+    letter-spacing: 2px;
+  }
+
+  @keyframes emergencyBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .emergency-off {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: monospace;
+    font-size: 10px;
+    color: #ffaaaa;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 8px 16px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 4px;
+  }
 
   /* ========== СТРАНИЦЫ ========== */
   .page {
@@ -824,37 +927,6 @@
     .control-ticket { display: none; }
     .record-lamp { transform: scale(0.8); transform-origin: bottom left; }
   }
-  /* ========== СТАТИЧЕСКИЕ ПОЛОСЫ (ЭФФЕКТ ПОМЕХ) ========== */
-  @keyframes staticBars {
-    0% { opacity: 0; }
-    5% { opacity: 0.6; }
-    10% { opacity: 0.4; }
-    15% { opacity: 0.7; }
-    20% { opacity: 0.3; }
-    25% { opacity: 0; }
-    100% { opacity: 0; }
-  }
-
-  .static-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: repeating-linear-gradient(0deg, 
-      rgba(0,0,0,0) 0px, 
-      rgba(0,0,0,0.3) 1px, 
-      rgba(255,255,255,0.1) 2px,
-      rgba(0,0,0,0.2) 3px,
-      rgba(0,0,0,0) 4px,
-      rgba(255,255,255,0.05) 5px,
-      rgba(0,0,0,0) 6px);
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0;
-    animation: staticBars 0.25s ease-out;
-  }
- 
 </style>
 </head>
 <body class="crt">
@@ -1103,11 +1175,12 @@
     <div class="warning-footer blink-red">[ ОПЕРАТИВНОЕ ЗАМЕЧАНИЕ: ЛИЧНОСТЬ ОБЪЕКТА ПОДЛЕЖИТ ЗАЩИТЕ ]</div>
   </div>
 
-<div class="footer">
+  <div class="footer">
     <span>КГБ КПМ // ФОРМА КГБ-7А // 2033</span>
     <span>НЕСАНКЦИОНИРОВАННЫЙ ДОСТУП — РАССТРЕЛ БЕЗ СУДА</span>
     <span>ДОС-КЛ-2033-089</span>
-    <span id="liveDateTime"></span>  <!-- ЭТО НОВАЯ СТРОКА -->
+    <span id="liveDateTime"></span>
+  </div>
 </div>
 
 <!-- КОНТРОЛЬНЫЙ ТАЛОН -->
@@ -1134,12 +1207,20 @@
     </div>
 </div>
 
+<!-- ЭКСТРЕННАЯ КНОПКА -->
+<div class="emergency-btn" id="emergencyBtn">ЧС</div>
+<div id="emergencyOverlay" class="emergency-overlay">
+    <div>
+        <div class="emergency-text">ДОСТУП ЗАБЛОКИРОВАН</div>
+        <div class="emergency-sub">НАРУШЕНИЕ РЕЖИМА СЕКРЕТНОСТИ</div>
+        <div class="emergency-off" id="emergencyOff">[ ВОССТАНОВИТЬ ДОСТУП ]</div>
+    </div>
+</div>
+
 <!-- ЗВУКИ -->
 <audio id="clickSound" preload="auto">
     <source src="click.mp3" type="audio/mpeg">
 </audio>
-
-<!-- ФОНОВАЯ МУЗЫКА -->
 <audio id="bgMusic" preload="auto" loop>
     <source src="ambient.mp3" type="audio/mpeg">
 </audio>
@@ -1149,9 +1230,13 @@
     // === ПОЛУЧАЕМ ЭЛЕМЕНТЫ ===
     const recordLamp = document.getElementById('recordLamp');
     const wrapper = document.querySelector('.wrapper');
+    const emergencyBtn = document.getElementById('emergencyBtn');
+    const emergencyOverlay = document.getElementById('emergencyOverlay');
+    const emergencyOff = document.getElementById('emergencyOff');
     
     // === ЗВУКИ ===
     let soundEnabled = false;
+    let bgMusicPlaying = false;
     
     function playSound(audioId) {
         if (!soundEnabled) return;
@@ -1162,33 +1247,34 @@
         }
     }
     
-function initSound() {
-    if (soundEnabled) return;
-    soundEnabled = true;
-    const unlockBtn = document.getElementById('unlockSoundBtn');
-    if (unlockBtn) unlockBtn.remove();
-    
-    // Запускаем фоновую музыку
-    const bgMusic = document.getElementById('bgMusic');
-    if (bgMusic) {
-        bgMusic.volume = 0.3;  // Громкость 30% (не перебивает голос)
-        bgMusic.play().catch(e => console.log('Music error:', e));
+    function initSound() {
+        if (soundEnabled) return;
+        soundEnabled = true;
+        const unlockBtn = document.getElementById('unlockSoundBtn');
+        if (unlockBtn) unlockBtn.remove();
+        
+        // Запускаем фоновую музыку
+        const bgMusic = document.getElementById('bgMusic');
+        if (bgMusic) {
+            bgMusic.volume = 0.25;
+            bgMusic.play().catch(e => console.log('Music error:', e));
+            bgMusicPlaying = true;
+        }
+        
+        const msg = document.createElement('div');
+        msg.textContent = 'ЗВУК АКТИВИРОВАН';
+        msg.style.cssText = 'position:fixed; bottom:10px; left:50%; transform:translateX(-50%); background:#8b0000; color:#fff; padding:2px 10px; font-size:8px; z-index:10000; font-family:monospace;';
+        document.body.appendChild(msg);
+        setTimeout(() => msg.remove(), 1500);
+        
+        // Короткий щелчок для подтверждения
+        playSound('clickSound');
     }
-    
-    const msg = document.createElement('div');
-    msg.textContent = 'ЗВУК АКТИВИРОВАН';
-    msg.style.cssText = 'position:fixed; bottom:10px; left:50%; transform:translateX(-50%); background:#8b0000; color:#fff; padding:2px 10px; font-size:8px; z-index:10000; font-family:monospace;';
-    document.body.appendChild(msg);
-    setTimeout(() => msg.remove(), 1500);
-    
-    // Воспроизводим короткий звук staticSound (если есть) или просто щелчок
-    playSound('clickSound');
-}
     
     const unlockBtn = document.createElement('div');
     unlockBtn.id = 'unlockSoundBtn';
-    unlockBtn.textContent = 'АКТИВИРОВАТЬ ЗВУКИ';
-    unlockBtn.style.cssText = 'position:fixed; bottom:10px; left:10px; font-size:6px; color:#8a7a6a; z-index:10000; background:rgba(0,0,0,0.6); padding:3px 8px; cursor:pointer; font-family:monospace; border:1px solid #8b0000;';
+    unlockBtn.textContent = '⚡ АКТИВИРОВАТЬ ЗВУКИ ⚡';
+    unlockBtn.className = 'sound-unlock';
     unlockBtn.onclick = initSound;
     document.body.appendChild(unlockBtn);
     
@@ -1254,28 +1340,8 @@ function initSound() {
             }
         }, 30);
     }
-    // === СТАТИЧЕСКИЕ ПОЛОСЫ (КАЖДЫЕ 30 СЕКУНД) ===
-    const staticOverlay = document.getElementById('staticOverlay');
     
-    if (staticOverlay) {
-        function showStatic() {
-            staticOverlay.style.animation = 'none';
-            void staticOverlay.offsetWidth;
-            staticOverlay.style.animation = 'staticBars 0.25s ease-out';
-            setTimeout(() => {
-                if (staticOverlay) staticOverlay.style.animation = '';
-            }, 260);
-        }
-        
-        function randomStatic() {
-            showStatic();
-            const nextDelay = 25000 + Math.random() * 15000;
-            setTimeout(randomStatic, nextDelay);
-        }
-        randomStatic();
-    }
-
-   // === ЖИВЫЕ ДАТА И ВРЕМЯ (С ФИКСИРОВАННЫМ 2033 ГОДОМ) ===
+    // === ЖИВЫЕ ДАТА И ВРЕМЯ (С ФИКСИРОВАННЫМ 2033 ГОДОМ) ===
     function updateDateTime() {
         const now = new Date();
         const day = String(now.getDate()).padStart(2, '0');
@@ -1292,14 +1358,65 @@ function initSound() {
         }
     }
     
-    // Обновляем сразу при загрузке
     updateDateTime();
-    // И каждую секунду
     setInterval(updateDateTime, 1000);
-   
+    
+    // === ЭКСТРЕННАЯ КНОПКА ЧС ===
+    let emergencyTimer = null;
+    let wasSoundEnabled = false;
+    
+    if (emergencyBtn) {
+        emergencyBtn.addEventListener('click', function() {
+            // Сохраняем состояние звука
+            wasSoundEnabled = soundEnabled;
+            
+            // Останавливаем фоновую музыку если звук был включён
+            if (wasSoundEnabled) {
+                const bgMusic = document.getElementById('bgMusic');
+                if (bgMusic) bgMusic.pause();
+            }
+            
+            // Показываем панель
+            emergencyOverlay.classList.add('active');
+            
+            // Воспроизводим звук тревоги
+            if (wasSoundEnabled) {
+                const alarmSound = new Audio();
+                alarmSound.src = 'https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3';
+                alarmSound.volume = 0.5;
+                alarmSound.play().catch(e => console.log('Alarm error:', e));
+            }
+            
+            // Устанавливаем таймер на автоматическое восстановление через 3 секунды
+            if (emergencyTimer) clearTimeout(emergencyTimer);
+            emergencyTimer = setTimeout(resetEmergency, 3000);
+        });
+    }
+    
+    function resetEmergency() {
+        emergencyOverlay.classList.remove('active');
+        
+        // Возвращаем музыку если она была включена
+        if (wasSoundEnabled) {
+            const bgMusic = document.getElementById('bgMusic');
+            if (bgMusic) {
+                bgMusic.volume = 0.25;
+                bgMusic.play().catch(e => console.log('Music resume error:', e));
+            }
+        }
+        
+        if (emergencyTimer) clearTimeout(emergencyTimer);
+        emergencyTimer = null;
+    }
+    
+    if (emergencyOff) {
+        emergencyOff.addEventListener('click', function() {
+            if (emergencyTimer) clearTimeout(emergencyTimer);
+            resetEmergency();
+        });
+    }
   });
 </script>
-<!-- СТАТИЧЕСКИЕ ПОЛОСЫ ДЛЯ ЭФФЕКТА ПОМЕХ -->
-<div id="staticOverlay" class="static-overlay"></div>
+
 </body>
 </html>
