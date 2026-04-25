@@ -1103,11 +1103,11 @@
     <div class="warning-footer blink-red">[ ОПЕРАТИВНОЕ ЗАМЕЧАНИЕ: ЛИЧНОСТЬ ОБЪЕКТА ПОДЛЕЖИТ ЗАЩИТЕ ]</div>
   </div>
 
-  <div class="footer">
+<div class="footer">
     <span>КГБ КПМ // ФОРМА КГБ-7А // 2033</span>
     <span>НЕСАНКЦИОНИРОВАННЫЙ ДОСТУП — РАССТРЕЛ БЕЗ СУДА</span>
     <span>ДОС-КЛ-2033-089</span>
-  </div>
+    <span id="liveDateTime"></span>  <!-- ЭТО НОВАЯ СТРОКА -->
 </div>
 
 <!-- КОНТРОЛЬНЫЙ ТАЛОН -->
@@ -1274,6 +1274,28 @@ function initSound() {
         }
         randomStatic();
     }
+
+   // === ЖИВЫЕ ДАТА И ВРЕМЯ (С ФИКСИРОВАННЫМ 2033 ГОДОМ) ===
+    function updateDateTime() {
+        const now = new Date();
+        const day = String(now.getDate()).padStart(2, '0');
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        
+        const dateTimeString = `${day}.${month}.2033 | ${hours}:${minutes}:${seconds}`;
+        
+        const dateTimeElement = document.getElementById('liveDateTime');
+        if (dateTimeElement) {
+            dateTimeElement.textContent = dateTimeString;
+        }
+    }
+    
+    // Обновляем сразу при загрузке
+    updateDateTime();
+    // И каждую секунду
+    setInterval(updateDateTime, 1000);
    
   });
 </script>
