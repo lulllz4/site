@@ -768,19 +768,30 @@
   }
 
   /* ========== КНОПКА АКТИВАЦИИ ЗВУКА ========== */
-  .sound-unlock {
+.sound-unlock {
     position: fixed;
-    bottom: 10px;
-    left: 10px;
-    font-size: 6px;
-    color: #8a7a6a;
+    bottom: 20px;
+    left: 20px;
+    font-size: 11px;
+    color: #cc1a1a;
     z-index: 10000;
-    background: rgba(0,0,0,0.6);
-    padding: 3px 8px;
+    background: rgba(0,0,0,0.85);
+    padding: 10px 16px;
     cursor: pointer;
     font-family: monospace;
-    border: 1px solid #8b0000;
-  }
+    border: 2px solid #8b0000;
+    border-radius: 4px;
+    transition: all 0.2s;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+}
+
+.sound-unlock:hover {
+    background: #8b0000;
+    color: #0a0c10;
+    border-color: #ff4444;
+    box-shadow: 0 0 10px rgba(200,0,0,0.5);
+}
 
   /* ========== СТРАНИЦЫ ========== */
   .page {
@@ -1094,10 +1105,12 @@
 
 <!-- ЗВУКИ -->
 <audio id="clickSound" preload="auto">
-    <source src="https://zvukogram.com/zvuk/84723/" type="audio/mpeg">
+    <source src="click.mp3" type="audio/mpeg">
 </audio>
-<audio id="staticSound" preload="auto">
-    <source src="https://zvukogram.com/zvuk/98016/" type="audio/mpeg">
+
+<!-- ФОНОВАЯ МУЗЫКА -->
+<audio id="bgMusic" preload="auto" loop>
+    <source src="ambient.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -1118,20 +1131,28 @@
         }
     }
     
-    function initSound() {
-        if (soundEnabled) return;
-        soundEnabled = true;
-        const unlockBtn = document.getElementById('unlockSoundBtn');
-        if (unlockBtn) unlockBtn.remove();
-        
-        const msg = document.createElement('div');
-        msg.textContent = 'ЗВУК АКТИВИРОВАН';
-        msg.style.cssText = 'position:fixed; bottom:10px; left:50%; transform:translateX(-50%); background:#8b0000; color:#fff; padding:2px 10px; font-size:8px; z-index:10000; font-family:monospace;';
-        document.body.appendChild(msg);
-        setTimeout(() => msg.remove(), 1500);
-        
-        playSound('staticSound');
+function initSound() {
+    if (soundEnabled) return;
+    soundEnabled = true;
+    const unlockBtn = document.getElementById('unlockSoundBtn');
+    if (unlockBtn) unlockBtn.remove();
+    
+    // Запускаем фоновую музыку
+    const bgMusic = document.getElementById('bgMusic');
+    if (bgMusic) {
+        bgMusic.volume = 0.3;  // Громкость 30% (не перебивает голос)
+        bgMusic.play().catch(e => console.log('Music error:', e));
     }
+    
+    const msg = document.createElement('div');
+    msg.textContent = 'ЗВУК АКТИВИРОВАН';
+    msg.style.cssText = 'position:fixed; bottom:10px; left:50%; transform:translateX(-50%); background:#8b0000; color:#fff; padding:2px 10px; font-size:8px; z-index:10000; font-family:monospace;';
+    document.body.appendChild(msg);
+    setTimeout(() => msg.remove(), 1500);
+    
+    // Воспроизводим короткий звук staticSound (если есть) или просто щелчок
+    playSound('clickSound');
+}
     
     const unlockBtn = document.createElement('div');
     unlockBtn.id = 'unlockSoundBtn';
