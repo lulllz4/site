@@ -90,14 +90,14 @@
     100% { opacity: 0.96; filter: grayscale(12%) contrast(1.05) brightness(0.98); }
   }
 
-@keyframes horizontalJitter {
+  @keyframes horizontalJitter {
     0% { transform: translateX(0px); }
     25% { transform: translateX(0.15px); }
     75% { transform: translateX(-0.1px); }
     100% { transform: translateX(0px); }
-}
+  }
 
-.photo-container {
+  .photo-container {
     background: #050608;
     border: 1px solid #8b0000;
     position: relative;
@@ -107,9 +107,10 @@
     justify-content: center;
     box-shadow: inset 0 0 25px rgba(0,0,0,0.8);
     overflow: hidden;
-}
+    animation: horizontalJitter 0.2s ease-in-out infinite;
+  }
 
-.photo-container img {
+  .photo-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -119,7 +120,7 @@
     image-rendering: pixelated;
     image-rendering: crisp-edges;
     filter: blur(0.3px) contrast(1.15) brightness(0.94) grayscale(8%);
-}
+  }
 
   /* Полосы поверх картинки (эффект ЭЛТ) */
   .photo-container::after {
@@ -176,11 +177,6 @@
   @keyframes ledBlink {
     0%, 100% { background: #cc1a1a; box-shadow: 0 0 2px #cc1a1a; }
     50% { background: #ff4444; box-shadow: 0 0 8px #ff4444; }
-  }
-
-  @keyframes pulseBorder {
-    0%, 100% { border-color: rgba(139,0,0,0.3); box-shadow: 0 0 0px rgba(139,0,0,0.2); }
-    50% { border-color: rgba(200,0,0,0.7); box-shadow: 0 0 6px rgba(200,0,0,0.4); }
   }
 
   .blink-red, .status, .warning-footer, .tag, .photo-stamp {
@@ -604,6 +600,93 @@
     margin-top: 25px;
   }
 
+  /* ========== КОНТРОЛЬНЫЙ ТАЛОН (ОТРЫВНОЙ УГОЛОК) ========== */
+  .control-ticket {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 130px;
+    height: 75px;
+    background: linear-gradient(135deg, #1a1010 0%, #0a0c10 100%);
+    border: 1px solid #8b0000;
+    border-right: none;
+    border-bottom: none;
+    z-index: 1000;
+    font-family: monospace;
+    font-size: 6px;
+    color: #8b0000;
+    padding: 6px 8px;
+    transform: rotate(2deg);
+    box-shadow: -2px -2px 5px rgba(0,0,0,0.3);
+  }
+
+  .control-ticket::before {
+    content: "✂ - - - - - - - - - - - - - - - - - - - ✂";
+    position: absolute;
+    top: -8px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 5px;
+    letter-spacing: 1px;
+    color: #5a3a3a;
+  }
+
+  .control-ticket .ticket-number {
+    font-size: 8px;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+    border-bottom: 1px dotted #8b0000;
+    display: inline-block;
+  }
+
+  .control-ticket .ticket-date {
+    font-size: 5px;
+    margin-top: 4px;
+    color: #6a5a4a;
+  }
+
+  /* ========== ЛАМПА "ЗАПИСЬ" ПРИ ПЕРЕКЛЮЧЕНИИ ========== */
+  .record-lamp {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(10, 12, 16, 0.8);
+    padding: 6px 12px;
+    border: 1px solid #8b0000;
+    z-index: 1000;
+    font-family: monospace;
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: #aa5a5a;
+    opacity: 0;
+    transition: opacity 0.1s ease;
+    pointer-events: none;
+  }
+
+  .record-lamp.active {
+    opacity: 1;
+    animation: lampFlash 0.5s ease-out;
+  }
+
+  .record-lamp .lamp-bulb {
+    width: 10px;
+    height: 10px;
+    background: #cc1a1a;
+    border-radius: 50%;
+    box-shadow: 0 0 4px #ff0000;
+  }
+
+  @keyframes lampFlash {
+    0% { opacity: 0; transform: scale(0.9); }
+    20% { opacity: 1; transform: scale(1.05); }
+    60% { opacity: 0.8; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0.95); }
+  }
+
   /* ========== СТРАНИЦЫ ========== */
   .page {
     display: none;
@@ -632,6 +715,8 @@
     .wrapper { padding-left: 25px; padding-bottom: 80px; }
     .vertical-stripe { width: 25px; }
     .vertical-stripe .sickle-hammer { font-size: 10px; }
+    .control-ticket { transform: scale(0.8) rotate(2deg); transform-origin: bottom right; }
+    .record-lamp { transform: scale(0.8); transform-origin: bottom left; }
   }
 </style>
 </head>
@@ -888,12 +973,33 @@
   </div>
 </div>
 
+<!-- КОНТРОЛЬНЫЙ ТАЛОН -->
+<div class="control-ticket">
+  <div class="ticket-number">ДОС-КЛ-2033-089</div>
+  <div>УНИЧТОЖИТЬ<br>ПОСЛЕ ОЗНАКОМЛЕНИЯ</div>
+  <div class="ticket-date">СОТРУДНИК КГБ: ________</div>
+</div>
+
+<!-- ЛАМПА "ЗАПИСЬ" -->
+<div id="recordLamp" class="record-lamp">
+  <div class="lamp-bulb"></div>
+  <span>ЗАПИСЬ</span>
+</div>
+
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const buttons = document.querySelectorAll('.nav-btn');
+    const recordLamp = document.getElementById('recordLamp');
+    
     buttons.forEach(button => {
       button.addEventListener('click', function() {
         const pageId = this.getAttribute('data-page');
+        
+        // Анимация лампы
+        recordLamp.classList.remove('active');
+        void recordLamp.offsetWidth; // Форсируем перерисовку
+        recordLamp.classList.add('active');
+        
         buttons.forEach(btn => btn.classList.remove('active'));
         this.classList.add('active');
         document.querySelectorAll('.page').forEach(page => page.classList.remove('active-page'));
