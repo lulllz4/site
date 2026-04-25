@@ -100,14 +100,23 @@
     100% { transform: translateX(0px); }
   }
 
-  .photo-container img {
+.photo-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
-    animation: flickerImage 0.2s steps(2, jump-end) infinite, horizontalJitter 0.1s linear infinite;
+    animation: flickerImage 0.15s steps(2, jump-end) infinite, horizontalJitter 0.08s linear infinite;
     display: block;
-  }
+    
+    /* Эффект плохого качества */
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    filter: 
+        blur(0.5px) 
+        contrast(1.3) 
+        brightness(0.9) 
+        grayscale(15%);
+}
 
   /* ========== ТЕКСТ ТАБЛИЦ - СВЕТЛЫЙ (СЕРЫЙ ДЛЯ КОНТРАСТА) ========== */
   .card-body {
