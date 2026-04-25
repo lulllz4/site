@@ -83,7 +83,7 @@
     z-index: 9998;
   }
 
-  /* ========== МЕРЦАНИЕ КАРТИНКИ ========== */
+  /* ========== МЕРЦАНИЕ КАРТИНКИ — ОЧЕНЬ ПЛАВНОЕ ========== */
   @keyframes flickerImage {
     0% { opacity: 0.96; filter: grayscale(12%) contrast(1.05) brightness(0.98); }
     50% { opacity: 0.93; filter: grayscale(15%) contrast(1.08) brightness(0.96); }
@@ -108,7 +108,6 @@
     box-shadow: inset 0 0 25px rgba(0,0,0,0.8);
     overflow: hidden;
     animation: horizontalJitter 3s ease-in-out infinite;
-
   }
 
   .photo-container img {
@@ -443,7 +442,7 @@
     text-transform: uppercase;
   }
 
-  /* ========== ПОЛОСЫ УРОВНЕЙ ========== */
+  /* ========== ПОЛОСЫ УРОВНЕЙ С АНИМАЦИЕЙ ========== */
   .stat-item {
     margin-bottom: 16px;
   }
@@ -471,11 +470,20 @@
     background: #1a1010;
     border: 1px solid #4a2a2a;
     box-shadow: inset 0 1px 3px rgba(0,0,0,0.6);
+    overflow: hidden;
   }
 
+  /* Анимация бегущих полосок для статов */
   .stat-fill {
     height: 100%;
     background: repeating-linear-gradient(90deg, #8b0000 0px, #8b0000 4px, #cc1a1a 4px, #cc1a1a 8px);
+    background-size: 20px 100%;
+    animation: flowingStripes 1.5s linear infinite;
+  }
+
+  @keyframes flowingStripes {
+    0% { background-position: 0 0; }
+    100% { background-position: 20px 0; }
   }
 
   /* ========== ТАЙМЛАЙН ========== */
@@ -686,6 +694,19 @@
     100% { opacity: 0; transform: scale(0.95); }
   }
 
+  /* ========== АНИМАЦИЯ ПЕРЕКЛЮЧЕНИЯ СТРАНИЦ ========== */
+  @keyframes pageFlash {
+    0% { opacity: 1; }
+    10% { opacity: 0.2; background-color: rgba(200,0,0,0.3); }
+    30% { opacity: 0.6; }
+    60% { opacity: 0.9; }
+    100% { opacity: 1; background-color: transparent; }
+  }
+
+  .page-transition {
+    animation: pageFlash 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
   /* ========== ЭКРАН ЗАГРУЗКИ ========== */
   .loading-overlay {
     position: fixed;
@@ -733,6 +754,8 @@
     width: 0%;
     height: 100%;
     background: repeating-linear-gradient(90deg, #8b0000 0px, #8b0000 4px, #cc1a1a 4px, #cc1a1a 8px);
+    background-size: 20px 100%;
+    animation: flowingStripes 0.8s linear infinite;
     transition: width 0.05s linear;
   }
 
@@ -742,6 +765,21 @@
     color: #8b0000;
     margin-top: 10px;
     font-family: monospace;
+  }
+
+  /* ========== КНОПКА АКТИВАЦИИ ЗВУКА ========== */
+  .sound-unlock {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    font-size: 6px;
+    color: #8a7a6a;
+    z-index: 10000;
+    background: rgba(0,0,0,0.6);
+    padding: 3px 8px;
+    cursor: pointer;
+    font-family: monospace;
+    border: 1px solid #8b0000;
   }
 
   /* ========== СТРАНИЦЫ ========== */
@@ -812,10 +850,10 @@
   <!-- НАВИГАЦИЯ -->
   <div class="side-nav">
     <div class="nav-btn active" data-page="main">⌂</div>
-    <div class="nav-btn" data-page="bio">🕮</div>
-    <div class="nav-btn" data-page="psych">🗁</div>
-    <div class="nav-btn" data-page="operation">🗁</div>
-    <div class="nav-btn" data-page="medical">🗁</div>
+    <div class="nav-btn" data-page="bio">☙</div>
+    <div class="nav-btn" data-page="psych">◈</div>
+    <div class="nav-btn" data-page="operation">⚙</div>
+    <div class="nav-btn" data-page="medical">☠</div>
   </div>
 
   <!-- СТРАНИЦА 1: ОБЗОР -->
@@ -877,7 +915,7 @@
         <div class="photo-stamp blink-red">АРХИВ // 2033</div>
       </div>
       <div class="card">
-        <div class="card-header"><span class="header-icon">◈</span> [ ЛИЧНОЕ ДЕЛО ]</div>
+        <div class="card-header"><span class="header-icon">■</span> [ ЛИЧНОЕ ДЕЛО ]</div>
         <div class="card-body">Полное досье объекта Тинъюнь Линь. Уполномоченный комиссар по внешним связям, ключевая фигура в дипломатическом корпусе Красной линии.</div>
       </div>
     </div>
@@ -926,19 +964,19 @@
         <div class="photo-stamp blink-red">АРХИВ // 2033</div>
       </div>
       <div class="card">
-        <div class="card-header"><span class="header-icon">◈</span> [ ПСИХОЛОГИЧЕСКИЙ ПРОФИЛЬ ]</div>
+        <div class="card-header"><span class="header-icon">■</span> [ ПСИХОЛОГИЧЕСКИЙ ПРОФИЛЬ ]</div>
         <div class="card-body"><span class="blink-red">Тинъюнь</span> — сочетает внешнюю мягкость с железной внутренней убеждённостью. <span class="blink-red">Исключительно лояльна, идеологически устойчива.</span> Умеет расположить к себе даже недружественно настроенных собеседников.</div>
       </div>
     </div>
 
     <div class="content-grid">
-      <div class="card"><div class="card-header"><span class="header-icon">●</span> ЭМПАТИЯ</div><div class="card-body">Исключительно высокий уровень эмпатии. Считывает эмоции собеседника до того, как они проявлены внешне.</div></div>
-      <div class="card"><div class="card-header"><span class="header-icon">●</span> ХАРИЗМА</div><div class="card-body">99-й процентиль. Располагает к себе интуитивно, без явных усилий.</div></div>
-      <div class="card"><div class="card-header"><span class="header-icon">●</span> АДАПТИВНОСТЬ</div><div class="card-body">Мгновенно подстраивает стиль общения под собеседника, сохраняя свою цель.</div></div>
-      <div class="card"><div class="card-header"><span class="header-icon">●</span> СТРЕССОУСТОЙЧИВОСТЬ</div><div class="card-body">Высокая. Держит удар, не переходит на личные оскорбления, добивается своего.</div></div>
+      <div class="card"><div class="card-header"><span class="header-icon">◈</span> ЭМПАТИЯ</div><div class="card-body">Исключительно высокий уровень эмпатии. Считывает эмоции собеседника до того, как они проявлены внешне.</div></div>
+      <div class="card"><div class="card-header"><span class="header-icon">◈</span> ХАРИЗМА</div><div class="card-body">99-й процентиль. Располагает к себе интуитивно, без явных усилий.</div></div>
+      <div class="card"><div class="card-header"><span class="header-icon">◈</span> АДАПТИВНОСТЬ</div><div class="card-body">Мгновенно подстраивает стиль общения под собеседника, сохраняя свою цель.</div></div>
+      <div class="card"><div class="card-header"><span class="header-icon">◈</span> СТРЕССОУСТОЙЧИВОСТЬ</div><div class="card-body">Высокая. Держит удар, не переходит на личные оскорбления, добивается своего.</div></div>
     </div>
 
-    <div class="card"><div class="card-header"><span class="header-icon">●</span> ПРЕДАННОСТЬ ПАРТИИ</div><div class="card-body">Абсолютная. Воспринимает Красную линию как единственную семью.</div></div>
+    <div class="card"><div class="card-header"><span class="header-icon">◈</span> ПРЕДАННОСТЬ ПАРТИИ</div><div class="card-body">Абсолютная. Воспринимает Красную линию как единственную семью.</div></div>
     <div class="dialogue-block">
       <div class="secret-badge">КОММЕНТАРИЙ ПСИХОЛОГА</div>
       <div class="dialogue-line">Объект демонстрирует высокую степень лояльности и психологическую устойчивость. Рекомендуется для работы на ответственных переговорных позициях.</div>
@@ -956,7 +994,7 @@
         <div class="photo-stamp blink-red">АРХИВ // 2033</div>
       </div>
       <div class="card">
-        <div class="card-header"><span class="header-icon">◈</span> [ УЧАСТИЕ В ОПЕРАЦИЯХ ]</div>
+        <div class="card-header"><span class="header-icon">■</span> [ УЧАСТИЕ В ОПЕРАЦИЯХ ]</div>
         <div class="card-body">Тинъюнь принимала участие в нескольких ключевых переговорных миссиях. Как правило, действует как официальный представитель.</div>
       </div>
     </div>
@@ -990,7 +1028,7 @@
         <div class="photo-stamp blink-red">АРХИВ // 2033</div>
       </div>
       <div class="card">
-        <div class="card-header"><span class="header-icon">◈</span> [ МЕДИЦИНСКАЯ КАРТА // СОВ. СЕКРЕТНО ]</div>
+        <div class="card-header"><span class="header-icon">■</span> [ МЕДИЦИНСКАЯ КАРТА // СОВ. СЕКРЕТНО ]</div>
         <div class="card-body">Полное медицинское досье объекта. Информация категории <span class="blink-red">«Особая важность»</span>.</div>
       </div>
     </div>
@@ -1054,59 +1092,117 @@
     </div>
 </div>
 
+<!-- ЗВУКИ -->
+<audio id="clickSound" preload="auto">
+    <source src="https://www.soundjay.com/misc/sounds/button-click-01.mp3" type="audio/mpeg">
+</audio>
+<audio id="staticSound" preload="auto">
+    <source src="https://www.soundjay.com/misc/sounds/static-01.mp3" type="audio/mpeg">
+</audio>
+
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    const buttons = document.querySelectorAll('.nav-btn');
+    // === ПОЛУЧАЕМ ЭЛЕМЕНТЫ ===
     const recordLamp = document.getElementById('recordLamp');
+    const wrapper = document.querySelector('.wrapper');
+    
+    // === ЗВУКИ ===
+    let soundEnabled = false;
+    
+    function playSound(audioId) {
+        if (!soundEnabled) return;
+        const audio = document.getElementById(audioId);
+        if (audio) {
+            audio.currentTime = 0;
+            audio.play().catch(e => console.log('Sound error:', e));
+        }
+    }
+    
+    function initSound() {
+        if (soundEnabled) return;
+        soundEnabled = true;
+        const unlockBtn = document.getElementById('unlockSoundBtn');
+        if (unlockBtn) unlockBtn.remove();
+        
+        const msg = document.createElement('div');
+        msg.textContent = 'ЗВУК АКТИВИРОВАН';
+        msg.style.cssText = 'position:fixed; bottom:10px; left:50%; transform:translateX(-50%); background:#8b0000; color:#fff; padding:2px 10px; font-size:8px; z-index:10000; font-family:monospace;';
+        document.body.appendChild(msg);
+        setTimeout(() => msg.remove(), 1500);
+        
+        playSound('staticSound');
+    }
+    
+    const unlockBtn = document.createElement('div');
+    unlockBtn.id = 'unlockSoundBtn';
+    unlockBtn.textContent = '⚡ АКТИВИРОВАТЬ ЗВУКИ ⚡';
+    unlockBtn.style.cssText = 'position:fixed; bottom:10px; left:10px; font-size:6px; color:#8a7a6a; z-index:10000; background:rgba(0,0,0,0.6); padding:3px 8px; cursor:pointer; font-family:monospace; border:1px solid #8b0000;';
+    unlockBtn.onclick = initSound;
+    document.body.appendChild(unlockBtn);
+    
+    // === ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ ===
+    const buttons = document.querySelectorAll('.nav-btn');
     
     buttons.forEach(button => {
-      button.addEventListener('click', function() {
-        const pageId = this.getAttribute('data-page');
-        
-        // Анимация лампы
-        recordLamp.classList.remove('active');
-        void recordLamp.offsetWidth;
-        recordLamp.classList.add('active');
-        
-        buttons.forEach(btn => btn.classList.remove('active'));
-        this.classList.add('active');
-        document.querySelectorAll('.page').forEach(page => page.classList.remove('active-page'));
-        document.getElementById('page-' + pageId).classList.add('active-page');
-      });
+        button.addEventListener('click', function() {
+            const pageId = this.getAttribute('data-page');
+            
+            // Звук клика
+            playSound('clickSound');
+            
+            // Анимация лампы
+            if (recordLamp) {
+                recordLamp.classList.remove('active');
+                void recordLamp.offsetWidth;
+                recordLamp.classList.add('active');
+            }
+            
+            // Мерцание страницы
+            if (wrapper) {
+                wrapper.classList.add('page-transition');
+                setTimeout(() => {
+                    wrapper.classList.remove('page-transition');
+                }, 200);
+            }
+            
+            // Переключение
+            buttons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active-page'));
+            document.getElementById('page-' + pageId).classList.add('active-page');
+        });
     });
+    
+    // === ЭКРАН ЗАГРУЗКИ ===
+    const overlay = document.getElementById('loadingOverlay');
+    const loadingBar = document.getElementById('loadingBar');
+    const loadingStatus = document.getElementById('loadingStatus');
+    
+    if (overlay && loadingBar && loadingStatus) {
+        let width = 0;
+        const interval = setInterval(function() {
+            if (width >= 100) {
+                clearInterval(interval);
+                overlay.classList.add('fade-out');
+                setTimeout(function() {
+                    if (overlay) overlay.style.display = 'none';
+                }, 500);
+            } else {
+                width += Math.random() * 15 + 5;
+                if (width > 100) width = 100;
+                loadingBar.style.width = width + '%';
+                loadingStatus.textContent = Math.floor(width) + '%';
+                
+                if (width > 40 && width < 45) {
+                    loadingStatus.textContent = 'ДЕШИФРОВКА...';
+                }
+                if (width > 70 && width < 75) {
+                    loadingStatus.textContent = 'ВЕРИФИКАЦИЯ...';
+                }
+            }
+        }, 30);
+    }
   });
-
-  // ЭКРАН ЗАГРУЗКИ
-  (function() {
-      const overlay = document.getElementById('loadingOverlay');
-      const loadingBar = document.getElementById('loadingBar');
-      const loadingStatus = document.getElementById('loadingStatus');
-      
-      if (!overlay) return;
-      
-      let width = 0;
-      const interval = setInterval(function() {
-          if (width >= 100) {
-              clearInterval(interval);
-              overlay.classList.add('fade-out');
-              setTimeout(function() {
-                  if (overlay) overlay.style.display = 'none';
-              }, 500);
-          } else {
-              width += Math.random() * 15 + 5;
-              if (width > 100) width = 100;
-              loadingBar.style.width = width + '%';
-              loadingStatus.textContent = Math.floor(width) + '%';
-              
-              if (width > 40 && width < 45) {
-                  loadingStatus.textContent = 'ДЕШИФРОВКА...';
-              }
-              if (width > 70 && width < 75) {
-                  loadingStatus.textContent = 'ВЕРИФИКАЦИЯ...';
-              }
-          }
-      }, 30);
-  })();
 </script>
 
 </body>
