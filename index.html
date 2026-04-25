@@ -926,6 +926,16 @@
     .vertical-stripe .sickle-hammer { font-size: 10px; }
     .control-ticket { display: none; }
     .record-lamp { transform: scale(0.8); transform-origin: bottom left; }
+    
+    /* Кнопка ЧС на телефоне — в правый верхний угол (не мешает навигации) */
+    .emergency-btn {
+      bottom: auto;
+      top: 20px;
+      right: 20px;
+      width: 45px;
+      height: 45px;
+      font-size: 14px;
+    }
   }
 </style>
 </head>
@@ -1273,7 +1283,7 @@
     
     const unlockBtn = document.createElement('div');
     unlockBtn.id = 'unlockSoundBtn';
-    unlockBtn.textContent = '⚡ АКТИВИРОВАТЬ ЗВУКИ ⚡';
+    unlockBtn.textContent = 'АКТИВИРОВАТЬ ЗВУКИ';
     unlockBtn.className = 'sound-unlock';
     unlockBtn.onclick = initSound;
     document.body.appendChild(unlockBtn);
