@@ -83,7 +83,7 @@
     z-index: 9998;
   }
 
-  /* ========== МЕРЦАНИЕ КАРТИНКИ - МЯГЧЕ ========== */
+  /* ========== МЕРЦАНИЕ КАРТИНКИ ========== */
   @keyframes flickerImage {
     0% { opacity: 0.96; filter: grayscale(12%) contrast(1.05) brightness(0.98); }
     50% { opacity: 0.93; filter: grayscale(15%) contrast(1.08) brightness(0.96); }
@@ -122,7 +122,6 @@
     filter: blur(0.3px) contrast(1.15) brightness(0.94) grayscale(8%);
   }
 
-  /* Полосы поверх картинки (эффект ЭЛТ) */
   .photo-container::after {
     content: "";
     position: absolute;
@@ -159,7 +158,6 @@
     color: #b8cad8;
   }
 
-  /* Карточки — без мерцания */
   .card {
     background: rgba(10, 12, 16, 0.85);
     border: 1px solid #2a1a1a;
@@ -600,7 +598,7 @@
     margin-top: 25px;
   }
 
-  /* ========== КОНТРОЛЬНЫЙ ТАЛОН (ОТРЫВНОЙ УГОЛОК) ========== */
+  /* ========== КОНТРОЛЬНЫЙ ТАЛОН ========== */
   .control-ticket {
     position: fixed;
     bottom: 20px;
@@ -646,7 +644,7 @@
     color: #6a5a4a;
   }
 
-  /* ========== ЛАМПА "ЗАПИСЬ" ПРИ ПЕРЕКЛЮЧЕНИИ ========== */
+  /* ========== ЛАМПА "ЗАПИСЬ" ========== */
   .record-lamp {
     position: fixed;
     bottom: 20px;
@@ -687,37 +685,6 @@
     100% { opacity: 0; transform: scale(0.95); }
   }
 
-  /* ========== СТРАНИЦЫ ========== */
-  .page {
-    display: none;
-  }
-
-  .page.active-page {
-    display: block;
-  }
-
-  @media (max-width: 900px) {
-    .content-grid, .photo-big { grid-template-columns: 1fr; }
-    .side-nav {
-      position: fixed;
-      bottom: 20px;
-      top: auto;
-      right: 20px;
-      flex-direction: row;
-      transform: none;
-      background: rgba(10,12,16,0.95);
-      padding: 8px;
-      border-radius: 6px;
-      border: 1px solid #8b0000;
-      gap: 8px;
-    }
-    .nav-btn { width: 40px; height: 40px; font-size: 16px; }
-    .wrapper { padding-left: 25px; padding-bottom: 80px; }
-    .vertical-stripe { width: 25px; }
-    .vertical-stripe .sickle-hammer { font-size: 10px; }
-    .control-ticket { display: none; }
-    .record-lamp { transform: scale(0.8); transform-origin: bottom left; }
-  }
   /* ========== ЭКРАН ЗАГРУЗКИ ========== */
   .loading-overlay {
     position: fixed;
@@ -751,7 +718,6 @@
     letter-spacing: 3px;
     color: #cc1a1a;
     margin-bottom: 20px;
-    animation: blinkRed 1s step-end infinite;
   }
 
   .loading-bar-container {
@@ -775,6 +741,38 @@
     color: #8b0000;
     margin-top: 10px;
     font-family: monospace;
+  }
+
+  /* ========== СТРАНИЦЫ ========== */
+  .page {
+    display: none;
+  }
+
+  .page.active-page {
+    display: block;
+  }
+
+  @media (max-width: 900px) {
+    .content-grid, .photo-big { grid-template-columns: 1fr; }
+    .side-nav {
+      position: fixed;
+      bottom: 20px;
+      top: auto;
+      right: 20px;
+      flex-direction: row;
+      transform: none;
+      background: rgba(10,12,16,0.95);
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #8b0000;
+      gap: 8px;
+    }
+    .nav-btn { width: 40px; height: 40px; font-size: 16px; }
+    .wrapper { padding-left: 25px; padding-bottom: 80px; }
+    .vertical-stripe { width: 25px; }
+    .vertical-stripe .sickle-hammer { font-size: 10px; }
+    .control-ticket { display: none; }
+    .record-lamp { transform: scale(0.8); transform-origin: bottom left; }
   }
 </style>
 </head>
@@ -1044,6 +1042,17 @@
   <span>ЗАПИСЬ</span>
 </div>
 
+<!-- ЭКРАН ЗАГРУЗКИ -->
+<div id="loadingOverlay" class="loading-overlay">
+    <div class="loading-container">
+        <div class="loading-text blink-red">РАСШИФРОВКА ДОСЬЕ</div>
+        <div class="loading-bar-container">
+            <div class="loading-bar" id="loadingBar"></div>
+        </div>
+        <div class="loading-status" id="loadingStatus">0%</div>
+    </div>
+</div>
+
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const buttons = document.querySelectorAll('.nav-btn');
@@ -1055,7 +1064,7 @@
         
         // Анимация лампы
         recordLamp.classList.remove('active');
-        void recordLamp.offsetWidth; // Форсируем перерисовку
+        void recordLamp.offsetWidth;
         recordLamp.classList.add('active');
         
         buttons.forEach(btn => btn.classList.remove('active'));
@@ -1065,11 +1074,14 @@
       });
     });
   });
-   // ЭКРАН ЗАГРУЗКИ
+
+  // ЭКРАН ЗАГРУЗКИ
   (function() {
       const overlay = document.getElementById('loadingOverlay');
       const loadingBar = document.getElementById('loadingBar');
       const loadingStatus = document.getElementById('loadingStatus');
+      
+      if (!overlay) return;
       
       let width = 0;
       const interval = setInterval(function() {
@@ -1077,7 +1089,7 @@
               clearInterval(interval);
               overlay.classList.add('fade-out');
               setTimeout(function() {
-                  overlay.style.display = 'none';
+                  if (overlay) overlay.style.display = 'none';
               }, 500);
           } else {
               width += Math.random() * 15 + 5;
@@ -1095,15 +1107,6 @@
       }, 30);
   })();
 </script>
- <!-- ЭКРАН ЗАГРУЗКИ -->
-<div id="loadingOverlay" class="loading-overlay">
-    <div class="loading-container">
-        <div class="loading-text">РАСШИФРОВКА ДОСЬЕ</div>
-        <div class="loading-bar-container">
-            <div class="loading-bar" id="loadingBar"></div>
-        </div>
-        <div class="loading-status" id="loadingStatus">0%</div>
-    </div>
-</div>
+
 </body>
 </html>
