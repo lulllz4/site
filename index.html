@@ -992,6 +992,61 @@
       font-size: 14px;
     }
   }
+   /* ========== СТИЛИ ДЛЯ ПСИХОЛОГИЧЕСКОГО ПОРТРЕТА ========== */
+  .psych-profile {
+    width: 100%;
+  }
+
+  .psych-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+
+  .psych-title {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: #cc1a1a;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    border-left: 2px solid #8b0000;
+    padding-left: 10px;
+  }
+
+  .psych-title:first-of-type {
+    margin-top: 0;
+  }
+
+  .psych-column p {
+    font-size: 11px;
+    line-height: 1.65;
+    color: #c8bcac;
+    margin-bottom: 16px;
+    text-align: justify;
+  }
+
+  .psych-footer {
+    margin-top: 25px;
+    padding: 12px 16px;
+    background: rgba(139,0,0,0.1);
+    border-left: 3px solid #8b0000;
+  }
+
+  .psych-stamp {
+    font-family: monospace;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    color: #aa5a5a;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 700px) {
+    .psych-columns {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+  }
 </style>
 </head>
 <body class="crt">
@@ -1085,7 +1140,7 @@
     </div>
   </div>
 
-  <!-- СТРАНИЦА 2: БИОГРАФИЯ -->
+  <!-- СТРАНИЦА 2: БИОГРАФИЯ / ЛИЧНОЕ ДЕЛО -->
   <div id="page-bio" class="page">
     <div class="photo-big">
       <div class="photo-container">
@@ -1100,29 +1155,58 @@
     </div>
 
     <div class="card">
-      <div class="card-header"><span class="header-icon">●</span> [ ДЕТСТВО И ЮНОСТЬ ]</div>
+      <div class="card-header"><span class="header-icon">●</span> [ ПРОИСХОЖДЕНИЕ И КАРЬЕРА ]</div>
       <div class="card-body">
-        <div class="info-row"><div class="info-label">ранние годы</div><div class="info-value">Родилась на станции «Нагатинская». В 2015 году станция уничтожена мутантами.</div></div>
-        <div class="info-row"><div class="info-label">эвакуация</div><div class="info-value">Спасена полевым отрядом Красной линии. Точные обстоятельства операции засекречены.</div></div>
-        <div class="info-row"><div class="info-label">воспитание</div><div class="info-value">Партийная система детских учреждений. Проявила выдающиеся способности к дипломатии.</div></div>
+        <div class="info-row"><div class="info-label">место рождения</div><div class="info-value">Станция «Нагатинская»</div></div>
+        <div class="info-row"><div class="info-label">дата рождения</div><div class="info-value">26 апреля 2007 г.</div></div>
+        <div class="info-row"><div class="info-label">семья</div><div class="info-value">Родители погибли при уничтожении станции в 2015 г.</div></div>
+        <div class="info-row"><div class="info-label">образование</div><div class="info-value">Партийная система детских учреждений</div></div>
+        <div class="info-row"><div class="info-label">стаж в партии</div><div class="info-value">с 2028 г.</div></div>
+        <div class="info-row"><div class="info-label">текущая должность</div><div class="info-value blink-red">Уполномоченный комиссар по внешним связям</div></div>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-header"><span class="header-icon">●</span> [ КАРЬЕРА ]</div>
+      <div class="card-header"><span class="header-icon">◈</span> [ ПСИХОЛОГИЧЕСКИЙ ПОРТРЕТ ]</div>
       <div class="card-body">
-        <div class="info-row"><div class="info-label">2024-2028</div><div class="info-value">Помощник комиссара по внешним связям на станции «Добрынинская».</div></div>
-        <div class="info-row"><div class="info-label">2028-2031</div><div class="info-value">Куратор переговорных миссий с Ганзой и независимыми станциями.</div></div>
-        <div class="info-row"><div class="info-label">2031-наст.</div><div class="info-value blink-red">Уполномоченный комиссар по внешним связям и товарообмену.</div></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-header"><span class="header-icon">●</span> [ ВООРУЖЕНИЕ ]</div>
-      <div class="card-body">
-        <div class="info-row"><div class="info-label">основное</div><div class="info-value">Пистолет ПММ (модернизированный Макарова)</div></div>
-        <div class="info-row"><div class="info-label">носимое</div><div class="info-value">Радиостанция Р-105, сигнальные патроны</div></div>
-        <div class="info-row"><div class="info-label">специальное</div><div class="info-value blink-red">Наручники с маркировкой КГБ</div></div>
+        <div class="psych-profile">
+          <div class="psych-columns">
+            <div class="psych-column">
+              <h4 class="psych-title">Лицо переговорщика</h4>
+              <p>В её присутствии собеседник расслабляется и начинает говорить больше, чем планировал. Она незаметно сужает пространство возможных решений до одного — нужного Красной линии. Внешняя мягкость и внутренняя жёсткость — разные режимы одного прибора.</p>
+              
+              <h4 class="psych-title">Корень</h4>
+              <p>Восьмилетний ребёнок, переживший гибель станции, усвоил: любая стабильность может рухнуть, выжить можно только рядом с сильным. Преданность линии — не идеология, а привязанность выжившего к спасателю.</p>
+              
+              <h4 class="psych-title">Эмпатия как инструмент</h4>
+              <p>Она не сопереживает, она анализирует. Считывает напряжение, ложь, страх. Это навык выживания, отточенный до профессионального уровня. Сама уже не всегда отличает искреннюю заботу от рабочей необходимости.</p>
+              
+              <h4 class="psych-title">Самоконтроль</h4>
+              <p>Оскорбление, угроза, известие о предательстве — реакция ровная. Это дисциплина, под которой лежит страх потери контроля. Одна вспышка может разрушить равновесие, выстроенное годами.</p>
+            </div>
+            
+            <div class="psych-column">
+              <h4 class="psych-title">Страх изгнания</h4>
+              <p>Не боится пули или пытки. Боится услышать: «Уходи. Ты больше не нужна». Изгнание страшнее смерти — рушится идентичность, смысл, два десятилетия жизни. Этот страх делает её абсолютно лояльной.</p>
+              
+              <h4 class="psych-title">Отсутствие личной жизни</h4>
+              <p>Нет романов, близких друзей, хобби. Любая неформальная близость — риск потерять контроль. Освоила роль комиссара. Роль женщины или подруги ей никто не показал.</p>
+              
+              <h4 class="psych-title">Ирония</h4>
+              <p>Видит изъяны системы — воровство, несправедливость. Не бунтует. Вместо этого — усмешка в разговоре, которую нельзя принять за неуважение. Способ сохранять дистанцию и внутреннюю свободу.</p>
+              
+              <h4 class="psych-title">Что выключает дружелюбие</h4>
+              <p>Работорговля, предательство ради выгоды, жестокость к беззащитным. В таких случаях «Лисица» исчезает. Комиссар не торгуется — она выносит приговор.</p>
+              
+              <h4 class="psych-title">Отсутствие дна</h4>
+              <p>Нет состояния, в котором перестаёт функционировать. Страшное известие — через час она работает. Это автоматическая защита: «Если я сейчас остановлюсь, я не вернусь». Единственная трещина — угроза изгнания.</p>
+            </div>
+          </div>
+          
+          <div class="psych-footer">
+            <span class="psych-stamp">ВЫВОД КГБ: ОБЪЕКТ НАДЁЖЕН. УЯЗВИМОСТЬ — СТРАХ ИЗГНАНИЯ. РЕКОМЕНДОВАН К ИСПОЛЬЗОВАНИЮ НА ПЕРЕГОВОРНЫХ ПОЗИЦИЯХ.</span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1131,6 +1215,7 @@
       <span class="tag">КГБ</span>
       <span class="tag">Дипломатический корпус</span>
       <span class="tag">Внешние связи</span>
+      <span class="tag">Профиль: эмпат-аналитик</span>
     </div>
   </div>
 
