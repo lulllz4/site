@@ -1484,6 +1484,48 @@
     80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
     100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
   }
+
+  /* ========== АНИМАЦИИ ДЛЯ КОНТРОЛЬНОГО ТАЛОНА ========== */
+  @keyframes ticketShake {
+    0% { transform: rotate(2deg) translateX(0); }
+    25% { transform: rotate(1deg) translateX(-3px); }
+    75% { transform: rotate(3deg) translateX(3px); }
+    100% { transform: rotate(2deg) translateX(0); }
+  }
+
+  @keyframes ticketSlideOut {
+    0% {
+      transform: translateX(0) rotate(2deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(150px) rotate(10deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes ticketSlideIn {
+    0% {
+      transform: translateX(150px) rotate(10deg);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0) rotate(2deg);
+      opacity: 1;
+    }
+  }
+
+  .ticket-shake {
+    animation: ticketShake 0.2s ease-in-out;
+  }
+
+  .ticket-slide-out {
+    animation: ticketSlideOut 0.4s ease-out forwards;
+  }
+
+  .ticket-slide-in {
+    animation: ticketSlideIn 0.4s ease-in forwards;
+  }
  
 </style>
 </head>
@@ -2037,12 +2079,12 @@
   </div>
 </div>
 
-<!-- КОНТРОЛЬНЫЙ ТАЛОН -->
-<div class="control-ticket">
-  <div class="ticket-number">ДОС-КЛ-2033-089</div>
-  <div>УНИЧТОЖИТЬ<br>ПОСЛЕ ОЗНАКОМЛЕНИЯ</div>
-  <div class="ticket-date">СОТРУДНИК КГБ: ________</div>
-</div>
+  <!-- КОНТРОЛЬНЫЙ ТАЛОН -->
+  <div class="control-ticket" id="controlTicket">
+    <div class="ticket-number">ДОС-КЛ-2033-089</div>
+    <div>УНИЧТОЖИТЬ<br>ПОСЛЕ ОЗНАКОМЛЕНИЯ</div>
+    <div class="ticket-date">СОТРУДНИК КГБ: ________</div>
+  </div>
 
 <!-- ЛАМПА "ЗАПИСЬ" -->
 <div id="recordLamp" class="record-lamp">
@@ -2461,6 +2503,68 @@
         setTimeout(() => {
           message.remove();
         }, 1500);
+      });
+    }
+
+    // === ИНТЕРАКТИВНЫЙ КОНТРОЛЬНЫЙ ТАЛОН ===
+    const ticket = document.getElementById('controlTicket');
+    let ticketTimeout = null;
+    
+    if (ticket) {
+      // Обычный клик — тряска и сообщение
+      ticket.addEventListener('click', function(e) {
+        // Предотвращаем срабатывание двойного клика
+        if (ticketTimeout) clearTimeout(ticketTimeout);
+        
+        ticket.classList.add('ticket-shake');
+        setTimeout(() => {
+          ticket.classList.remove('ticket-shake');
+        }, 200);
+        
+        // Меняем текст временно
+        const originalText = this.innerHTML;
+        this.innerHTML = '<div class="ticket-number">ДОС-КЛ-2033-089</div><div>КОНТРОЛЬНЫЙ ТАЛОН<br>АННУЛИРОВАН</div><div class="ticket-date">СОТРУДНИК КГБ: ________</div>';
+        
+        setTimeout(() => {
+          this.innerHTML = originalText;
+        }, 1500);
+      });
+      
+      // Двойной клик — уезжает за экран и возвращается
+      ticket.addEventListener('dblclick', function(e) {
+        // Убираем возможные предыдущие анимации
+        this.classList.remove('ticket-slide-in');
+        
+        // Уезжаем
+        this.classList.add('ticket-slide-out');
+        
+        // Возвращаем через 1 секунду
+        setTimeout(() => {
+          this.classList.remove('ticket-slide-out');
+          this.classList.add('ticket-slide-in');
+          
+          // Убираем класс возврата после анимации
+          setTimeout(() => {
+            if (this) this.classList.remove('ticket-slide-in');
+          }, 400);
+        }, 1000);
+      });
+      
+      // Клик с зажатым Shift — тряска + предупреждение
+      ticket.addEventListener('click', function(e) {
+        if (e.shiftKey) {
+          e.preventDefault();
+          
+          const originalText = this.innerHTML;
+          this.classList.add('ticket-shake');
+          
+          this.innerHTML = '<div class="ticket-number">⚠️ ДОСТУП ЗАПРЕЩЁН ⚠️</div><div>ПОПЫТКА ВЗЛОМА<br>ЗАФИКСИРОВАНА</div><div class="ticket-date">КГБ УВЕДОМЛЕН</div>';
+          
+          setTimeout(() => {
+            this.classList.remove('ticket-shake');
+            this.innerHTML = originalText;
+          }, 2000);
+        }
       });
     }
    
