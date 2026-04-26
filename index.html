@@ -1387,7 +1387,10 @@
             // Останавливаем фоновую музыку если звук был включён
             if (wasSoundEnabled) {
                 const bgMusic = document.getElementById('bgMusic');
-                if (bgMusic) bgMusic.pause();
+                if (bgMusic) {
+                    bgMusic.pause();
+                    bgMusic.currentTime = 0; // Сбрасываем фоновую музыку на начало
+                }
             }
             
             // Показываем панель
@@ -1397,57 +1400,44 @@
             if (wasSoundEnabled) {
                 const alarmSound = document.getElementById('alarmSound');
                 if (alarmSound) {
+                    alarmSound.pause(); // Останавливаем если играл
                     alarmSound.currentTime = 0;
-                    alarmSound.volume = 0.25;
+                    alarmSound.volume = 0.4;
                     alarmSound.loop = false;
                     alarmSound.play().catch(e => console.log('Alarm error:', e));
                     currentAlarmSound = alarmSound;
                 }
             }
             
-            // Устанавливаем таймер на автоматическое восстановление через 3 секунды
+            // Устанавливаем таймер на автоматическое восстановление через 6 секунд
             if (emergencyTimer) clearTimeout(emergencyTimer);
             emergencyTimer = setTimeout(resetEmergency, 6000);
         });
     }
     
     function resetEmergency() {
+        // Скрываем панель
         emergencyOverlay.classList.remove('active');
         
-        // Останавливаем звук тревоги
+        // ОСТАНАВЛИВАЕМ ЗВУК ТРЕВОГИ (ПРИНУДИТЕЛЬНО)
         if (currentAlarmSound) {
             currentAlarmSound.pause();
             currentAlarmSound.currentTime = 0;
             currentAlarmSound = null;
         }
         
-        // Возвращаем музыку если она была включена
-        if (wasSoundEnabled) {
-            const bgMusic = document.getElementById('bgMusic');
-            if (bgMusic) {
-                bgMusic.volume = 0.25;
-                bgMusic.play().catch(e => console.log('Music resume error:', e));
-            }
+        // ДОПОЛНИТЕЛЬНАЯ ЗАЩИТА: останавливаем ВСЕ возможные звуки тревоги
+        const alarmSoundElement = document.getElementById('alarmSound');
+        if (alarmSoundElement && !alarmSoundElement.paused) {
+            alarmSoundElement.pause();
+            alarmSoundElement.currentTime = 0;
         }
         
-        if (emergencyTimer) clearTimeout(emergencyTimer);
-        emergencyTimer = null;
-    }
-    
-    if (emergencyOff) {
-        emergencyOff.addEventListener('click', function() {
-            if (emergencyTimer) clearTimeout(emergencyTimer);
-            resetEmergency();
-        });
-    }
-    
-    function resetEmergency() {
-        emergencyOverlay.classList.remove('active');
-        
         // Возвращаем музыку если она была включена
         if (wasSoundEnabled) {
             const bgMusic = document.getElementById('bgMusic');
             if (bgMusic) {
+                bgMusic.currentTime = 0; // Начинаем с начала
                 bgMusic.volume = 0.25;
                 bgMusic.play().catch(e => console.log('Music resume error:', e));
             }
