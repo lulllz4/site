@@ -1423,6 +1423,67 @@
   .shake-screen {
     animation: screenShake 0.2s ease-in-out;
   }
+
+   /* ========== АНИМАЦИЯ ДЛЯ ЗВЕЗДЫ ========== */
+  @keyframes starExplode {
+    0% { transform: scale(1); text-shadow: 0 0 0px #f39c12; }
+    50% { transform: scale(1.3); text-shadow: 0 0 15px #f39c12, 0 0 30px #ff6600; }
+    100% { transform: scale(1); text-shadow: 0 0 0px #f39c12; }
+  }
+
+  @keyframes sparkleFly {
+    0% {
+      opacity: 1;
+      transform: translate(0, 0) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(var(--tx), var(--ty)) scale(0);
+    }
+  }
+
+  .star-click {
+    animation: starExplode 0.3s ease-out;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  .sparkle {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    background: #f39c12;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    animation: sparkleFly 0.6s ease-out forwards;
+    box-shadow: 0 0 4px #ff6600;
+  }
+
+  .star-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(139,0,0,0.9);
+    color: #fff;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 12px;
+    padding: 12px 24px;
+    border: 2px solid #f39c12;
+    z-index: 10001;
+    text-align: center;
+    white-space: nowrap;
+    animation: messageFade 1.5s ease-out forwards;
+    pointer-events: none;
+  }
+
+  @keyframes messageFade {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+    20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+  }
  
 </style>
 </head>
@@ -1448,7 +1509,7 @@
       <div class="number">ФОРМА КГБ-7А // ДОС-КЛ-2033-089</div>
     </div>
     <div class="logo-center">
-      <div class="emblem">★</div>
+      <div class="emblem" id="clickableStar" style="cursor: pointer;">★</div>
       <div class="title">КГБ КРАСНОЙ ЛИНИИ</div>
       <div class="sub">КОМИТЕТ ГОСУДАРСТВЕННОЙ БЕЗОПАСНОСТИ // МОСКОВСКИЙ МЕТРОПОЛИТЕН // 2033 Г.</div>
     </div>
@@ -2348,6 +2409,61 @@
         });
       });
     }
+
+       // === ИНТЕРАКТИВНАЯ ЗВЕЗДА (ВЗРЫВ ЗВЁЗДОЧЕК) ===
+    const star = document.getElementById('clickableStar');
+    
+    if (star) {
+      star.addEventListener('click', function(e) {
+        // Анимация звезды
+        this.classList.add('star-click');
+        setTimeout(() => {
+          this.classList.remove('star-click');
+        }, 300);
+        
+        // Звук (если звук включён)
+        if (soundEnabled) {
+          const starSound = new Audio();
+          starSound.src = 'https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3';
+          starSound.volume = 0.3;
+          starSound.play().catch(e => console.log('Star sound error:', e));
+        }
+        
+        // Создаём разлетающиеся звёздочки
+        const starRect = this.getBoundingClientRect();
+        const starCenterX = starRect.left + starRect.width / 2;
+        const starCenterY = starRect.top + starRect.height / 2;
+        
+        for (let i = 0; i < 12; i++) {
+          const sparkle = document.createElement('div');
+          sparkle.className = 'sparkle';
+          const angle = (i / 12) * Math.PI * 2;
+          const distance = 60 + Math.random() * 40;
+          const tx = Math.cos(angle) * distance;
+          const ty = Math.sin(angle) * distance;
+          sparkle.style.setProperty('--tx', tx + 'px');
+          sparkle.style.setProperty('--ty', ty + 'px');
+          sparkle.style.left = (starCenterX - 3) + 'px';
+          sparkle.style.top = (starCenterY - 3) + 'px';
+          document.body.appendChild(sparkle);
+          
+          setTimeout(() => {
+            sparkle.remove();
+          }, 600);
+        }
+        
+        // Показываем сообщение
+        const message = document.createElement('div');
+        message.className = 'star-message';
+        message.textContent = 'КГБ НАБЛЮДАЕТ ★';
+        document.body.appendChild(message);
+        
+        setTimeout(() => {
+          message.remove();
+        }, 1500);
+      });
+    }
+   
   });
 </script>
 
