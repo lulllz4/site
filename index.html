@@ -1146,6 +1146,93 @@
       flex: 1;
     }
   }
+  /* ========== КАРТОТЕКА ОПЕРАЦИЙ ========== */
+  .operations-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .operation-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 14px 12px;
+    border-left: 3px solid #2a1a1a;
+    background: rgba(10, 12, 16, 0.5);
+    transition: all 0.2s;
+  }
+
+  .operation-item:hover {
+    background: rgba(139,0,0,0.1);
+    border-left-color: #8b0000;
+  }
+
+  .operation-year {
+    min-width: 85px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 9px;
+    color: #cc1a1a;
+    letter-spacing: 1px;
+  }
+
+  .operation-icon {
+    font-size: 20px;
+    color: #8b0000;
+    opacity: 0.7;
+  }
+
+  .operation-info {
+    flex: 1;
+  }
+
+  .operation-name {
+    font-size: 12px;
+    font-weight: bold;
+    color: #c8a88a;
+    margin-bottom: 4px;
+  }
+
+  .operation-desc {
+    font-size: 10px;
+    color: #9a8a7a;
+    line-height: 1.5;
+  }
+
+  .operation-status {
+    min-width: 100px;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    padding: 4px 8px;
+    text-align: center;
+    font-family: monospace;
+  }
+
+  .operation-status.success {
+    color: #22a84a;
+    border: 1px solid #22a84a;
+    background: rgba(34,168,74,0.1);
+  }
+
+  .operation-status.active-status {
+    color: #cc1a1a;
+    border: 1px solid #cc1a1a;
+    background: rgba(200,26,26,0.15);
+    animation: strongFlicker 0.15s step-end infinite;
+  }
+
+  @media (max-width: 700px) {
+    .operation-item {
+      flex-wrap: wrap;
+    }
+    .operation-year {
+      min-width: 70px;
+    }
+    .operation-status {
+      margin-left: 70px;
+    }
+  }
+ 
 </style>
 </head>
 <body class="crt">
@@ -1382,7 +1469,7 @@
 
   <!-- СТРАНИЦА 4: ОПЕРАТИВНЫЕ МАТЕРИАЛЫ -->
   <div id="page-operation" class="page">
-    <div class="warning-footer blink-red">[ МАТЕРИАЛЫ ПО СПЕЦИАЛЬНЫМ ОПЕРАЦИЯМ // ГРИФ "СОВ. СЕКРЕТНО" ]</div>
+    <div class="warning-footer blink-red">[ ОПЕРАТИВНЫЕ МАТЕРИАЛЫ // ГРИФ "СОВ. СЕКРЕТНО" ]</div>
 
     <div class="photo-big">
       <div class="photo-container">
@@ -1392,28 +1479,81 @@
       </div>
       <div class="card">
         <div class="card-header"><span class="header-icon">■</span> [ УЧАСТИЕ В ОПЕРАЦИЯХ ]</div>
-        <div class="card-body">Тинъюнь принимала участие в нескольких ключевых переговорных миссиях. Как правило, действует как официальный представитель.</div>
+        <div class="card-body">Тинъюнь принимала участие в нескольких ключевых переговорных и разведывательных миссиях. Ниже представлен полный список операций с участием объекта.</div>
       </div>
     </div>
 
-    <div class="dialogue-block">
-      <div class="secret-badge">ОПЕРАЦИЯ «ДОВЕРИЕ» // 2032</div>
-      <div class="dialogue-line"><span class="speaker">Из отчёта:</span> Успешно убедила представителей станции «Профсоюзная» заключить эксклюзивный договор на поставку электроэнергии, обойдя конкурентов из Ганзы.</div>
-    </div>
+    <!-- СПИСОК ОПЕРАЦИЙ -->
+    <div class="card">
+      <div class="card-header"><span class="header-icon">●</span> [ КАРТОТЕКА ОПЕРАЦИЙ ]</div>
+      <div class="card-body">
+        <div class="operations-list">
+          
+          <div class="operation-item completed">
+            <div class="operation-year">2032</div>
+            <div class="operation-icon">📋</div>
+            <div class="operation-info">
+              <div class="operation-name">Операция «Доверие»</div>
+              <div class="operation-desc">Успешно убедила представителей станции «Профсоюзная» заключить эксклюзивный договор на поставку электроэнергии, обойдя конкурентов из Ганзы.</div>
+            </div>
+            <div class="operation-status success">ЗАВЕРШЕНА</div>
+          </div>
 
-    <div class="dialogue-block">
-      <div class="secret-badge">ОПЕРАЦИЯ «МОСТ» // 2033</div>
-      <div class="dialogue-line"><span class="speaker">Из отчёта:</span> Добилась пропуска караванов Красной линии через территорию, контролируемую нейтральной станцией «Серпуховская», без оплаты пошлины.</div>
+          <div class="operation-item completed">
+            <div class="operation-year">2032–2033</div>
+            <div class="operation-icon">🕵️</div>
+            <div class="operation-info">
+              <div class="operation-name">Операция «Оборотень»</div>
+              <div class="operation-desc">Длительная внедренческая миссия. Объект работала под легендой на нейтральной территории, собирая данные о перемещении караванов Ганзы.</div>
+            </div>
+            <div class="operation-status success">ЗАВЕРШЕНА</div>
+          </div>
+
+          <div class="operation-item completed">
+            <div class="operation-year">2033</div>
+            <div class="operation-icon">🌉</div>
+            <div class="operation-info">
+              <div class="operation-name">Операция «Мост»</div>
+              <div class="operation-desc">Добилась пропуска караванов Красной линии через территорию, контролируемую нейтральной станцией «Серпуховская», без оплаты пошлины.</div>
+            </div>
+            <div class="operation-status success">ЗАВЕРШЕНА</div>
+          </div>
+
+          <div class="operation-item completed">
+            <div class="operation-year">2033</div>
+            <div class="operation-icon">📜</div>
+            <div class="operation-info">
+              <div class="operation-name">Операция «Наследие»</div>
+              <div class="operation-desc">Участие в восстановлении архивов после инцидента с телом Ленина. Координация информационной кампании.</div>
+            </div>
+            <div class="operation-status success">ЗАВЕРШЕНА</div>
+          </div>
+
+          <div class="operation-item active">
+            <div class="operation-year">2033 – н.в.</div>
+            <div class="operation-icon">🎭</div>
+            <div class="operation-info">
+              <div class="operation-name">Операция «Эмиссар»</div>
+              <div class="operation-desc">Текущая миссия. Объект выступает официальным представителем Красной линии на переговорах с независимыми станциями и Ганзой.</div>
+            </div>
+            <div class="operation-status active-status">АКТИВНА</div>
+          </div>
+
+        </div>
+      </div>
     </div>
 
     <div class="card">
       <div class="card-header"><span class="header-icon">●</span> [ ИТОГИ РАБОТЫ ]</div>
       <div class="card-body">
-        <div class="info-row"><div class="info-label">договорённости</div><div class="info-value">Заключено 12 долгосрочных соглашений.</div></div>
-        <div class="info-row"><div class="info-label">оценка руководства</div><div class="info-value blink-red">Исключительно положительная.</div></div>
-        <div class="info-row"><div class="info-label">перспективы</div><div class="info-value">Включена в резерв на выдвижение в Политбюро.</div></div>
+        <div class="info-row"><div class="info-label">договорённости</div><div class="info-value">Заключено 12 долгосрочных соглашений</div></div>
+        <div class="info-row"><div class="info-label">оценка руководства</div><div class="info-value blink-red">Исключительно положительная</div></div>
+        <div class="info-row"><div class="info-label">перспективы</div><div class="info-value">Включена в резерв на выдвижение в Политбюро</div></div>
+        <div class="info-row"><div class="info-label">оперативный псевдоним</div><div class="info-value">ЛИСИЦА (утверждён 2031)</div></div>
       </div>
     </div>
+
+    <div class="warning-footer blink-red">[ ОПЕРАТИВНОЕ ЗАМЕЧАНИЕ: ЛИЧНОСТЬ ОБЪЕКТА ПОДЛЕЖИТ ЗАЩИТЕ. ДАННЫЕ О МЕСТОНАХОЖДЕНИИ НЕ РАЗГЛАШАТЬ ]</div>
   </div>
 
   <!-- СТРАНИЦА 5: МЕДИЦИНСКАЯ КАРТА -->
