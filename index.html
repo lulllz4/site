@@ -1398,7 +1398,7 @@
                 const alarmSound = document.getElementById('alarmSound');
                 if (alarmSound) {
                     alarmSound.currentTime = 0;
-                    alarmSound.volume = 0.5;
+                    alarmSound.volume = 0.25;
                     alarmSound.loop = false;
                     alarmSound.play().catch(e => console.log('Alarm error:', e));
                     currentAlarmSound = alarmSound;
