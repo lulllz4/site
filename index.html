@@ -1047,6 +1047,105 @@
       gap: 0;
     }
   }
+   /* ========== ГОРИЗОНТАЛЬНАЯ ХРОНОЛОГИЯ КАРЬЕРЫ ========== */
+  .timeline-horizontal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    position: relative;
+    padding: 20px 0 10px 0;
+  }
+
+  .timeline-horizontal::before {
+    content: '';
+    position: absolute;
+    top: 35px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #2a1a1a, #8b0000, #cc1a1a, #8b0000, #2a1a1a);
+    animation: timelineFlow 3s ease-in-out infinite;
+  }
+
+  @keyframes timelineFlow {
+    0% { background-position: 0% 50%; background-size: 200% 100%; }
+    100% { background-position: 100% 50%; background-size: 200% 100%; }
+  }
+
+  .timeline-item {
+    flex: 1;
+    min-width: 80px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    background: rgba(10, 12, 16, 0.7);
+    padding: 8px 4px;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .timeline-item:hover {
+    background: rgba(139,0,0,0.2);
+    transform: translateY(-3px);
+  }
+
+  .timeline-year {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    color: #cc1a1a;
+    margin-bottom: 6px;
+  }
+
+  .timeline-dot {
+    width: 10px;
+    height: 10px;
+    background: #8b0000;
+    border: 1px solid #cc1a1a;
+    border-radius: 50%;
+    margin: 0 auto 8px auto;
+    position: relative;
+    z-index: 2;
+    transition: all 0.2s;
+  }
+
+  .timeline-item:hover .timeline-dot {
+    background: #cc1a1a;
+    box-shadow: 0 0 6px #cc1a1a;
+    transform: scale(1.2);
+  }
+
+  .timeline-text {
+    font-size: 9px;
+    line-height: 1.4;
+    color: #b8c6db;
+  }
+
+  @media (max-width: 800px) {
+    .timeline-horizontal {
+      flex-direction: column;
+      gap: 12px;
+    }
+    .timeline-horizontal::before {
+      display: none;
+    }
+    .timeline-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      text-align: left;
+      padding: 6px 12px;
+    }
+    .timeline-year {
+      min-width: 50px;
+      margin-bottom: 0;
+    }
+    .timeline-dot {
+      margin: 0;
+    }
+    .timeline-text {
+      flex: 1;
+    }
+  }
 </style>
 </head>
 <body class="crt">
@@ -1111,7 +1210,7 @@
           <div class="info-row"><div class="info-label">полное имя</div><div class="info-value">Тинъюнь Линь</div></div>
           <div class="info-row"><div class="info-label">позывной</div><div class="info-value blink-red">«Лисица», «Красный дипломат», «Шёлковый язычок»</div></div>
           <div class="info-row"><div class="info-label">должность</div><div class="info-value">Уполномоченный комиссар по внешним связям и товарообмену</div></div>
-          <div class="info-row"><div class="info-label">происхождение</div><div class="info-value">провинция Юньнань, КНР</div></div>
+          <div class="info-row"><div class="info-label">происхождение</div><div class="info-value">КНР</div></div>
           <div class="info-row"><div class="info-label">дата рождения</div><div class="info-value">26 апреля 2007 г. (26 лет)</div></div>
         </div>
       </div>
@@ -1157,7 +1256,7 @@
     <div class="card">
       <div class="card-header"><span class="header-icon">●</span> [ ПРОИСХОЖДЕНИЕ И КАРЬЕРА ]</div>
       <div class="card-body">
-        <div class="info-row"><div class="info-label">место рождения</div><div class="info-value">Станция «Нагатинская»</div></div>
+        <div class="info-row"><div class="info-label">место рождения</div><div class="info-value">провинция Юньнань, КНР</div></div>
         <div class="info-row"><div class="info-label">дата рождения</div><div class="info-value">26 апреля 2007 г.</div></div>
         <div class="info-row"><div class="info-label">семья</div><div class="info-value">Родители погибли при уничтожении станции в 2015 г.</div></div>
         <div class="info-row"><div class="info-label">образование</div><div class="info-value">Партийная система детских учреждений</div></div>
@@ -1205,6 +1304,45 @@
           
           <div class="psych-footer">
             <span class="psych-stamp">ВЫВОД КГБ: ОБЪЕКТ НАДЁЖЕН. УЯЗВИМОСТЬ — СТРАХ ИЗГНАНИЯ. РЕКОМЕНДОВАН К ИСПОЛЬЗОВАНИЮ НА ПЕРЕГОВОРНЫХ ПОЗИЦИЯХ.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+       <!-- ХРОНОЛОГИЯ КАРЬЕРЫ -->
+    <div class="card">
+      <div class="card-header"><span class="header-icon">▣</span> [ КАРЬЕРНАЯ ХРОНОЛОГИЯ ]</div>
+      <div class="card-body">
+        <div class="timeline-horizontal">
+          <div class="timeline-item">
+            <div class="timeline-year">2022</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">Помощник комиссара<br>«Добрынинская»</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">2024</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">Вступление в партию</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">2026</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">Самостоятельные<br>переговоры</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">2028</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">Куратор миссий<br>с Ганзой</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">2031</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">Уполномоченный комиссар<br>по внешним связям</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">2033</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-text blink-red">Резерв выдвижения<br>в Политбюро</div>
           </div>
         </div>
       </div>
