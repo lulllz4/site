@@ -1267,6 +1267,92 @@
   .operation-item.hidden {
     display: none;
   }
+
+   /* ========== НАГРАДЫ ========== */
+  .awards-card {
+    flex: 1;
+  }
+
+  .awards-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .award-item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px dotted #2a1a1a;
+  }
+
+  .award-year {
+    min-width: 45px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px;
+    color: #cc1a1a;
+    letter-spacing: 1px;
+  }
+
+  .award-icon {
+    font-size: 16px;
+    color: #f39c12;
+  }
+
+  .award-name {
+    flex: 2;
+    font-size: 10px;
+    font-weight: bold;
+    color: #c8a88a;
+  }
+
+  .award-desc {
+    flex: 3;
+    font-size: 9px;
+    color: #9a8a7a;
+    line-height: 1.4;
+  }
+
+  .awards-footer {
+    margin-top: 15px;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #8b0000;
+  }
+
+  .awards-total {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px;
+    color: #f39c12;
+    letter-spacing: 1px;
+  }
+
+  .awards-stamp {
+    font-size: 6px;
+    color: #8b0000;
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 700px) {
+    .award-item {
+      flex-wrap: wrap;
+    }
+    .award-name {
+      flex: auto;
+      width: 100%;
+      margin-left: 55px;
+    }
+    .award-desc {
+      flex: auto;
+      width: 100%;
+      margin-left: 55px;
+    }
+  }
+ 
 </style>
 </head>
 <body class="crt">
@@ -1507,6 +1593,44 @@
 
     <div class="photo-big">
       <div class="photo-container">
+             <div class="card awards-card">
+        <div class="card-header">
+          <span class="header-icon">★</span>
+          <span class="header-text">[ НАГРАДЫ И ОТЛИЧИЯ ]</span>
+        </div>
+        <div class="card-body">
+          <div class="awards-list">
+            <div class="award-item">
+              <div class="award-year">2031</div>
+              <div class="award-icon">★</div>
+              <div class="award-name">Медаль «За отвагу»</div>
+              <div class="award-desc">За участие в ликвидации мутантов на станции «Добрынинская».</div>
+            </div>
+            <div class="award-item">
+              <div class="award-year">2032</div>
+              <div class="award-icon">★</div>
+              <div class="award-name">Знак «Почётный сотрудник КГБ»</div>
+              <div class="award-desc">За успешное завершение операции «Доверие».</div>
+            </div>
+            <div class="award-item">
+              <div class="award-year">2033</div>
+              <div class="award-icon">★</div>
+              <div class="award-name">Орден «Красной звезды»</div>
+              <div class="award-desc">За выдающиеся заслуги в переговорах с Ганзой.</div>
+            </div>
+            <div class="award-item">
+              <div class="award-year">2033</div>
+              <div class="award-icon">★</div>
+              <div class="award-name">Почётная грамота Политбюро</div>
+              <div class="award-desc">За укрепление внешних связей Красной линии.</div>
+            </div>
+          </div>
+          <div class="awards-footer">
+            <span class="awards-total">ВСЕГО НАГРАД: 4</span>
+            <span class="awards-stamp">КГБ // ПОДТВЕРЖДЕНО</span>
+          </div>
+        </div>
+      </div>
         <div class="kgb-stamp">КГБ</div>
         <img src="photo.jpg" alt="Фото Тинъюнь">
         <div class="photo-stamp blink-red">АРХИВ // 2033</div>
