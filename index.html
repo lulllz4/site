@@ -1352,6 +1352,77 @@
       margin-left: 55px;
     }
   }
+
+  /* ========== ШТАМП ПРИ НАВЕДЕНИИ НА ФОТО ========== */
+  .photo-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stamp-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(139,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .photo-container:hover .stamp-overlay {
+    opacity: 1;
+  }
+
+  .stamp-text {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    transform: rotate(-15deg);
+    border: 2px solid #fff;
+    padding: 8px 16px;
+    background: rgba(0,0,0,0.6);
+    text-shadow: 0 0 5px #ff0000;
+    animation: stampAppear 0.3s ease-out;
+  }
+
+  @keyframes stampAppear {
+    0% {
+      transform: rotate(-25deg) scale(0.5);
+      opacity: 0;
+    }
+    100% {
+      transform: rotate(-15deg) scale(1);
+      opacity: 1;
+    }
+  }
+
+  /* ========== ДРОЖАНИЕ ЭКРАНА ПРИ ЗАГРУЗКЕ ========== */
+  @keyframes screenShake {
+    0% { transform: translate(0px, 0px); }
+    10% { transform: translate(-1px, 1px); }
+    20% { transform: translate(1px, -1px); }
+    30% { transform: translate(-1px, -1px); }
+    40% { transform: translate(1px, 1px); }
+    50% { transform: translate(-1px, 0px); }
+    60% { transform: translate(1px, 0px); }
+    70% { transform: translate(0px, 1px); }
+    80% { transform: translate(0px, -1px); }
+    90% { transform: translate(0px, 0px); }
+    100% { transform: translate(0px, 0px); }
+  }
+
+  .shake-screen {
+    animation: screenShake 0.2s ease-in-out;
+  }
  
 </style>
 </head>
@@ -1402,6 +1473,9 @@
       <div class="photo-container">
         <div class="kgb-stamp">КГБ</div>
         <img src="photo.jpg" alt="Фото Тинъюнь">
+         <div class="stamp-overlay">
+    <div class="stamp-text">ПОДТВЕРЖДЕНО КГБ</div>
+  </div>
         <div class="photo-stamp blink-red">АРХИВ // 2033</div>
       </div>
       <div class="card">
@@ -1453,6 +1527,9 @@
       <div class="photo-container">
         <div class="kgb-stamp">КГБ</div>
         <img src="photo.jpg" alt="Фото Тинъюнь">
+         <div class="stamp-overlay">
+    <div class="stamp-text">ПОДТВЕРЖДЕНО КГБ</div>
+  </div>
         <div class="photo-stamp blink-red">АРХИВ // 2033</div>
       </div>
       <div class="card">
@@ -1527,6 +1604,9 @@
       <div class="photo-container">
         <div class="kgb-stamp">КГБ</div>
         <img src="photo.jpg" alt="Фото Тинъюнь">
+         <div class="stamp-overlay">
+    <div class="stamp-text">ПОДТВЕРЖДЕНО КГБ</div>
+  </div>
         <div class="photo-stamp blink-red">АРХИВ // 2033</div>
       </div>
       <div class="card">
@@ -1596,6 +1676,9 @@
       <div class="photo-container">
         <div class="kgb-stamp">КГБ</div>
         <img src="photo.jpg" alt="Фото Тинъюнь">
+         <div class="stamp-overlay">
+    <div class="stamp-text">ПОДТВЕРЖДЕНО КГБ</div>
+  </div>
         <div class="photo-stamp blink-red">АРХИВ // 2033</div>
       </div>
            <div class="card awards-card">
@@ -1846,6 +1929,9 @@
       <div class="photo-container">
         <div class="kgb-stamp">КГБ</div>
         <img src="photo.jpg" alt="Фото Тинъюнь">
+         <div class="stamp-overlay">
+    <div class="stamp-text">ПОДТВЕРЖДЕНО КГБ</div>
+  </div>
         <div class="photo-stamp blink-red">АРХИВ // 2033</div>
       </div>
       <div class="card">
@@ -1942,6 +2028,11 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+       // === ДРОЖАНИЕ ЭКРАНА ПРИ ЗАГРУЗКЕ ===
+    document.body.classList.add('shake-screen');
+    setTimeout(() => {
+      document.body.classList.remove('shake-screen');
+    }, 200);
     // === ПОЛУЧАЕМ ЭЛЕМЕНТЫ ===
     const recordLamp = document.getElementById('recordLamp');
     const wrapper = document.querySelector('.wrapper');
