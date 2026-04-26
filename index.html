@@ -1234,6 +1234,9 @@
 <audio id="bgMusic" preload="auto" loop>
     <source src="ambient.mp3" type="audio/mpeg">
 </audio>
+<audio id="alarmSound" preload="auto">   <!-- ДОБАВЬТЕ ЭТО -->
+    <source src="alarm.mp3" type="audio/mpeg">
+</audio>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -1371,37 +1374,39 @@
     updateDateTime();
     setInterval(updateDateTime, 1000);
     
-    // === ЭКСТРЕННАЯ КНОПКА ЧС ===
-    let emergencyTimer = null;
-    let wasSoundEnabled = false;
-    
-    if (emergencyBtn) {
-        emergencyBtn.addEventListener('click', function() {
-            // Сохраняем состояние звука
-            wasSoundEnabled = soundEnabled;
-            
-            // Останавливаем фоновую музыку если звук был включён
-            if (wasSoundEnabled) {
-                const bgMusic = document.getElementById('bgMusic');
-                if (bgMusic) bgMusic.pause();
-            }
-            
-            // Показываем панель
-            emergencyOverlay.classList.add('active');
-            
-            // Воспроизводим звук тревоги
-            if (wasSoundEnabled) {
-                const alarmSound = new Audio();
-                alarmSound.src = 'https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3';
-                alarmSound.volume = 0.5;
+// === ЭКСТРЕННАЯ КНОПКА ЧС ===
+let emergencyTimer = null;
+let wasSoundEnabled = false;
+
+if (emergencyBtn) {
+    emergencyBtn.addEventListener('click', function() {
+        // Сохраняем состояние звука
+        wasSoundEnabled = soundEnabled;
+        
+        // Останавливаем фоновую музыку если звук был включён
+        if (wasSoundEnabled) {
+            const bgMusic = document.getElementById('bgMusic');
+            if (bgMusic) bgMusic.pause();
+        }
+        
+        // Показываем панель
+        emergencyOverlay.classList.add('active');
+        
+        // Воспроизводим звук тревоги из файла alarm.mp3
+        if (wasSoundEnabled) {
+            const alarmSound = document.getElementById('alarmSound');
+            if (alarmSound) {
+                alarmSound.currentTime = 0;
+                alarmSound.volume = 0.4;
                 alarmSound.play().catch(e => console.log('Alarm error:', e));
             }
-            
-            // Устанавливаем таймер на автоматическое восстановление через 3 секунды
-            if (emergencyTimer) clearTimeout(emergencyTimer);
-            emergencyTimer = setTimeout(resetEmergency, 3000);
-        });
-    }
+        }
+        
+        // Устанавливаем таймер на автоматическое восстановление через 3 секунды
+        if (emergencyTimer) clearTimeout(emergencyTimer);
+        emergencyTimer = setTimeout(resetEmergency, 6000);
+    });
+}
     
     function resetEmergency() {
         emergencyOverlay.classList.remove('active');
