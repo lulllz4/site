@@ -709,7 +709,7 @@
     animation: pageFlash 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-   /* ========== ЭКРАН ЗАГРУЗКИ В СТИЛЕ КОНСОЛИ ========== */
+  /* ========== ЭКРАН ЗАГРУЗКИ — ТЕРМИНАЛ ========== */
   .loading-overlay {
     position: fixed;
     top: 0;
@@ -731,85 +731,97 @@
     pointer-events: none;
   }
 
-  .console-container {
-    width: 500px;
-    max-width: 85vw;
+  .terminal-container {
+    width: 650px;
+    max-width: 90vw;
     background: #050608;
-    border: 1px solid #8b0000;
+    border: 1px solid #2a4a2a;
     padding: 20px;
-    box-shadow: 0 0 20px rgba(139,0,0,0.2);
+    box-shadow: 0 0 20px rgba(34,168,74,0.15);
   }
 
-  .console-header {
+  .terminal-header {
     display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: space-between;
     padding-bottom: 10px;
     margin-bottom: 15px;
-    border-bottom: 1px solid #2a1a1a;
+    border-bottom: 1px solid #2a4a2a;
     font-size: 9px;
     letter-spacing: 2px;
-    color: #8b0000;
+    color: #22a84a;
     font-family: 'Press Start 2P', monospace;
   }
 
-  .console-header .led {
-    width: 10px;
-    height: 10px;
-    background: #cc1a1a;
-    border-radius: 50%;
-    animation: ledBlink 1s step-end infinite;
+  .terminal-header-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
-  .console-lines {
+  .terminal-led {
+    width: 10px;
+    height: 10px;
+    background: #22a84a;
+    border-radius: 50%;
+    animation: terminalLedBlink 1s step-end infinite;
+  }
+
+  @keyframes terminalLedBlink {
+    0%, 100% { opacity: 1; box-shadow: 0 0 4px #22a84a; }
+    50% { opacity: 0.4; box-shadow: 0 0 0px #22a84a; }
+  }
+
+  .terminal-skip {
+    font-size: 8px;
+    color: #22a84a;
+    background: rgba(34,168,74,0.1);
+    border: 1px solid #22a84a;
+    padding: 3px 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: monospace;
+  }
+
+  .terminal-skip:hover {
+    background: #22a84a;
+    color: #0a0c10;
+  }
+
+  .terminal-lines {
     font-family: 'Share Tech Mono', monospace;
-    font-size: 12px;
-    color: #b8c6db;
+    font-size: 13px;
+    color: #22a84a;
     line-height: 1.8;
   }
 
-  .console-line {
+  .terminal-line {
     display: block;
-    white-space: nowrap;
-    overflow: hidden;
-    opacity: 0;
+    margin-bottom: 6px;
+    min-height: 24px;
   }
 
-  .console-line.visible {
-    opacity: 1;
-  }
-
-  .cursor {
+  .cursor-blink {
     display: inline-block;
     width: 8px;
-    height: 14px;
-    background: #b8c6db;
+    height: 16px;
+    background: #22a84a;
     vertical-align: middle;
     margin-left: 2px;
-    animation: cursorBlink 1s step-end infinite;
+    animation: cursorBlinkTerminal 1s step-end infinite;
   }
 
-  @keyframes cursorBlink {
+  @keyframes cursorBlinkTerminal {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
   }
 
-  .typewriter {
-    overflow: hidden;
-    white-space: nowrap;
-    display: inline-block;
+  .path-green {
+    color: #55cc55;
   }
 
-  .success-text {
-    color: #22a84a;
-  }
-
-  .error-text {
-    color: #cc1a1a;
-  }
-
-  .path-text {
-    color: #f39c12;
+  .success-green {
+    color: #88ff88;
   }
 
   /* ========== КНОПКА АКТИВАЦИИ ЗВУКА ========== */
@@ -1249,20 +1261,18 @@
   <span>ЗАПИСЬ</span>
 </div>
 
-<!-- ЭКРАН ЗАГРУЗКИ В СТИЛЕ КОНСОЛИ -->
+<!-- ЭКРАН ЗАГРУЗКИ — ТЕРМИНАЛ -->
 <div id="loadingOverlay" class="loading-overlay">
-  <div class="console-container">
-    <div class="console-header">
-      <div class="led"></div>
-      <span>ROOT@KGB_ARCHIVE:~</span>
+  <div class="terminal-container">
+    <div class="terminal-header">
+      <div class="terminal-header-left">
+        <div class="terminal-led"></div>
+        <span>ROOT@KGB_ARCHIVE:~</span>
+      </div>
+      <div class="terminal-skip" id="skipTerminalBtn">[ ПРОПУСТИТЬ ]</div>
     </div>
-    <div class="console-lines" id="consoleLines">
-      <div class="console-line" data-delay="0">> sudo access_archive --level=alpha</div>
-      <div class="console-line" data-delay="200">> Введите код доступа: <span class="path-text">******</span></div>
-      <div class="console-line" data-delay="500">> Доступ <span class="success-text">разрешён</span>. Приветствую, сотрудник.</div>
-      <div class="console-line" data-delay="800">> Загрузка досье: <span class="path-text">/КГБ/КПМ/ДОСЬЕ/ТИНЪЮНЬ.exe</span></div>
-      <div class="console-line" data-delay="1100">> <span class="success-text">Досье загружено.</span> Добро пожаловать в архив.</div>
-      <div class="console-line" data-delay="1400">> <span class="path-text">_</span><span class="cursor"></span></div>
+    <div class="terminal-lines" id="terminalLines">
+      <!-- Строки будут добавляться динамически через JS -->
     </div>
   </div>
 </div>
@@ -1374,27 +1384,103 @@
         });
     });
     
-    // === ЭКРАН ЗАГРУЗКИ В СТИЛЕ КОНСОЛИ ===
-    const loadingOverlay = document.getElementById('loadingOverlay');
-    const consoleLines = document.querySelectorAll('.console-line');
+    // === ЭКРАН ЗАГРУЗКИ — ТЕРМИНАЛ С АНИМАЦИЕЙ ПЕЧАТИ ===
+    const terminalOverlay = document.getElementById('loadingOverlay');
+    const terminalContainer = document.getElementById('terminalLines');
+    const skipBtn = document.getElementById('skipTerminalBtn');
     
-    if (loadingOverlay && consoleLines.length) {
-      // Показываем строки постепенно
-      consoleLines.forEach(line => {
-        const delay = parseInt(line.getAttribute('data-delay')) || 0;
-        setTimeout(() => {
-          line.classList.add('visible');
-        }, delay);
-      });
+    if (terminalOverlay && terminalContainer) {
+      // Строки для вывода (каждая строка — объект)
+      const lines = [
+        { text: "> sudo access_archive --level=alpha", delay: 0, typeSpeed: 30 },
+        { text: "> Введите код доступа: ██████", delay: 0, typeSpeed: 20 },
+        { text: "> Доступ РАЗРЕШЁН. Приветствую, сотрудник.", delay: 0, typeSpeed: 25, class: "success-green" },
+        { text: "> Загрузка досье: /КГБ/КПМ/ДОСЬЕ/ТИНЪЮНЬ.exe", delay: 0, typeSpeed: 15, class: "path-green" },
+        { text: "> Расшифровка биометрических данных...", delay: 0, typeSpeed: 20 },
+        { text: "> Досье успешно ЗАГРУЖЕНО.", delay: 0, typeSpeed: 25, class: "success-green" },
+        { text: "> Добро пожаловать в архив КГБ.", delay: 0, typeSpeed: 20 },
+        { text: "> _", delay: 0, typeSpeed: 100, isCursor: true }
+      ];
       
-      // Закрываем экран загрузки после появления всех строк
-      const totalDelay = 1600;
-      setTimeout(() => {
-        loadingOverlay.classList.add('fade-out');
+      let currentLineIndex = 0;
+      let skipRequested = false;
+      let typingTimeouts = [];
+      
+      // Функция анимации печати одной строки
+      function typeLine(lineObj, lineElement, callback) {
+        let i = 0;
+        const text = lineObj.text;
+        
+        function typeNextChar() {
+          if (skipRequested) {
+            lineElement.textContent = text;
+            if (callback) callback();
+            return;
+          }
+          
+          if (i < text.length) {
+            lineElement.textContent += text[i];
+            i++;
+            setTimeout(typeNextChar, lineObj.typeSpeed || 25);
+          } else {
+            if (callback) callback();
+          }
+        }
+        
+        lineElement.textContent = '';
+        typeNextChar();
+      }
+      
+      // Функция запуска последовательного вывода строк
+      function startTyping() {
+        if (currentLineIndex >= lines.length) {
+          finishLoading();
+          return;
+        }
+        
+        const lineObj = lines[currentLineIndex];
+        const lineElement = document.createElement('div');
+        lineElement.className = 'terminal-line';
+        if (lineObj.class) {
+          lineElement.classList.add(lineObj.class);
+        }
+        terminalContainer.appendChild(lineElement);
+        
+        // Добавляем курсор в конце, если это последняя строка с курсором
+        if (lineObj.isCursor) {
+          typeLine(lineObj, lineElement, () => {
+            // После последней строки с курсором — задержка и закрытие
+            setTimeout(() => {
+              if (!skipRequested) finishLoading();
+            }, 800);
+          });
+        } else {
+          typeLine(lineObj, lineElement, () => {
+            // Задержка между строками
+            const lineDelay = 400;
+            currentLineIndex++;
+            setTimeout(startTyping, lineDelay);
+          });
+        }
+      }
+      
+      function finishLoading() {
+        terminalOverlay.classList.add('fade-out');
         setTimeout(() => {
-          if (loadingOverlay) loadingOverlay.style.display = 'none';
+          if (terminalOverlay) terminalOverlay.style.display = 'none';
         }, 500);
-      }, totalDelay);
+      }
+      
+      // Обработчик кнопки пропуска
+      if (skipBtn) {
+        skipBtn.addEventListener('click', function() {
+          skipRequested = true;
+          finishLoading();
+        });
+      }
+      
+      // Запускаем анимацию
+      startTyping();
     }
     
     // === ЖИВЫЕ ДАТА И ВРЕМЯ (С ФИКСИРОВАННЫМ 2033 ГОДОМ) ===
