@@ -1402,7 +1402,7 @@
                 if (alarmSound) {
                     alarmSound.pause(); // Останавливаем если играл
                     alarmSound.currentTime = 0;
-                    alarmSound.volume = 0.4;
+                    alarmSound.volume = 0.2;
                     alarmSound.loop = false;
                     alarmSound.play().catch(e => console.log('Alarm error:', e));
                     currentAlarmSound = alarmSound;
