@@ -1232,7 +1232,41 @@
       margin-left: 70px;
     }
   }
- 
+   /* ========== ФИЛЬТРАЦИЯ ОПЕРАЦИЙ ========== */
+  .filter-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #2a1a1a;
+  }
+
+  .filter-btn {
+    background: transparent;
+    border: 1px solid #8b0000;
+    color: #8b0000;
+    padding: 5px 15px;
+    font-size: 8px;
+    font-family: monospace;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 1px;
+  }
+
+  .filter-btn:hover {
+    background: rgba(139,0,0,0.2);
+    border-color: #cc1a1a;
+  }
+
+  .filter-btn.active {
+    background: #8b0000;
+    color: #0a0c10;
+    border-color: #cc1a1a;
+  }
+
+  .operation-item.hidden {
+    display: none;
+  }
 </style>
 </head>
 <body class="crt">
@@ -1477,59 +1511,189 @@
         <img src="photo.jpg" alt="Фото Тинъюнь">
         <div class="photo-stamp blink-red">АРХИВ // 2033</div>
       </div>
+    </div>
 
-    <!-- СПИСОК ОПЕРАЦИЙ -->
+    <!-- КАРТОТЕКА ОПЕРАЦИЙ С ФИЛЬТРАЦИЕЙ -->
     <div class="card">
       <div class="card-header"><span class="header-icon">●</span> [ КАРТОТЕКА ОПЕРАЦИЙ ]</div>
       <div class="card-body">
-        <div class="operations-list">
+        
+        <!-- ФИЛЬТРЫ -->
+        <div class="filter-bar">
+          <button class="filter-btn active" data-filter="all">ВСЕ</button>
+          <button class="filter-btn" data-filter="completed">ЗАВЕРШЕНЫ</button>
+          <button class="filter-btn" data-filter="active">АКТИВНЫЕ</button>
+        </div>
+
+        <!-- СПИСОК ОПЕРАЦИЙ -->
+        <div class="operations-list" id="operationsList">
           
-          <div class="operation-item completed">
+          <div class="operation-item completed" data-status="completed">
+            <div class="operation-year">2024</div>
+            <div class="operation-icon">➤</div>
+            <div class="operation-info">
+              <div class="operation-name">Операция «Плацдарм»</div>
+              <div class="operation-desc">Первое самостоятельное наблюдение. Сбор данных о маршрутах Ганзы.</div>
+            </div>
+            <div class="operation-status success">ЗАВЕРШЕНА</div>
+          </div>
+
+          <div class="operation-item completed" data-status="completed">
+            <div class="operation-year">2025</div>
+            <div class="operation-icon">➤</div>
+            <div class="operation-info">
+              <div class="operation-name">Операция «Эхо»</div>
+              <div class="operation-desc">Анализ перехваченных радиопереговоров.</div>
+            </div>
+            <div class="operation-status success">ЗАВЕРШЕНА</div>
+          </div>
+
+          <div class="operation-item completed" data-status="completed">
+            <div class="operation-year">2025</div>
+            <div class="operation-icon">➤</div>
+            <div class="operation-info">
+              <div class="operation-name">Операция «Тень»</div>
+              <div class="operation-desc">Наружное наблюдение за агентом Рейха.</div>
+            </div>
+            <div class="operation-status success">ЗАВЕРШЕНА</div>
+          </div>
+
+          <div class="operation-item completed" data-status="completed">
+            <div class="operation-year">2026</div>
+            <div class="operation-icon">➤</div>
+            <div class="operation-info">
+              <div class="operation-name">Операция «Коммутатор»</div>
+              <div class="operation-desc">Обеспечение связи между линиями.</div>
+            </div>
+            <div class="operation-status success">ЗАВЕРШЕНА</div>
+          </div>
+
+          <div class="operation-item completed" data-status="completed">
+            <div class="operation-year">2026</div>
+            <div class="operation-icon">➤</div>
+            <div class="operation-info">
+              <div class="operation-name">Операция «Слепой»</div>
+              <div class="operation-desc">Выявление информатора.</div>
+            </div>
+            <div class="operation-status success">ЗАВЕРШЕНА</div>
+          </div>
+
+          <div class="operation-item completed" data-status="completed">
+            <div class="operation-year">2027</div>
+            <div class="operation-icon">➤</div>
+            <div class="operation-info">
+              <div class="operation-name">Операция «Страж»</div>
+              <div class="operation-desc">Охрана каравана с грузом на линии.</div>
+            </div>
+            <div class="operation-status success">ЗАВЕРШЕНА</div>
+          </div>
+
+          <div class="operation-item completed" data-status="completed">
+            <div class="operation-year">2027</div>
+            <div class="operation-icon">➤</div>
+            <div class="operation-info">
+              <div class="operation-name">Операция «Немой»</div>
+              <div class="operation-desc">Устранение утечки информации.</div>
+            </div>
+            <div class="operation-status success">ЗАВЕРШЕНА</div>
+          </div>
+
+          <div class="operation-item completed" data-status="completed">
+            <div class="operation-year">2028</div>
+            <div class="operation-icon">➤</div>
+            <div class="operation-info">
+              <div class="operation-name">Операция «Маятник»</div>
+              <div class="operation-desc">Сбор информации о Ганзе.</div>
+            </div>
+            <div class="operation-status success">ЗАВЕРШЕНА</div>
+          </div>
+
+          <div class="operation-item completed" data-status="completed">
+            <div class="operation-year">2028</div>
+            <div class="operation-icon">➤</div>
+            <div class="operation-info">
+              <div class="operation-name">Операция «Зеркало»</div>
+              <div class="operation-desc">Контролируемая дезинформация.</div>
+            </div>
+            <div class="operation-status success">ЗАВЕРШЕНА</div>
+          </div>
+
+          <div class="operation-item completed" data-status="completed">
+            <div class="operation-year">2029</div>
+            <div class="operation-icon">➤</div>
+            <div class="operation-info">
+              <div class="operation-name">Операция «Ключ»</div>
+              <div class="operation-desc">Доступ к архивам.</div>
+            </div>
+            <div class="operation-status success">ЗАВЕРШЕНА</div>
+          </div>
+
+          <div class="operation-item completed" data-status="completed">
+            <div class="operation-year">2030</div>
+            <div class="operation-icon">➤</div>
+            <div class="operation-info">
+              <div class="operation-name">Операция «Пелена»</div>
+              <div class="operation-desc">Прикрытие нелегальной сети.</div>
+            </div>
+            <div class="operation-status success">ЗАВЕРШЕНА</div>
+          </div>
+
+          <div class="operation-item completed" data-status="completed">
+            <div class="operation-year">2031</div>
+            <div class="operation-icon">➤</div>
+            <div class="operation-info">
+              <div class="operation-name">Операция «Молот»</div>
+              <div class="operation-desc">Силовое давление на нелояльную станцию.</div>
+            </div>
+            <div class="operation-status success">ЗАВЕРШЕНА</div>
+          </div>
+
+          <div class="operation-item completed" data-status="completed">
             <div class="operation-year">2032</div>
             <div class="operation-icon">➤</div>
             <div class="operation-info">
               <div class="operation-name">Операция «Доверие»</div>
-              <div class="operation-desc">Успешно убедила представителей станции «Профсоюзная» заключить эксклюзивный договор, обойдя конкурентов из Ганзы.</div>
+              <div class="operation-desc">Убедила станцию заключить договор, обойдя конкурентов из Ганзы.</div>
             </div>
             <div class="operation-status success">ЗАВЕРШЕНА</div>
           </div>
 
-          <div class="operation-item completed">
+          <div class="operation-item completed" data-status="completed">
             <div class="operation-year">2032–2033</div>
             <div class="operation-icon">➤</div>
             <div class="operation-info">
               <div class="operation-name">Операция «Оборотень»</div>
-              <div class="operation-desc">Длительная внедренческая миссия. Объект работала под легендой на нейтральной территории, собирая данные о перемещении караванов.</div>
+              <div class="operation-desc">Внедренческая миссия. Сбор данных о Ганзе.</div>
             </div>
             <div class="operation-status success">ЗАВЕРШЕНА</div>
           </div>
 
-          <div class="operation-item completed">
+          <div class="operation-item completed" data-status="completed">
             <div class="operation-year">2033</div>
             <div class="operation-icon">➤</div>
             <div class="operation-info">
               <div class="operation-name">Операция «Мост»</div>
-              <div class="operation-desc">Добилась временного пропуска караванов Красной линии через территорию, контролируемую нейтральной станцией «Серпуховская», без оплаты пошлины.</div>
+              <div class="operation-desc">Пропуск караванов Красной линии без оплаты.</div>
             </div>
             <div class="operation-status success">ЗАВЕРШЕНА</div>
           </div>
 
-          <div class="operation-item completed">
+          <div class="operation-item completed" data-status="completed">
             <div class="operation-year">2033</div>
             <div class="operation-icon">➤</div>
             <div class="operation-info">
               <div class="operation-name">Операция «Наследие»</div>
-              <div class="operation-desc">ЗАСЕКРЕЧЕНО</div>
+              <div class="operation-desc">Восстановление архивов, координация информационной кампании.</div>
             </div>
             <div class="operation-status success">ЗАВЕРШЕНА</div>
           </div>
 
-          <div class="operation-item active">
+          <div class="operation-item active" data-status="active">
             <div class="operation-year">2033 – н.в.</div>
             <div class="operation-icon">➤</div>
             <div class="operation-info">
               <div class="operation-name">Операция «Эмиссар»</div>
-              <div class="operation-desc">Текущая миссия. Объект выступает официальным представителем Красной линии на переговорах.</div>
+              <div class="operation-desc">Официальный представитель на переговорах с независимыми станциями и Ганзой.</div>
             </div>
             <div class="operation-status active-status">АКТИВНА</div>
           </div>
@@ -1541,7 +1705,7 @@
     <div class="card">
       <div class="card-header"><span class="header-icon">●</span> [ ИТОГИ РАБОТЫ ]</div>
       <div class="card-body">
-        <div class="info-row"><div class="info-label">договорённости</div><div class="info-value">Заключено 12 долгосрочных соглашений</div></div>
+        <div class="info-row"><div class="info-label">договорённости</div><div class="info-value">Заключено 18 долгосрочных соглашений</div></div>
         <div class="info-row"><div class="info-label">оценка руководства</div><div class="info-value blink-red">Исключительно положительная</div></div>
         <div class="info-row"><div class="info-label">перспективы</div><div class="info-value">Включена в резерв на выдвижение в Политбюро</div></div>
         <div class="info-row"><div class="info-label">оперативный псевдоним</div><div class="info-value">ЛИСИЦА (утверждён 2031)</div></div>
@@ -1934,6 +2098,39 @@
             if (emergencyTimer) clearTimeout(emergencyTimer);
             resetEmergency();
         });
+    }
+       // === ФИЛЬТРАЦИЯ ОПЕРАЦИЙ ===
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const operationItems = document.querySelectorAll('.operation-item');
+    
+    if (filterBtns.length && operationItems.length) {
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          // Убираем активный класс со всех кнопок
+          filterBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          
+          const filterValue = this.getAttribute('data-filter');
+          
+          operationItems.forEach(item => {
+            if (filterValue === 'all') {
+              item.classList.remove('hidden');
+            } else if (filterValue === 'completed') {
+              if (item.classList.contains('completed')) {
+                item.classList.remove('hidden');
+              } else {
+                item.classList.add('hidden');
+              }
+            } else if (filterValue === 'active') {
+              if (item.classList.contains('active')) {
+                item.classList.remove('hidden');
+              } else {
+                item.classList.add('hidden');
+              }
+            }
+          });
+        });
+      });
     }
   });
 </script>
