@@ -6,7 +6,6 @@
 <title>КГБ КПМ // ДОСЬЕ ТИНЪЮНЬ // ГРИФ "ОСОБОЙ ВАЖНОСТИ"</title>
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Press+Start+2P&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
-  /* ВСЕ СТИЛИ ОСТАЮТСЯ ТЕМИ ЖЕ - ДОБАВЛЕН ТОЛЬКО .nav-btn ПЕРЕХОД */
   * {
     margin: 0;
     padding: 0;
@@ -22,7 +21,6 @@
     position: relative;
   }
 
-  /* ========== ФОН С ТЕКСТУРОЙ ========== */
   body {
     background-image: 
       repeating-linear-gradient(45deg, rgba(30,30,40,0.3) 0px, rgba(30,30,40,0.3) 1px, transparent 1px, transparent 8px),
@@ -42,7 +40,6 @@
     z-index: 9996;
   }
 
-  /* ========== ЭФФЕКТЫ ЭЛТ-МОНИТОРА ========== */
   .scan-line {
     position: fixed;
     top: 0;
@@ -84,7 +81,6 @@
     z-index: 9998;
   }
 
-  /* ========== МЕРЦАНИЕ КАРТИНКИ — ОЧЕНЬ ПЛАВНОЕ ========== */
   @keyframes flickerImage {
     0% { opacity: 0.96; filter: grayscale(12%) contrast(1.05) brightness(0.98); }
     50% { opacity: 0.93; filter: grayscale(15%) contrast(1.08) brightness(0.96); }
@@ -139,7 +135,6 @@
     z-index: 2;
   }
 
-  /* ========== ТЕКСТ — БЕЗ МЕРЦАНИЯ ========== */
   .card-body {
     padding: 14px;
     font-size: 12px;
@@ -166,7 +161,6 @@
     box-shadow: 4px 4px 0px rgba(0,0,0,0.4);
   }
 
-  /* ========== МЕРЦАНИЕ ТОЛЬКО ДЛЯ ВАЖНЫХ ЭЛЕМЕНТОВ ========== */
   @keyframes strongFlicker {
     0% { opacity: 0.95; text-shadow: 0 0 0px #8b0000; }
     50% { opacity: 0.82; text-shadow: 0 0 2px #cc1a1a; }
@@ -193,7 +187,6 @@
     box-shadow: 0 0 2px red;
   }
 
-  /* ========== ВЕРТИКАЛЬНАЯ ПОЛОСА ========== */
   .vertical-stripe {
     position: fixed;
     left: 0;
@@ -236,7 +229,6 @@
     z-index: 1;
   }
 
-  /* ========== ШАПКА ========== */
   .secret-header {
     display: flex;
     justify-content: space-between;
@@ -291,6 +283,7 @@
     color: #8b0000;
     text-shadow: 2px 2px 0px #2a0a0a;
     filter: drop-shadow(0 0 3px rgba(200,0,0,0.4));
+    cursor: pointer;
   }
 
   .logo-center .title {
@@ -322,7 +315,6 @@
     color: #7a6a5a;
   }
 
-  /* ========== НАВИГАЦИЯ ========== */
   .side-nav {
     position: fixed;
     right: 20px;
@@ -358,7 +350,6 @@
     transform: scale(1.05);
   }
 
-  /* ========== КАРТОЧКИ ========== */
   .card-header {
     padding: 12px 16px;
     background: linear-gradient(90deg, rgba(30, 15, 15, 0.7) 0%, rgba(15, 10, 10, 0.5) 100%);
@@ -378,7 +369,6 @@
     color: #cc1a1a;
   }
 
-  /* ========== ФОТО ========== */
   .photo-big {
     display: grid;
     grid-template-columns: 280px 1fr;
@@ -413,7 +403,6 @@
     font-family: monospace;
   }
 
-  /* ========== ТАБЛИЦЫ ========== */
   .content-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -443,14 +432,13 @@
     text-transform: uppercase;
   }
 
-  /* ========== ПОЛОСЫ УРОВНЕЙ С АНИМАЦИЕЙ ========== */
   .stat-item {
     margin-bottom: 16px;
   }
 
   .stat-header {
     display: flex;
-    justify-space-between;
+    justify-content: space-between;
     margin-bottom: 6px;
   }
 
@@ -486,7 +474,6 @@
     100% { background-position: 20px 0; }
   }
 
-  /* ========== ТАЙМЛАЙН ========== */
   .horizontal-timeline {
     display: flex;
     overflow-x: auto;
@@ -515,7 +502,6 @@
     color: #c8a88a;
   }
 
-  /* ========== ДИАЛОГИ ========== */
   .dialogue-block {
     background: #0a0c10;
     border: 1px solid #3a2a2a;
@@ -555,7 +541,6 @@
     font-weight: bold;
   }
 
-  /* ========== ТЕГИ ========== */
   .tags-cloud {
     display: flex;
     flex-wrap: wrap;
@@ -583,7 +568,6 @@
     user-select: none;
   }
 
-  /* ========== ФУТЕР И ПРЕДУПРЕЖДЕНИЯ ========== */
   .warning-footer {
     margin: 25px 0;
     padding: 12px;
@@ -610,7 +594,6 @@
     margin-top: 25px;
   }
 
-  /* ========== КОНТРОЛЬНЫЙ ТАЛОН ========== */
   .control-ticket {
     position: fixed;
     bottom: 20px;
@@ -656,7 +639,6 @@
     color: #6a5a4a;
   }
 
-  /* ========== ЛАМПА "ЗАПИСЬ" ========== */
   .record-lamp {
     position: fixed;
     bottom: 20px;
@@ -697,7 +679,6 @@
     100% { opacity: 0; transform: scale(0.95); }
   }
 
-  /* ========== АНИМАЦИЯ ПЕРЕКЛЮЧЕНИЯ СТРАНИЦ ========== */
   @keyframes pageFlash {
     0% { opacity: 1; }
     10% { opacity: 0.2; background-color: rgba(200,0,0,0.3); }
@@ -710,7 +691,6 @@
     animation: pageFlash 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* ========== ЭКРАН ЗАГРУЗКИ — ТЕРМИНАЛ ========== */
   .loading-overlay {
     position: fixed;
     top: 0;
@@ -825,7 +805,6 @@
     color: #88ff88;
   }
 
-  /* ========== КНОПКА АКТИВАЦИИ ЗВУКА ========== */
   .sound-unlock {
     position: fixed;
     bottom: 20px;
@@ -851,7 +830,6 @@
     box-shadow: 0 0 10px rgba(200,0,0,0.5);
   }
 
-  /* Крупнее на ПК */
   @media (min-width: 901px) {
     .sound-unlock {
       font-size: 16px;
@@ -861,7 +839,6 @@
     }
   }
 
-  /* ========== ЭКСТРЕННАЯ КНОПКА ========== */
   .emergency-btn {
     position: fixed;
     bottom: 20px;
@@ -952,7 +929,6 @@
     border-radius: 4px;
   }
 
-  /* ========== СТРАНИЦЫ ========== */
   .page {
     display: none;
   }
@@ -982,8 +958,6 @@
     .vertical-stripe .sickle-hammer { font-size: 10px; }
     .control-ticket { display: none; }
     .record-lamp { transform: scale(0.8); transform-origin: bottom left; }
-    
-    /* Кнопка ЧС на телефоне — в правый верхний угол (не мешает навигации) */
     .emergency-btn {
       bottom: auto;
       top: 20px;
@@ -993,7 +967,7 @@
       font-size: 14px;
     }
   }
-   /* ========== СТИЛИ ДЛЯ ПСИХОЛОГИЧЕСКОГО ПОРТРЕТА ========== */
+
   .psych-profile {
     width: 100%;
   }
@@ -1048,7 +1022,7 @@
       gap: 0;
     }
   }
-   /* ========== ГОРИЗОНТАЛЬНАЯ ХРОНОЛОГИЯ КАРЬЕРЫ ========== */
+
   .timeline-horizontal {
     display: flex;
     flex-wrap: wrap;
@@ -1147,7 +1121,7 @@
       flex: 1;
     }
   }
-  /* ========== КАРТОТЕКА ОПЕРАЦИЙ ========== */
+
   .operations-list {
     display: flex;
     flex-direction: column;
@@ -1233,7 +1207,7 @@
       margin-left: 70px;
     }
   }
-   /* ========== ФИЛЬТРАЦИЯ ОПЕРАЦИЙ ========== */
+
   .filter-bar {
     display: flex;
     gap: 10px;
@@ -1269,7 +1243,6 @@
     display: none;
   }
 
-   /* ========== НАГРАДЫ ========== */
   .awards-card {
     flex: 1;
   }
@@ -1354,12 +1327,6 @@
     }
   }
 
-  /* ========== ШТАМП ПРИ НАВЕДЕНИИ НА ФОТО ========== */
-  .photo-container {
-    position: relative;
-    overflow: hidden;
-  }
-
   .stamp-overlay {
     position: absolute;
     top: 0;
@@ -1406,7 +1373,6 @@
     }
   }
 
-  /* ========== ДРОЖАНИЕ ЭКРАНА ПРИ ЗАГРУЗКЕ ========== */
   @keyframes screenShake {
     0% { transform: translate(0px, 0px); }
     10% { transform: translate(-1px, 1px); }
@@ -1425,7 +1391,6 @@
     animation: screenShake 0.2s ease-in-out;
   }
 
-   /* ========== АНИМАЦИЯ ДЛЯ ЗВЕЗДЫ ========== */
   @keyframes starExplode {
     0% { transform: scale(1); text-shadow: 0 0 0px #f39c12; }
     50% { transform: scale(1.3); text-shadow: 0 0 15px #f39c12, 0 0 30px #ff6600; }
@@ -1486,7 +1451,6 @@
     100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
   }
 
-  /* ========== АНИМАЦИИ ДЛЯ КОНТРОЛЬНОГО ТАЛОНА ========== */
   @keyframes ticketShake {
     0% { transform: rotate(2deg) translateX(0); }
     25% { transform: rotate(1deg) translateX(-3px); }
@@ -1528,7 +1492,6 @@
     animation: ticketSlideIn 0.4s ease-in forwards;
   }
 
-   /* ========== МЕДИЦИНСКАЯ КАРТА ========== */
   .med-grid {
     display: flex;
     flex-direction: column;
@@ -1567,7 +1530,6 @@
     }
   }
 
-   /* ========== ИСТОЧНИКИ ИНФОРМАЦИИ ========== */
   .sources-list {
     display: flex;
     flex-direction: column;
@@ -1610,17 +1572,14 @@
     font-family: monospace;
   }
 
-/* Плавный переход для кнопок навигации */
-.nav-btn {
-  transition: all 0.2s;
-}
+  .nav-btn {
+    transition: all 0.2s;
+  }
 
-  /* ========== ДЛЯ СТАТУСА ЗДОРОВЬЯ ========== */
   .success-green {
     color: #22a84a;
   }
 
-  /* ========== СТАТУС ЗДОРОВЬЯ (ПОД ФОТО) ========== */
   .status-banner {
     display: flex;
     flex-wrap: wrap;
@@ -1646,10 +1605,6 @@
     color: #b8c6db;
   }
 
-  .success-green {
-    color: #22a84a;
-  }
-  /* ========== СЕКРЕТНАЯ СТРАНИЦА (ТРЕВОЖНАЯ ТЕМА) ========== */
   .secret-page {
     background: rgba(0,0,0,0.95);
   }
@@ -1707,8 +1662,7 @@
     border-top: 1px solid #ff0000;
     padding-top: 12px;
   }
-  
-  /* ========== ТЕРМИНАЛ-ОКНО ДЛЯ ВВОДА КОДА ========== */
+
   .terminal-modal {
     position: fixed;
     top: 0;
@@ -1765,7 +1719,7 @@
     padding: 20px;
   }
   
-  .terminal-line {
+  .terminal-body .terminal-line {
     color: #22a84a;
     font-family: monospace;
     font-size: 13px;
@@ -1799,17 +1753,6 @@
     margin-top: 10px;
     font-size: 11px;
   }
-
-  /* Крупнее на ПК */
-  @media (min-width: 901px) {
-    .sound-unlock {
-      font-size: 16px;
-      padding: 14px 24px;
-      bottom: 30px;
-      left: 30px;
-    }
-  }
-  
 </style>
 </head>
 <body class="crt">
@@ -1823,7 +1766,6 @@
 
 <div class="wrapper">
 
-  <!-- ШАПКА -->
   <div class="secret-header">
     <div class="corner corner-tl"></div>
     <div class="corner corner-tr"></div>
@@ -1834,7 +1776,7 @@
       <div class="number">ФОРМА КГБ-7А // ДОС-КЛ-2033-089</div>
     </div>
     <div class="logo-center">
-      <div class="emblem" id="clickableStar" style="cursor: pointer;">★</div>
+      <div class="emblem" id="clickableStar">★</div>
       <div class="title">КГБ КРАСНОЙ ЛИНИИ</div>
       <div class="sub">КОМИТЕТ ГОСУДАРСТВЕННОЙ БЕЗОПАСНОСТИ // МОСКОВСКИЙ МЕТРОПОЛИТЕН // 2033 Г.</div>
     </div>
@@ -1844,14 +1786,13 @@
     </div>
   </div>
 
-  <!-- НАВИГАЦИЯ -->
   <div class="side-nav">
     <div class="nav-btn active" data-page="main" data-default="🗀" data-hover="🗁">🗀</div>
     <div class="nav-btn" data-page="bio" data-default="🗀" data-hover="🗁">🗀</div>
     <div class="nav-btn" data-page="psych" data-default="🗀" data-hover="🗁">🗀</div>
     <div class="nav-btn" data-page="operation" data-default="🗀" data-hover="🗁">🗀</div>
     <div class="nav-btn" data-page="medical" data-default="🗀" data-hover="🗁">🗀</div>
-     <div class="nav-btn" data-page="secret">⚠</div>
+    <div class="nav-btn" data-page="secret">⚠</div>
   </div>
 
   <!-- СТРАНИЦА 1: ОБЗОР -->
@@ -1860,9 +1801,9 @@
       <div class="photo-container">
         <div class="kgb-stamp">КГБ</div>
         <img src="photo.jpg" alt="Фото Тинъюнь">
-         <div class="stamp-overlay">
-           <div class="stamp-text">ПОДТВЕРЖДЕНО КГБ</div>
-         </div>
+        <div class="stamp-overlay">
+          <div class="stamp-text">ПОДТВЕРЖДЕНО КГБ</div>
+        </div>
         <div class="photo-stamp blink-red">АРХИВ // 2033</div>
       </div>
       <div class="card">
@@ -1880,7 +1821,7 @@
           <div class="info-row"><div class="info-label">должность</div><div class="info-value">Уполномоченный комиссар по внешним связям и товарообмену</div></div>
           <div class="info-row"><div class="info-label">происхождение</div><div class="info-value">КНР</div></div>
           <div class="info-row"><div class="info-label">дата рождения</div><div class="info-value">26 апреля 2007 г. (26 лет)</div></div>
-         <div class="info-row"><div class="info-label">базирование</div><div class="info-value">Станция «Площадь Революции»</div></div>
+          <div class="info-row"><div class="info-label">базирование</div><div class="info-value">Станция «Площадь Революции»</div></div>
         </div>
       </div>
       <div class="card">
@@ -1914,14 +1855,14 @@
       <div class="photo-container">
         <div class="kgb-stamp">КГБ</div>
         <img src="photo.jpg" alt="Фото Тинъюнь">
-         <div class="stamp-overlay">
-           <div class="stamp-text">ПОДТВЕРЖДЕНО КГБ</div>
-         </div>
+        <div class="stamp-overlay">
+          <div class="stamp-text">ПОДТВЕРЖДЕНО КГБ</div>
+        </div>
         <div class="photo-stamp blink-red">АРХИВ // 2033</div>
       </div>
       <div class="card">
         <div class="card-header"><span class="header-icon">■</span> [ ЛИЧНОЕ ДЕЛО ]</div>
-        <div class="card-body">Тинъюнь Линь родилась 26 апреля 2007 года в провинции Юньнань, КНР. Отец — Линь Вэй, гражданин КНР, инженер-строитель. Мать — Елена Михайновна Линь (урожд. Волкова), гражданка РФ, филолог. Родители познакомились в 2005 году в Пекине, где мать работала преподавателем русского языка.<br>В 2010 году семья переехала в Москву по линии межправительственного соглашения о развитии транспортной инфраструктуры. Отец получил контракт в проектном институте «Метрогипротранс» как специалист по вентиляционным системам. Семья проживала на станции «Нагатинская». Тётя (сестра матери) — Анна Михайловна Волкова, 1980 г.р., филолог — переехала вместе с ними.<br>В 2015 году станция «Нагатинская» была уничтожена в результате прорыва мутантов. Родители погибли при эвакуации. Тинъюнь и её тётя спасены полевым отрядом Красной линии и доставлены на станцию «Площадь Революции».<br>2015–2018 — проживание с тётей в жилом секторе станции «Площадь Революции». Посещение школы при комсомольском интернате.<br>2018 — тётя скончалась от туберкулёза. Тинъюнь, оставшись полной сиротой, переведена в комсомольский интернат на постоянное проживание.<br>2018–2022 — воспитание в интернате. Проявила способности к языкам и коммуникации. Направлена на курсы внешней торговли при Отделе внешних связей.<br>2022 — окончила интернат и курсы, зачислена помощником комиссара по внешним связям на станции «Добрынинская».<br>2024 — принята в члены Коммунистической партии Красной линии.<br>2026 — переведена в центральный аппарат на станцию «Площадь Революции», назначена младшим куратором переговорных миссий.<br>2028 — назначена куратором переговорных миссий с Ганзой (направление внешней торговли).<br>2031 — утверждена на должность уполномоченного комиссара по внешним связям и товарообмену.<br>2033 — включена в резерв выдвижения в Политбюро.</div>
+        <div class="card-body">Тинъюнь Линь родилась 26 апреля 2007 года в провинции Юньнань, КНР. Отец — Линь Вэй, гражданин КНР, инженер-строитель. Мать — Елена Михайловна Линь (урожд. Волкова), гражданка РФ, филолог. Родители познакомились в 2005 году в Пекине, где мать работала преподавателем русского языка.<br>В 2010 году семья переехала в Москву по линии межправительственного соглашения о развитии транспортной инфраструктуры. Отец получил контракт в проектном институте «Метрогипротранс» как специалист по вентиляционным системам. Семья проживала на станции «Нагатинская». Тётя (сестра матери) — Анна Михайловна Волкова, 1980 г.р., филолог — переехала вместе с ними.<br>В 2015 году станция «Нагатинская» была уничтожена в результате прорыва мутантов. Родители погибли при эвакуации. Тинъюнь и её тётя спасены полевым отрядом Красной линии и доставлены на станцию «Площадь Революции».<br>2015–2018 — проживание с тётей в жилом секторе станции «Площадь Революции». Посещение школы при комсомольском интернате.<br>2018 — тётя скончалась от туберкулёза. Тинъюнь, оставшись полной сиротой, переведена в комсомольский интернат на постоянное проживание.<br>2018–2022 — воспитание в интернате. Проявила способности к языкам и коммуникации. Направлена на курсы внешней торговли при Отделе внешних связей.<br>2022 — окончила интернат и курсы, зачислена помощником комиссара по внешним связям на станции «Добрынинская».<br>2024 — принята в члены Коммунистической партии Красной линии.<br>2026 — переведена в центральный аппарат на станцию «Площадь Революции», назначена младшим куратором переговорных миссий.<br>2028 — назначена куратором переговорных миссий с Ганзой (направление внешней торговли).<br>2031 — утверждена на должность уполномоченного комиссара по внешним связям и товарообмену.<br>2033 — включена в резерв выдвижения в Политбюро.</div>
       </div>
     </div>
 
@@ -1937,7 +1878,6 @@
       </div>
     </div>
 
-       <!-- ХРОНОЛОГИЯ КАРЬЕРЫ -->
     <div class="card">
       <div class="card-header"><span class="header-icon">▣</span> [ КАРЬЕРНАЯ ХРОНОЛОГИЯ ]</div>
       <div class="card-body">
@@ -1983,7 +1923,7 @@
       <span class="tag">Внешние связи</span>
       <span class="tag">Профиль: эмпат-аналитик</span>
     </div>
-       <!-- ИСТОЧНИКИ ИНФОРМАЦИИ -->
+
     <div class="card sources-card">
       <div class="card-header">
         <span class="header-icon">▣</span>
@@ -2015,15 +1955,15 @@
     </div>
   </div>
 
-  <!-- СТРАНИЦА 3: ПСИХОЛОГИЧЕСКИЙ ПРОФИЛЬ (РАЗВЁРНУТЫЙ) -->
+  <!-- СТРАНИЦА 3: ПСИХОЛОГИЧЕСКИЙ ПРОФИЛЬ -->
   <div id="page-psych" class="page">
     <div class="photo-big">
       <div class="photo-container">
         <div class="kgb-stamp">КГБ</div>
         <img src="photo.jpg" alt="Фото Тинъюнь">
-         <div class="stamp-overlay">
-           <div class="stamp-text">ПОДТВЕРЖДЕНО КГБ</div>
-         </div>
+        <div class="stamp-overlay">
+          <div class="stamp-text">ПОДТВЕРЖДЕНО КГБ</div>
+        </div>
         <div class="photo-stamp blink-red">АРХИВ // 2033</div>
       </div>
       <div class="card">
@@ -2093,12 +2033,12 @@
       <div class="photo-container">
         <div class="kgb-stamp">КГБ</div>
         <img src="photo.jpg" alt="Фото Тинъюнь">
-         <div class="stamp-overlay">
-           <div class="stamp-text">ПОДТВЕРЖДЕНО КГБ</div>
-         </div>
+        <div class="stamp-overlay">
+          <div class="stamp-text">ПОДТВЕРЖДЕНО КГБ</div>
+        </div>
         <div class="photo-stamp blink-red">АРХИВ // 2033</div>
       </div>
-           <div class="card awards-card">
+      <div class="card awards-card">
         <div class="card-header">
           <span class="header-icon">★</span>
           <span class="header-text">[ НАГРАДЫ И ОТЛИЧИЯ ]</span>
@@ -2138,21 +2078,16 @@
       </div>
     </div>
 
-    <!-- КАРТОТЕКА ОПЕРАЦИЙ С ФИЛЬТРАЦИЕЙ -->
     <div class="card">
       <div class="card-header"><span class="header-icon">●</span> [ КАРТОТЕКА ОПЕРАЦИЙ ]</div>
       <div class="card-body">
-        
-        <!-- ФИЛЬТРЫ -->
         <div class="filter-bar">
           <button class="filter-btn active" data-filter="all">ВСЕ</button>
           <button class="filter-btn" data-filter="completed">ЗАВЕРШЕНЫ</button>
           <button class="filter-btn" data-filter="active">АКТИВНЫЕ</button>
         </div>
 
-        <!-- СПИСОК ОПЕРАЦИЙ -->
         <div class="operations-list" id="operationsList">
-          
           <div class="operation-item completed" data-status="completed">
             <div class="operation-year">2024</div>
             <div class="operation-icon">➤</div>
@@ -2162,7 +2097,6 @@
             </div>
             <div class="operation-status success">ЗАВЕРШЕНА</div>
           </div>
-
           <div class="operation-item completed" data-status="completed">
             <div class="operation-year">2025</div>
             <div class="operation-icon">➤</div>
@@ -2172,7 +2106,6 @@
             </div>
             <div class="operation-status success">ЗАВЕРШЕНА</div>
           </div>
-
           <div class="operation-item completed" data-status="completed">
             <div class="operation-year">2025</div>
             <div class="operation-icon">➤</div>
@@ -2182,7 +2115,6 @@
             </div>
             <div class="operation-status success">ЗАВЕРШЕНА</div>
           </div>
-
           <div class="operation-item completed" data-status="completed">
             <div class="operation-year">2026</div>
             <div class="operation-icon">➤</div>
@@ -2192,7 +2124,6 @@
             </div>
             <div class="operation-status success">ЗАВЕРШЕНА</div>
           </div>
-
           <div class="operation-item completed" data-status="completed">
             <div class="operation-year">2026</div>
             <div class="operation-icon">➤</div>
@@ -2202,7 +2133,6 @@
             </div>
             <div class="operation-status success">ЗАВЕРШЕНА</div>
           </div>
-
           <div class="operation-item completed" data-status="completed">
             <div class="operation-year">2027</div>
             <div class="operation-icon">➤</div>
@@ -2212,7 +2142,6 @@
             </div>
             <div class="operation-status success">ЗАВЕРШЕНА</div>
           </div>
-
           <div class="operation-item completed" data-status="completed">
             <div class="operation-year">2027</div>
             <div class="operation-icon">➤</div>
@@ -2222,7 +2151,6 @@
             </div>
             <div class="operation-status success">ЗАВЕРШЕНА</div>
           </div>
-
           <div class="operation-item completed" data-status="completed">
             <div class="operation-year">2028</div>
             <div class="operation-icon">➤</div>
@@ -2232,7 +2160,6 @@
             </div>
             <div class="operation-status success">ЗАВЕРШЕНА</div>
           </div>
-
           <div class="operation-item completed" data-status="completed">
             <div class="operation-year">2028</div>
             <div class="operation-icon">➤</div>
@@ -2242,7 +2169,6 @@
             </div>
             <div class="operation-status success">ЗАВЕРШЕНА</div>
           </div>
-
           <div class="operation-item completed" data-status="completed">
             <div class="operation-year">2029</div>
             <div class="operation-icon">➤</div>
@@ -2252,7 +2178,6 @@
             </div>
             <div class="operation-status success">ЗАВЕРШЕНА</div>
           </div>
-
           <div class="operation-item completed" data-status="completed">
             <div class="operation-year">2030</div>
             <div class="operation-icon">➤</div>
@@ -2262,7 +2187,6 @@
             </div>
             <div class="operation-status success">ЗАВЕРШЕНА</div>
           </div>
-
           <div class="operation-item completed" data-status="completed">
             <div class="operation-year">2031</div>
             <div class="operation-icon">➤</div>
@@ -2272,7 +2196,6 @@
             </div>
             <div class="operation-status success">ЗАВЕРШЕНА</div>
           </div>
-
           <div class="operation-item completed" data-status="completed">
             <div class="operation-year">2032</div>
             <div class="operation-icon">➤</div>
@@ -2282,7 +2205,6 @@
             </div>
             <div class="operation-status success">ЗАВЕРШЕНА</div>
           </div>
-
           <div class="operation-item completed" data-status="completed">
             <div class="operation-year">2032–2033</div>
             <div class="operation-icon">➤</div>
@@ -2292,7 +2214,6 @@
             </div>
             <div class="operation-status success">ЗАВЕРШЕНА</div>
           </div>
-
           <div class="operation-item completed" data-status="completed">
             <div class="operation-year">2033</div>
             <div class="operation-icon">➤</div>
@@ -2302,7 +2223,6 @@
             </div>
             <div class="operation-status success">ЗАВЕРШЕНА</div>
           </div>
-
           <div class="operation-item completed" data-status="completed">
             <div class="operation-year">2033</div>
             <div class="operation-icon">➤</div>
@@ -2312,7 +2232,6 @@
             </div>
             <div class="operation-status success">ЗАВЕРШЕНА</div>
           </div>
-
           <div class="operation-item active" data-status="active">
             <div class="operation-year">2033 – н.в.</div>
             <div class="operation-icon">➤</div>
@@ -2322,7 +2241,6 @@
             </div>
             <div class="operation-status active-status">АКТИВНА</div>
           </div>
-
         </div>
       </div>
     </div>
@@ -2342,7 +2260,6 @@
   <div id="page-medical" class="page">
     <div class="warning-footer blink-red">[ МЕДИЦИНСКАЯ КАРТА // СОВ. СЕКРЕТНО // ВРАЧЕБНАЯ ТАЙНА ]</div>
 
-    <!-- ФОТО + ФИЗИЧЕСКИЕ ХАРАКТЕРИСТИКИ -->
     <div class="photo-big">
       <div class="photo-container">
         <div class="kgb-stamp">КГБ</div>
@@ -2353,7 +2270,6 @@
         <div class="photo-stamp blink-red">АРХИВ // 2033</div>
       </div>
       
-      <!-- ФИЗИЧЕСКИЕ ХАРАКТЕРИСТИКИ (справа от фото) -->
       <div class="card">
         <div class="card-header"><span class="header-icon">›</span> [ ФИЗИЧЕСКИЕ ХАРАКТЕРИСТИКИ ]</div>
         <div class="card-body">
@@ -2371,7 +2287,6 @@
       </div>
     </div>
 
-    <!-- КРАТКИЙ СТАТУС ЗДОРОВЬЯ (ПОД ФОТО) -->
     <div class="status-banner">
       <div class="status-item"><span class="status-label">ОБЩЕЕ СОСТОЯНИЕ:</span> <span class="status-value blink-red">УДОВЛЕТВОРИТЕЛЬНОЕ</span></div>
       <div class="status-item"><span class="status-label">ГОДЕН К СЛУЖБЕ:</span> <span class="status-value success-green">ДА</span></div>
@@ -2380,8 +2295,6 @@
       <div class="status-item"><span class="status-label">СЛЕДУЮЩИЙ ОСМОТР:</span> <span class="status-value blink-red">15.02.2034</span></div>
     </div>
 
-    <!-- ОСТАЛЬНЫЕ КАРТОЧКИ -->
-    <!-- ОДЕЖДА И СНАРЯЖЕНИЕ -->
     <div class="card">
       <div class="card-header"><span class="header-icon">›</span> [ ОДЕЖДА И СНАРЯЖЕНИЕ ]</div>
       <div class="card-body">
@@ -2394,7 +2307,6 @@
     </div>
 
     <div class="content-grid">
-      <!-- ОСНОВНЫЕ ДАННЫЕ -->
       <div class="card">
         <div class="card-header"><span class="header-icon">›</span> [ ОСНОВНЫЕ ДАННЫЕ ]</div>
         <div class="card-body">
@@ -2406,7 +2318,6 @@
         </div>
       </div>
 
-      <!-- ТРАВМЫ -->
       <div class="card">
         <div class="card-header"><span class="header-icon">›</span> [ ТРАВМЫ ]</div>
         <div class="card-body">
@@ -2417,7 +2328,6 @@
       </div>
     </div>
 
-    <!-- СПЕЦИАЛЬНЫЕ ОТМЕТКИ -->
     <div class="card">
       <div class="card-header"><span class="header-icon">›</span> [ СПЕЦИАЛЬНЫЕ ОТМЕТКИ ]</div>
       <div class="card-body">
@@ -2429,18 +2339,10 @@
 
     <div class="warning-footer blink-red">[ ЗАКЛЮЧЕНИЕ МЕДИЦИНСКОЙ КОМИССИИ: ОБЪЕКТ ГОДЕН К СЛУЖБЕ. РЕКОМЕНДОВАНО ЕЖЕГОДНОЕ ОБСЛЕДОВАНИЕ ]</div>
   </div>
-    <div class="warning-footer blink-red">[ ОПЕРАТИВНОЕ ЗАМЕЧАНИЕ: ЛИЧНОСТЬ ОБЪЕКТА ПОДЛЕЖИТ ЗАЩИТЕ ]</div>
-  </div>
 
-  <div class="footer">
-    <span>КГБ КПМ // ФОРМА КГБ-7А // 2033</span>
-    <span>НЕСАНКЦИОНИРОВАННЫЙ ДОСТУП — РАССТРЕЛ БЕЗ СУДА</span>
-    <span>ДОС-КЛ-2033-089</span>
-    <span id="liveDateTime"></span>
-  </div>
-    <!-- СТРАНИЦА 6: СЕКРЕТНЫЙ АРХИВ (ЗАЩИЩЁН) -->
+  <!-- СТРАНИЦА 6: СЕКРЕТНЫЙ АРХИВ -->
   <div id="page-secret" class="page secret-page">
-    <div class="warning-footer blink-red" style="margin-bottom: 20px;"> СОВЕРШЕННО СЕКРЕТНО </div>
+    <div class="warning-footer blink-red" style="margin-bottom: 20px;">⚠️ СОВЕРШЕННО СЕКРЕТНО ⚠️</div>
     
     <div class="card secret-card">
       <div class="card-header"><span class="header-icon">☠</span> [ ДЕЛО № 17-01-2018 ]</div>
@@ -2466,6 +2368,14 @@
     
     <div class="warning-footer blink-red">[ ДАННЫЕ УНИЧТОЖИТЬ ПОСЛЕ ПРОЧТЕНИЯ. КГБ НЕ ПОДТВЕРЖДАЕТ ПОДЛИННОСТЬ ]</div>
   </div>
+
+</div> <!-- закрывается wrapper -->
+
+<div class="footer">
+  <span>КГБ КПМ // ФОРМА КГБ-7А // 2033</span>
+  <span>НЕСАНКЦИОНИРОВАННЫЙ ДОСТУП — РАССТРЕЛ БЕЗ СУДА</span>
+  <span>ДОС-КЛ-2033-089</span>
+  <span id="liveDateTime"></span>
 </div>
 
 <!-- КОНТРОЛЬНЫЙ ТАЛОН -->
@@ -2476,8 +2386,8 @@
 </div>
 
 <!-- КНОПКА АКТИВАЦИИ ЗВУКА -->
-<div class="sound-unlock" id="unlockSoundBtn"> АКТИВИРОВАТЬ ЗВУКИ </div>
-  
+<div class="sound-unlock" id="unlockSoundBtn">⚡ АКТИВИРОВАТЬ ЗВУКИ ⚡</div>
+
 <!-- ЛАМПА "ЗАПИСЬ" -->
 <div id="recordLamp" class="record-lamp">
   <div class="lamp-bulb"></div>
@@ -2492,27 +2402,28 @@
         <div class="terminal-led"></div>
         <span>ROOT@KGB_ARCHIVE:~</span>
       </div>
-      <div class="terminal-skip" id="skipTerminalBtn">ПРОПУСТИТЬ</div>
+      <div class="terminal-skip" id="skipTerminalBtn">⏩ ПРОПУСТИТЬ</div>
     </div>
-    <div class="terminal-lines" id="terminalLines">
-      <!-- Строки будут добавляться динамически через JS -->
-    </div>
+    <div class="terminal-lines" id="terminalLines"></div>
   </div>
 </div>
 
 <!-- ЭКСТРЕННАЯ КНОПКА -->
 <div class="emergency-btn" id="emergencyBtn">ЧС</div>
 <div id="emergencyOverlay" class="emergency-overlay">
-    <div>
-        <div class="emergency-text">ДОСТУП ЗАБЛОКИРОВАН</div>
-        <div class="emergency-sub">НАРУШЕНИЕ РЕЖИМА СЕКРЕТНОСТИ</div>
-        <div class="emergency-off" id="emergencyOff">[ ВОССТАНОВИТЬ ДОСТУП ]</div>
-    </div>
+  <div>
+    <div class="emergency-text">ДОСТУП ЗАБЛОКИРОВАН</div>
+    <div class="emergency-sub">НАРУШЕНИЕ РЕЖИМА СЕКРЕТНОСТИ</div>
+    <div class="emergency-off" id="emergencyOff">[ ВОССТАНОВИТЬ ДОСТУП ]</div>
+  </div>
 </div>
 
-<!-- ЗВУКИ -->
+<!-- ЗВУКИ (внешние ссылки для гарантированной работы) -->
 <audio id="clickSound" preload="auto">
   <source src="https://www.soundjay.com/misc/sounds/button-click-01.mp3" type="audio/mpeg">
+</audio>
+<audio id="bgMusic" preload="auto" loop>
+  <source src="https://www.soundjay.com/misc/sounds/mechanical-keyboard-01.mp3" type="audio/mpeg">
 </audio>
 <audio id="alarmSound" preload="auto">
   <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" type="audio/mpeg">
@@ -2526,12 +2437,47 @@
       document.body.classList.remove('shake-screen');
     }, 200);
     
+    // === ЗВУКИ (РАБОТАЮТ ПОСЛЕ НАЖАТИЯ КНОПКИ) ===
+    let soundEnabled = false;
+    
+    function playSound(audioId) {
+      if (!soundEnabled) return;
+      const audio = document.getElementById(audioId);
+      if (audio) {
+        audio.currentTime = 0;
+        audio.volume = 0.3;
+        audio.play().catch(e => console.log('Sound error:', e));
+      }
+    }
+    
+    function initSound() {
+      if (soundEnabled) return;
+      soundEnabled = true;
+      
+      const bgMusic = document.getElementById('bgMusic');
+      if (bgMusic) {
+        bgMusic.volume = 0.15;
+        bgMusic.loop = true;
+        bgMusic.play().catch(e => console.log('Music error:', e));
+      }
+      
+      playSound('clickSound');
+      
+      const msg = document.createElement('div');
+      msg.textContent = 'ЗВУК АКТИВИРОВАН';
+      msg.style.cssText = 'position:fixed; bottom:10px; left:50%; transform:translateX(-50%); background:#8b0000; color:#fff; padding:4px 12px; font-size:8px; z-index:10000; font-family:monospace;';
+      document.body.appendChild(msg);
+      setTimeout(() => msg.remove(), 1500);
+    }
+    
+    const unlockSoundBtn = document.getElementById('unlockSoundBtn');
+    if (unlockSoundBtn) {
+      unlockSoundBtn.onclick = initSound;
+    }
+    
     // === ПОЛУЧАЕМ ЭЛЕМЕНТЫ ===
     const recordLamp = document.getElementById('recordLamp');
     const wrapper = document.querySelector('.wrapper');
-    const emergencyBtn = document.getElementById('emergencyBtn');
-    const emergencyOverlay = document.getElementById('emergencyOverlay');
-    const emergencyOff = document.getElementById('emergencyOff');
     const buttons = document.querySelectorAll('.nav-btn');
     
     // === ФИЛЬТРАЦИЯ ОПЕРАЦИЙ ===
@@ -2562,20 +2508,19 @@
       button.addEventListener('click', function() {
         const pageId = this.getAttribute('data-page');
         
-        // Анимация лампы
+        playSound('clickSound');
+        
         if (recordLamp) {
           recordLamp.classList.remove('active');
           void recordLamp.offsetWidth;
           recordLamp.classList.add('active');
         }
         
-        // Мерцание страницы
         if (wrapper) {
           wrapper.classList.add('page-transition');
           setTimeout(() => wrapper.classList.remove('page-transition'), 200);
         }
         
-        // Переключение
         buttons.forEach(btn => btn.classList.remove('active'));
         this.classList.add('active');
         document.querySelectorAll('.page').forEach(page => page.classList.remove('active-page'));
@@ -2674,22 +2619,28 @@
     setInterval(updateDateTime, 1000);
     
     // === ЭКСТРЕННАЯ КНОПКА ===
+    const emergencyBtn = document.getElementById('emergencyBtn');
+    const emergencyOverlayEl = document.getElementById('emergencyOverlay');
+    const emergencyOffEl = document.getElementById('emergencyOff');
     let emergencyTimer = null;
     let wasSoundEnabled = false;
     let currentAlarmSound = null;
     
     if (emergencyBtn) {
       emergencyBtn.addEventListener('click', function() {
-        wasSoundEnabled = true;
+        wasSoundEnabled = soundEnabled;
         const bgMusic = document.getElementById('bgMusic');
-        if (bgMusic) bgMusic.pause();
-        emergencyOverlay.classList.add('active');
-        const alarmSound = document.getElementById('alarmSound');
-        if (alarmSound) {
-          alarmSound.currentTime = 0;
-          alarmSound.volume = 0.2;
-          alarmSound.play().catch(e => console.log('Alarm error:', e));
-          currentAlarmSound = alarmSound;
+        if (bgMusic && soundEnabled) bgMusic.pause();
+        emergencyOverlayEl.classList.add('active');
+        
+        if (soundEnabled) {
+          const alarmSound = document.getElementById('alarmSound');
+          if (alarmSound) {
+            alarmSound.currentTime = 0;
+            alarmSound.volume = 0.2;
+            alarmSound.play().catch(e => console.log('Alarm error:', e));
+            currentAlarmSound = alarmSound;
+          }
         }
         if (emergencyTimer) clearTimeout(emergencyTimer);
         emergencyTimer = setTimeout(resetEmergency, 6000);
@@ -2697,7 +2648,7 @@
     }
     
     function resetEmergency() {
-      emergencyOverlay.classList.remove('active');
+      emergencyOverlayEl.classList.remove('active');
       if (currentAlarmSound) {
         currentAlarmSound.pause();
         currentAlarmSound.currentTime = 0;
@@ -2709,7 +2660,7 @@
       emergencyTimer = null;
     }
     
-    if (emergencyOff) emergencyOff.addEventListener('click', () => { if (emergencyTimer) clearTimeout(emergencyTimer); resetEmergency(); });
+    if (emergencyOffEl) emergencyOffEl.addEventListener('click', () => { if (emergencyTimer) clearTimeout(emergencyTimer); resetEmergency(); });
     
     // === ИНТЕРАКТИВНАЯ ЗВЕЗДА ===
     const star = document.getElementById('clickableStar');
@@ -2769,13 +2720,11 @@
       });
     }
 
-        // === СЕКРЕТНАЯ СТРАНИЦА С ТЕРМИНАЛОМ ===
+    // === СЕКРЕТНАЯ СТРАНИЦА С ТЕРМИНАЛОМ ===
     const secretBtn = document.querySelector('.nav-btn[data-page="secret"]');
     const secretPage = document.getElementById('page-secret');
-    let terminalModal = null;
     let secretUnlocked = false;
     
-    // Создаём модальное окно терминала
     function createTerminalModal() {
       const modal = document.createElement('div');
       modal.className = 'terminal-modal';
@@ -2812,29 +2761,25 @@
         if (e.key === 'Enter') {
           const enteredCode = codeInput.value.trim();
           if (enteredCode === '17012018') {
-            // Правильный код
             modal.classList.remove('active');
             setTimeout(() => modal.remove(), 300);
             secretUnlocked = true;
             secretPage.classList.add('active-page');
-            document.body.classList.add('secret-mode');
             
-            // Меняем оформление тела на тревожное
-            document.body.style.background = '#050000';
-            
-            // Дополнительный эффект
             const msg = document.createElement('div');
             msg.textContent = 'ДОСТУП РАЗРЕШЁН. АРХИВ ОТКРЫТ.';
             msg.style.cssText = 'position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#ff0000; color:#fff; padding:20px; font-family:monospace; z-index:20002; font-size:14px; text-align:center; border:2px solid #fff;';
             document.body.appendChild(msg);
             setTimeout(() => msg.remove(), 1500);
+            
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            secretBtn.classList.add('active');
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active-page'));
+            secretPage.classList.add('active-page');
           } else {
-            // Неправильный код
             errorDiv.textContent = 'ОШИБКА: НЕВЕРНЫЙ КОД ДОСТУПА. ДОСТУП ЗАПРЕЩЁН.';
             codeInput.value = '';
             codeInput.focus();
-            
-            // Эффект тряски окна
             const terminalWin = document.querySelector('.terminal-window');
             terminalWin.style.animation = 'ticketShake 0.2s ease-in-out';
             setTimeout(() => {
@@ -2847,36 +2792,20 @@
       modal.classList.add('active');
     }
     
-    // Обработчик нажатия на секретную кнопку
     if (secretBtn) {
       secretBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        
-        // Если страница уже разблокирована, просто переключаемся
         if (secretUnlocked) {
-          // Переключаем активную страницу
           document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
           secretBtn.classList.add('active');
           document.querySelectorAll('.page').forEach(page => page.classList.remove('active-page'));
           secretPage.classList.add('active-page');
         } else {
-          // Показываем терминал для ввода кода
           createTerminalModal();
         }
       });
     }
-    
   });
 </script>
-<!-- ЗВУКИ -->
-<audio id="clickSound" preload="auto">
-    <source src="click.mp3" type="audio/mpeg">
-</audio>
-<audio id="bgMusic" preload="auto" loop>
-    <source src="ambient.mp3" type="audio/mpeg">
-</audio>
-<audio id="alarmSound" preload="auto">
-    <source src="alarm.mp3" type="audio/mpeg">
-</audio>
 </body>
 </html>
