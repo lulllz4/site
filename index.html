@@ -6,7 +6,6 @@
 <title>КГБ КПМ // ДОСЬЕ ТИНЪЮНЬ // ГРИФ "ОСОБОЙ ВАЖНОСТИ"</title>
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Press+Start+2P&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
-  /* ВЕСЬ ВАШ CSS ОСТАЁТСЯ БЕЗ ИЗМЕНЕНИЙ — он слишком большой, но я его сохраняю */
   * {
     margin: 0;
     padding: 0;
@@ -2486,6 +2485,9 @@
 <audio id="trainSound" preload="auto">
   <source src="train.mp3" type="audio/mpeg">
 </audio>
+  <audio id="secretBgMusic" preload="auto" loop>
+  <source src="atmosphere-the-hum-of-technology-machines-and-mechanisms.mp3" type="audio/mpeg">
+</audio>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -2914,6 +2916,9 @@
             setTimeout(() => modal.remove(), 300);
             secretUnlocked = true;
             secretPage.classList.add('active-page');
+            if (soundEnabled) {
+  switchToSecretMusic();
+}
             
             const computerAlert = document.getElementById('computerAlertSound');
             if (computerAlert && soundEnabled) {
@@ -2964,6 +2969,58 @@
         }
       });
     }
+
+    // === ПЕРЕКЛЮЧЕНИЕ МУЗЫКИ ДЛЯ СЕКРЕТНОЙ СТРАНИЦЫ ===
+    const normalBgMusic = document.getElementById('bgMusic');
+    const secretBgMusic = document.getElementById('secretBgMusic');
+    let wasNormalMusicPlaying = false;
+    
+    function switchToSecretMusic() {
+      if (!soundEnabled) return;
+      
+      // Запоминаем, играла ли обычная музыка
+      if (normalBgMusic && !normalBgMusic.paused) {
+        wasNormalMusicPlaying = true;
+        normalBgMusic.pause();
+      } else {
+        wasNormalMusicPlaying = false;
+      }
+      
+      // Запускаем секретную музыку
+      if (secretBgMusic) {
+        secretBgMusic.currentTime = 0;
+        secretBgMusic.volume = 0.25;
+        secretBgMusic.play().catch(e => console.log('Secret music error:', e));
+      }
+    }
+    
+    function switchToNormalMusic() {
+      // Останавливаем секретную музыку
+      if (secretBgMusic && !secretBgMusic.paused) {
+        secretBgMusic.pause();
+        secretBgMusic.currentTime = 0;
+      }
+      
+      // Возвращаем обычную музыку, если она играла до этого
+      if (wasNormalMusicPlaying && normalBgMusic && soundEnabled) {
+        normalBgMusic.play().catch(e => console.log('Normal music resume error:', e));
+      }
+    }
+    
+    // Следим за секретной страницей
+    const secretPageObserver = new MutationObserver(function() {
+      const secretPageActive = secretPage && secretPage.classList.contains('active-page');
+      if (secretPageActive) {
+        switchToSecretMusic();
+      } else {
+        switchToNormalMusic();
+      }
+    });
+    
+    if (secretPage) {
+      secretPageObserver.observe(secretPage, { attributes: true, attributeFilter: ['class'] });
+    }
+  
     
   });
 </script>
