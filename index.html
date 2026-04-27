@@ -1608,6 +1608,10 @@
     color: #8b0000;
     font-family: monospace;
   }
+
+.nav-btn {
+  transition: all 0.2s;
+}
  
 </style>
 </head>
@@ -1645,12 +1649,13 @@
 
   <!-- НАВИГАЦИЯ -->
   <div class="side-nav">
-    <div class="nav-btn active" data-page="main">⌂</div>
-    <div class="nav-btn" data-page="bio">🗁</div>
-    <div class="nav-btn" data-page="psych">🗁</div>
-    <div class="nav-btn" data-page="operation">🗁</div>
-    <div class="nav-btn" data-page="medical">🗁</div>
-  </div>
+<div class="side-nav">
+  <div class="nav-btn active" data-page="main" data-default="🗀" data-hover="🗁">🗀</div>
+  <div class="nav-btn" data-page="bio" data-default="🗀" data-hover="🗁">🗀</div>
+  <div class="nav-btn" data-page="psych" data-default="🗀" data-hover="🗁">🗀</div>
+  <div class="nav-btn" data-page="operation" data-default="🗀" data-hover="🗁">🗀</div>
+  <div class="nav-btn" data-page="medical" data-default="🗀" data-hover="🗁">🗀</div>
+</div>
 
   <!-- СТРАНИЦА 1: ОБЗОР -->
   <div id="page-main" class="page active-page">
@@ -2739,6 +2744,24 @@
     }
    
   });
+
+     // === ЭФФЕКТ ПАПКИ ПРИ НАВЕДЕНИИ ===
+    const navButtons = document.querySelectorAll('.nav-btn');
+    
+    navButtons.forEach(btn => {
+      const defaultIcon = btn.getAttribute('data-default');
+      const hoverIcon = btn.getAttribute('data-hover');
+      
+      if (defaultIcon && hoverIcon) {
+        btn.addEventListener('mouseenter', () => {
+          btn.textContent = hoverIcon;
+        });
+        
+        btn.addEventListener('mouseleave', () => {
+          btn.textContent = defaultIcon;
+        });
+      }
+    });
 </script>
 
 </body>
