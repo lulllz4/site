@@ -2386,7 +2386,7 @@
 </div>
 
 <!-- КНОПКА АКТИВАЦИИ ЗВУКА -->
-<div class="sound-unlock" id="unlockSoundBtn">⚡ АКТИВИРОВАТЬ ЗВУКИ ⚡</div>
+<div class="sound-unlock" id="unlockSoundBtn">АКТИВИРОВАТЬ ЗВУКИ</div>
 
 <!-- ЛАМПА "ЗАПИСЬ" -->
 <div id="recordLamp" class="record-lamp">
@@ -2402,7 +2402,7 @@
         <div class="terminal-led"></div>
         <span>ROOT@KGB_ARCHIVE:~</span>
       </div>
-      <div class="terminal-skip" id="skipTerminalBtn">⏩ ПРОПУСТИТЬ</div>
+      <div class="terminal-skip" id="skipTerminalBtn">ПРОПУСТИТЬ</div>
     </div>
     <div class="terminal-lines" id="terminalLines"></div>
   </div>
@@ -2418,15 +2418,15 @@
   </div>
 </div>
 
-<!-- ЗВУКИ (внешние ссылки для гарантированной работы) -->
+<!-- ЗВУКИ (ЛОКАЛЬНЫЕ ФАЙЛЫ) -->
 <audio id="clickSound" preload="auto">
-  <source src="https://www.soundjay.com/misc/sounds/button-click-01.mp3" type="audio/mpeg">
+  <source src="click.mp3" type="audio/mpeg">
 </audio>
 <audio id="bgMusic" preload="auto" loop>
-  <source src="https://www.soundjay.com/misc/sounds/mechanical-keyboard-01.mp3" type="audio/mpeg">
+  <source src="ambient.mp3" type="audio/mpeg">
 </audio>
 <audio id="alarmSound" preload="auto">
-  <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" type="audio/mpeg">
+  <source src="alarm.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -2437,8 +2437,9 @@
       document.body.classList.remove('shake-screen');
     }, 200);
     
-    // === ЗВУКИ (РАБОТАЮТ ПОСЛЕ НАЖАТИЯ КНОПКИ) ===
+    // === ЗВУКИ ===
     let soundEnabled = false;
+    let bgMusicElement = document.getElementById('bgMusic');
     
     function playSound(audioId) {
       if (!soundEnabled) return;
@@ -2454,18 +2455,26 @@
       if (soundEnabled) return;
       soundEnabled = true;
       
-      const bgMusic = document.getElementById('bgMusic');
-      if (bgMusic) {
-        bgMusic.volume = 0.15;
-        bgMusic.loop = true;
-        bgMusic.play().catch(e => console.log('Music error:', e));
+      if (bgMusicElement) {
+        bgMusicElement.volume = 0.15;
+        bgMusicElement.loop = true;
+        bgMusicElement.play().catch(e => console.log('Music error:', e));
       }
       
       playSound('clickSound');
       
+      // Удаляем кнопку после активации
+      const btn = document.getElementById('unlockSoundBtn');
+      if (btn) {
+        btn.textContent = 'ЗВУК АКТИВИРОВАН';
+        setTimeout(() => {
+          btn.style.opacity = '0.5';
+        }, 1000);
+      }
+      
       const msg = document.createElement('div');
       msg.textContent = 'ЗВУК АКТИВИРОВАН';
-      msg.style.cssText = 'position:fixed; bottom:10px; left:50%; transform:translateX(-50%); background:#8b0000; color:#fff; padding:4px 12px; font-size:8px; z-index:10000; font-family:monospace;';
+      msg.style.cssText = 'position:fixed; bottom:10px; left:50%; transform:translateX(-50%); background:#22a84a; color:#000; padding:4px 12px; font-size:8px; z-index:10000; font-family:monospace;';
       document.body.appendChild(msg);
       setTimeout(() => msg.remove(), 1500);
     }
