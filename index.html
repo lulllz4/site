@@ -1565,6 +1565,49 @@
       font-size: 9px;
     }
   }
+
+   /* ========== ИСТОЧНИКИ ИНФОРМАЦИИ ========== */
+  .sources-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .source-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 6px 0;
+    border-bottom: 1px dotted #2a1a1a;
+  }
+
+  .source-icon {
+    font-size: 14px;
+    color: #8b0000;
+    min-width: 28px;
+    text-align: center;
+  }
+
+  .source-text {
+    font-size: 10px;
+    line-height: 1.5;
+    color: #b8c6db;
+    font-family: monospace;
+  }
+
+  .sources-footer {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #8b0000;
+    text-align: right;
+  }
+
+  .sources-stamp {
+    font-size: 7px;
+    letter-spacing: 1.5px;
+    color: #8b0000;
+    font-family: monospace;
+  }
  
 </style>
 </head>
@@ -1738,6 +1781,36 @@
       <span class="tag">Внешние связи</span>
       <span class="tag">Профиль: эмпат-аналитик</span>
     </div>
+       <!-- ИСТОЧНИКИ ИНФОРМАЦИИ -->
+    <div class="card sources-card">
+      <div class="card-header">
+        <span class="header-icon">📚</span>
+        <span class="header-text">[ ИСТОЧНИКИ ИНФОРМАЦИИ ]</span>
+      </div>
+      <div class="card-body">
+        <div class="sources-list">
+          <div class="source-item">
+            <div class="source-icon">📄</div>
+            <div class="source-text">Показания Анны Волковой — протокол КГБ № 08-КЛ/2015</div>
+          </div>
+          <div class="source-item">
+            <div class="source-icon">📋</div>
+            <div class="source-text">Акт эвакуации со станции «Нагатинская» (2015)</div>
+          </div>
+          <div class="source-item">
+            <div class="source-icon">⚕️</div>
+            <div class="source-text">Медицинское заключение о смерти А. Волковой (2018)</div>
+          </div>
+          <div class="source-item">
+            <div class="source-icon">🎙️</div>
+            <div class="source-text">Оперативные опросы Тинъюнь (2023–2033)</div>
+          </div>
+        </div>
+        <div class="sources-footer">
+          <span class="sources-stamp">КГБ // АРХИВ ЗАВЕРЕН // 2033</span>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- СТРАНИЦА 3: ПСИХОЛОГИЧЕСКИЙ ПРОФИЛЬ (РАЗВЁРНУТЫЙ) -->
@@ -1834,7 +1907,7 @@
               <div class="award-year">2030</div>
               <div class="award-icon">★</div>
               <div class="award-name">Медаль «За отвагу»</div>
-              <div class="award-desc">За пстраница 5 нелегальной сети.</div>
+              <div class="award-desc">За прикрытие нелегальной сети.</div>
             </div>
             <div class="award-item">
               <div class="award-year">2032</div>
