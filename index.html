@@ -1799,6 +1799,16 @@
     margin-top: 10px;
     font-size: 11px;
   }
+
+  /* Крупнее на ПК */
+  @media (min-width: 901px) {
+    .sound-unlock {
+      font-size: 16px;
+      padding: 14px 24px;
+      bottom: 30px;
+      left: 30px;
+    }
+  }
   
 </style>
 </head>
@@ -2467,6 +2477,9 @@
   <div class="ticket-date">СОТРУДНИК КГБ: ________</div>
 </div>
 
+<!-- КНОПКА АКТИВАЦИИ ЗВУКА -->
+<div class="sound-unlock" id="unlockSoundBtn"> АКТИВИРОВАТЬ ЗВУКИ </div>
+  
 <!-- ЛАМПА "ЗАПИСЬ" -->
 <div id="recordLamp" class="record-lamp">
   <div class="lamp-bulb"></div>
