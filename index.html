@@ -2451,6 +2451,20 @@
       }
     }
     
+    // === ЗВУКИ ===
+    let soundEnabled = false;
+    let bgMusicElement = document.getElementById('bgMusic');
+    
+    function playSound(audioId) {
+      if (!soundEnabled) return;
+      const audio = document.getElementById(audioId);
+      if (audio) {
+        audio.currentTime = 0;
+        audio.volume = 0.3;
+        audio.play().catch(e => console.log('Sound error:', e));
+      }
+    }
+    
     function initSound() {
       if (soundEnabled) return;
       soundEnabled = true;
@@ -2463,13 +2477,14 @@
       
       playSound('clickSound');
       
-      // Удаляем кнопку после активации
+      // === КНОПКА ИСЧЕЗАЕТ ПОСЛЕ НАЖАТИЯ ===
       const btn = document.getElementById('unlockSoundBtn');
       if (btn) {
-        btn.textContent = 'ЗВУК АКТИВИРОВАН';
+        btn.style.transition = 'opacity 0.3s ease';
+        btn.style.opacity = '0';
         setTimeout(() => {
-          btn.style.opacity = '0.5';
-        }, 1000);
+          btn.style.display = 'none';
+        }, 300);
       }
       
       const msg = document.createElement('div');
