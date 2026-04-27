@@ -1649,6 +1649,156 @@
   .success-green {
     color: #22a84a;
   }
+  /* ========== СЕКРЕТНАЯ СТРАНИЦА (ТРЕВОЖНАЯ ТЕМА) ========== */
+  .secret-page {
+    background: rgba(0,0,0,0.95);
+  }
+  
+  .secret-page .card {
+    background: #0a0000;
+    border-color: #ff0000;
+    box-shadow: 0 0 15px rgba(255,0,0,0.3);
+  }
+  
+  .secret-page .card-header {
+    background: #1a0000;
+    border-left-color: #ff0000;
+    color: #ff4444;
+  }
+  
+  .secret-title {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 14px;
+    color: #ff0000;
+    text-align: center;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+  }
+  
+  .secret-date {
+    text-align: center;
+    font-size: 9px;
+    color: #aa5a5a;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ff0000;
+    padding-bottom: 8px;
+  }
+  
+  .secret-content p {
+    margin-bottom: 16px;
+    line-height: 1.7;
+    color: #ffbbbb;
+  }
+  
+  .secret-warning {
+    background: rgba(255,0,0,0.15);
+    border: 1px solid #ff0000;
+    padding: 12px;
+    margin: 16px 0;
+    font-size: 11px;
+    line-height: 1.6;
+    color: #ffaaaa;
+  }
+  
+  .secret-signature {
+    margin-top: 20px;
+    font-family: monospace;
+    font-size: 10px;
+    border-top: 1px solid #ff0000;
+    padding-top: 12px;
+  }
+  
+  /* ========== ТЕРМИНАЛ-ОКНО ДЛЯ ВВОДА КОДА ========== */
+  .terminal-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.95);
+    z-index: 20001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease;
+  }
+  
+  .terminal-modal.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .terminal-window {
+    width: 450px;
+    max-width: 85vw;
+    background: #0a0c10;
+    border: 2px solid #22a84a;
+    box-shadow: 0 0 30px rgba(34,168,74,0.3);
+  }
+  
+  .terminal-window .terminal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: #1a1a1a;
+    border-bottom: 1px solid #22a84a;
+  }
+  
+  .terminal-window .terminal-title {
+    color: #22a84a;
+    font-family: monospace;
+    font-size: 11px;
+  }
+  
+  .terminal-window .terminal-close {
+    color: #22a84a;
+    cursor: pointer;
+    font-size: 18px;
+    background: none;
+    border: none;
+  }
+  
+  .terminal-body {
+    padding: 20px;
+  }
+  
+  .terminal-line {
+    color: #22a84a;
+    font-family: monospace;
+    font-size: 13px;
+    margin-bottom: 15px;
+  }
+  
+  .terminal-input-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .terminal-prompt {
+    color: #22a84a;
+    font-family: monospace;
+    font-size: 13px;
+  }
+  
+  .terminal-input {
+    background: transparent;
+    border: none;
+    color: #22a84a;
+    font-family: monospace;
+    font-size: 13px;
+    flex: 1;
+    outline: none;
+  }
+  
+  .terminal-error {
+    color: #ff4444;
+    margin-top: 10px;
+    font-size: 11px;
+  }
   
 </style>
 </head>
@@ -1691,6 +1841,7 @@
     <div class="nav-btn" data-page="psych" data-default="🗀" data-hover="🗁">🗀</div>
     <div class="nav-btn" data-page="operation" data-default="🗀" data-hover="🗁">🗀</div>
     <div class="nav-btn" data-page="medical" data-default="🗀" data-hover="🗁">🗀</div>
+     <div class="nav-btn" data-page="secret">⚠</div>
   </div>
 
   <!-- СТРАНИЦА 1: ОБЗОР -->
@@ -2279,6 +2430,34 @@
     <span>ДОС-КЛ-2033-089</span>
     <span id="liveDateTime"></span>
   </div>
+    <!-- СТРАНИЦА 6: СЕКРЕТНЫЙ АРХИВ (ЗАЩИЩЁН) -->
+  <div id="page-secret" class="page secret-page">
+    <div class="warning-footer blink-red" style="margin-bottom: 20px;"> СОВЕРШЕННО СЕКРЕТНО </div>
+    
+    <div class="card secret-card">
+      <div class="card-header"><span class="header-icon">☠</span> [ ДЕЛО № 17-01-2018 ]</div>
+      <div class="card-body">
+        <div class="secret-title">АКТ О ЛИКВИДАЦИИ СТАНЦИИ «НАГАТИНСКАЯ»</div>
+        <div class="secret-date">2015 год. Рассекречено через 18 лет. Копия № 7.</div>
+        
+        <div class="secret-content">
+          <p><span class="blink-red">Постановление Политбюро № 017 от 12.04.2015.</span> Станция «Нагатинская» признана не подлежащей эвакуации. Причина: <span class="redacted">[вырезано цензурой]</span>. Приказ об уничтожении подписан лично <span class="redacted">[имя удалено]</span>.</p>
+          
+          <p>Полевой отряд Красной линии получил приказ: <span class="blink-red">не допускать прорыва</span>. Гражданское население — <span class="redacted">уровень эвакуации признан нецелесообразным</span>. Потери среди мирного населения: <span class="blink-red">оценочно 400–600 человек</span>.</p>
+          
+          <p>Тинъюнь Линь, возрастом 8 лет, была включена в список эвакуируемых <span class="blink-red">по личному указанию Корбута</span>. Причина не зафиксирована. Допрошенные свидетели показали: <span class="redacted">[дальнейшее засекречено]</span>.</p>
+          
+          <div class="secret-warning">
+            <span class="blink-red">ПРЕДУПРЕЖДЕНИЕ:</span> Объект Тинъюнь НЕ ДОЛЖЕН узнать о существовании данного документа. Разглашение информации приведёт к <span class="blink-red">непредсказуемым последствиям</span> для лояльности сотрудника.
+          </div>
+          
+          <p class="secret-signature">Подпись: <span class="redacted">[неразборчиво]</span><br>Печать: <span class="blink-red">КГБ КРАСНОЙ ЛИНИИ. ОСОБЫЙ СЕКТОР.</span></p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="warning-footer blink-red">[ ДАННЫЕ УНИЧТОЖИТЬ ПОСЛЕ ПРОЧТЕНИЯ. КГБ НЕ ПОДТВЕРЖДАЕТ ПОДЛИННОСТЬ ]</div>
+  </div>
 </div>
 
 <!-- КОНТРОЛЬНЫЙ ТАЛОН -->
@@ -2578,6 +2757,104 @@
         }, 1000);
       });
     }
+
+        // === СЕКРЕТНАЯ СТРАНИЦА С ТЕРМИНАЛОМ ===
+    const secretBtn = document.querySelector('.nav-btn[data-page="secret"]');
+    const secretPage = document.getElementById('page-secret');
+    let terminalModal = null;
+    let secretUnlocked = false;
+    
+    // Создаём модальное окно терминала
+    function createTerminalModal() {
+      const modal = document.createElement('div');
+      modal.className = 'terminal-modal';
+      modal.id = 'terminalModal';
+      modal.innerHTML = `
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <span class="terminal-title">КГБ-ТЕРМИНАЛ v.2.0</span>
+            <button class="terminal-close" id="terminalCloseBtn">✖</button>
+          </div>
+          <div class="terminal-body">
+            <div class="terminal-line">> ДОСТУП К АРХИВУ 17-01-2018 ТРЕБУЕТ АВТОРИЗАЦИИ</div>
+            <div class="terminal-line">> ВВЕДИТЕ КОД ДОСТУПА:</div>
+            <div class="terminal-input-line">
+              <span class="terminal-prompt">$></span>
+              <input type="password" id="codeInput" class="terminal-input" autofocus>
+            </div>
+            <div id="terminalError" class="terminal-error"></div>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+      
+      const closeBtn = document.getElementById('terminalCloseBtn');
+      const codeInput = document.getElementById('codeInput');
+      const errorDiv = document.getElementById('terminalError');
+      
+      closeBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+        setTimeout(() => modal.remove(), 300);
+      });
+      
+      codeInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          const enteredCode = codeInput.value.trim();
+          if (enteredCode === '17012018') {
+            // Правильный код
+            modal.classList.remove('active');
+            setTimeout(() => modal.remove(), 300);
+            secretUnlocked = true;
+            secretPage.classList.add('active-page');
+            document.body.classList.add('secret-mode');
+            
+            // Меняем оформление тела на тревожное
+            document.body.style.background = '#050000';
+            
+            // Дополнительный эффект
+            const msg = document.createElement('div');
+            msg.textContent = 'ДОСТУП РАЗРЕШЁН. АРХИВ ОТКРЫТ.';
+            msg.style.cssText = 'position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#ff0000; color:#fff; padding:20px; font-family:monospace; z-index:20002; font-size:14px; text-align:center; border:2px solid #fff;';
+            document.body.appendChild(msg);
+            setTimeout(() => msg.remove(), 1500);
+          } else {
+            // Неправильный код
+            errorDiv.textContent = 'ОШИБКА: НЕВЕРНЫЙ КОД ДОСТУПА. ДОСТУП ЗАПРЕЩЁН.';
+            codeInput.value = '';
+            codeInput.focus();
+            
+            // Эффект тряски окна
+            const terminalWin = document.querySelector('.terminal-window');
+            terminalWin.style.animation = 'ticketShake 0.2s ease-in-out';
+            setTimeout(() => {
+              terminalWin.style.animation = '';
+            }, 200);
+          }
+        }
+      });
+      
+      modal.classList.add('active');
+    }
+    
+    // Обработчик нажатия на секретную кнопку
+    if (secretBtn) {
+      secretBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Если страница уже разблокирована, просто переключаемся
+        if (secretUnlocked) {
+          // Переключаем активную страницу
+          document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+          secretBtn.classList.add('active');
+          document.querySelectorAll('.page').forEach(page => page.classList.remove('active-page'));
+          secretPage.classList.add('active-page');
+        } else {
+          // Показываем терминал для ввода кода
+          createTerminalModal();
+        }
+      });
+    }
+    
   });
 </script>
 <!-- ЗВУКИ -->
