@@ -2549,7 +2549,7 @@
       }
     }
     
-    function initSound() {
+   function initSound() {
       if (soundEnabled) return;
       soundEnabled = true;
       
@@ -2560,6 +2560,15 @@
       }
       
       playSound('clickSound');
+
+      // === ЗАПУСКАЕМ ЦИКЛИЧЕСКИЕ ФОНОВЫЕ ЗВУКИ ПОСЛЕ АКТИВАЦИИ ===
+      // Убедимся, что они не запустятся на секретной странице
+      if (ambientSoundsEnabled && !isOnSecretPage) {
+         // Небольшая задержка перед первым звуком
+         setTimeout(() => {
+            playRandomAmbientSound();
+         }, 1000);
+      }
       
       const btn = document.getElementById('unlockSoundBtn');
       if (btn) {
