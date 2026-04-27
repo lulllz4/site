@@ -6,6 +6,7 @@
 <title>КГБ КПМ // ДОСЬЕ ТИНЪЮНЬ // ГРИФ "ОСОБОЙ ВАЖНОСТИ"</title>
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Press+Start+2P&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
+  /* ВСЕ СТИЛИ ОСТАЮТСЯ ТЕМИ ЖЕ - ДОБАВЛЕН ТОЛЬКО .nav-btn ПЕРЕХОД */
   * {
     margin: 0;
     padding: 0;
@@ -449,7 +450,7 @@
 
   .stat-header {
     display: flex;
-    justify-content: space-between;
+    justify-space-between;
     margin-bottom: 6px;
   }
 
@@ -1609,6 +1610,7 @@
     font-family: monospace;
   }
 
+/* Плавный переход для кнопок навигации */
 .nav-btn {
   transition: all 0.2s;
 }
@@ -1649,13 +1651,12 @@
 
   <!-- НАВИГАЦИЯ -->
   <div class="side-nav">
-<div class="side-nav">
-  <div class="nav-btn active" data-page="main" data-default="🗀" data-hover="🗁">🗀</div>
-  <div class="nav-btn" data-page="bio" data-default="🗀" data-hover="🗁">🗀</div>
-  <div class="nav-btn" data-page="psych" data-default="🗀" data-hover="🗁">🗀</div>
-  <div class="nav-btn" data-page="operation" data-default="🗀" data-hover="🗁">🗀</div>
-  <div class="nav-btn" data-page="medical" data-default="🗀" data-hover="🗁">🗀</div>
-</div>
+    <div class="nav-btn active" data-page="main" data-default="🗀" data-hover="🗁">🗀</div>
+    <div class="nav-btn" data-page="bio" data-default="🗀" data-hover="🗁">🗀</div>
+    <div class="nav-btn" data-page="psych" data-default="🗀" data-hover="🗁">🗀</div>
+    <div class="nav-btn" data-page="operation" data-default="🗀" data-hover="🗁">🗀</div>
+    <div class="nav-btn" data-page="medical" data-default="🗀" data-hover="🗁">🗀</div>
+  </div>
 
   <!-- СТРАНИЦА 1: ОБЗОР -->
   <div id="page-main" class="page active-page">
@@ -1664,13 +1665,13 @@
         <div class="kgb-stamp">КГБ</div>
         <img src="photo.jpg" alt="Фото Тинъюнь">
          <div class="stamp-overlay">
-    <div class="stamp-text">ПОДТВЕРЖДЕНО КГБ</div>
-  </div>
+           <div class="stamp-text">ПОДТВЕРЖДЕНО КГБ</div>
+         </div>
         <div class="photo-stamp blink-red">АРХИВ // 2033</div>
       </div>
       <div class="card">
         <div class="card-header"><span class="header-icon">■</span> [ КРАТКОЕ РЕЗЮМЕ ]</div>
-        <div class="card-body">Тинъюнь — уполномоченный комиссар по внешним связям и товарообмену Красной линии. Уроженка КНР, в восьмилетнем возрасте потерявшая родителей при уничтожении станции «Нагатинская» мутантами в 2015 году. Была эвакуирована полевым отрядом Красной линии и с тех пор воспитана в партийной системе детских учреждений. Член партии. Абсолютно лояльна, идеологически устойчива, сочетает внешнюю мягкость с железной внутренней убеждённостью. Ценится за выдающиеся переговорные навыки и способность добиваться уступок без применения грубой силы.</span></div>
+        <div class="card-body">Тинъюнь — уполномоченный комиссар по внешним связям и товарообмену Красной линии. Уроженка КНР, в восьмилетнем возрасте потерявшая родителей при уничтожении станции «Нагатинская» мутантами в 2015 году. Была эвакуирована полевым отрядом Красной линии и с тех пор воспитана в партийной системе детских учреждений. Член партии. Абсолютно лояльна, идеологически устойчива, сочетает внешнюю мягкость с железной внутренней убеждённостью. Ценится за выдающиеся переговорные навыки и способность добиваться уступок без применения грубой силы.</div>
       </div>
     </div>
 
@@ -1718,8 +1719,8 @@
         <div class="kgb-stamp">КГБ</div>
         <img src="photo.jpg" alt="Фото Тинъюнь">
          <div class="stamp-overlay">
-    <div class="stamp-text">ПОДТВЕРЖДЕНО КГБ</div>
-  </div>
+           <div class="stamp-text">ПОДТВЕРЖДЕНО КГБ</div>
+         </div>
         <div class="photo-stamp blink-red">АРХИВ // 2033</div>
       </div>
       <div class="card">
@@ -1825,8 +1826,8 @@
         <div class="kgb-stamp">КГБ</div>
         <img src="photo.jpg" alt="Фото Тинъюнь">
          <div class="stamp-overlay">
-    <div class="stamp-text">ПОДТВЕРЖДЕНО КГБ</div>
-  </div>
+           <div class="stamp-text">ПОДТВЕРЖДЕНО КГБ</div>
+         </div>
         <div class="photo-stamp blink-red">АРХИВ // 2033</div>
       </div>
       <div class="card">
@@ -1897,8 +1898,8 @@
         <div class="kgb-stamp">КГБ</div>
         <img src="photo.jpg" alt="Фото Тинъюнь">
          <div class="stamp-overlay">
-    <div class="stamp-text">ПОДТВЕРЖДЕНО КГБ</div>
-  </div>
+           <div class="stamp-text">ПОДТВЕРЖДЕНО КГБ</div>
+         </div>
         <div class="photo-stamp blink-red">АРХИВ // 2033</div>
       </div>
            <div class="card awards-card">
@@ -2241,8 +2242,6 @@
     </div>
 
     <div class="warning-footer blink-red">[ ЗАКЛЮЧЕНИЕ МЕДИЦИНСКОЙ КОМИССИИ: ОБЪЕКТ ГОДЕН К СЛУЖБЕ. РЕКОМЕНДОВАНО ЕЖЕГОДНОЕ УГЛУБЛЁННОЕ ОБСЛЕДОВАНИЕ ]</div>
-  </div>
-
     <div class="warning-footer blink-red">[ ОПЕРАТИВНОЕ ЗАМЕЧАНИЕ: ЛИЧНОСТЬ ОБЪЕКТА ПОДЛЕЖИТ ЗАЩИТЕ ]</div>
   </div>
 
@@ -2254,12 +2253,12 @@
   </div>
 </div>
 
-  <!-- КОНТРОЛЬНЫЙ ТАЛОН -->
-  <div class="control-ticket" id="controlTicket">
-    <div class="ticket-number">ДОС-КЛ-2033-089</div>
-    <div>УНИЧТОЖИТЬ<br>ПОСЛЕ ОЗНАКОМЛЕНИЯ</div>
-    <div class="ticket-date">СОТРУДНИК КГБ: ________</div>
-  </div>
+<!-- КОНТРОЛЬНЫЙ ТАЛОН -->
+<div class="control-ticket" id="controlTicket">
+  <div class="ticket-number">ДОС-КЛ-2033-089</div>
+  <div>УНИЧТОЖИТЬ<br>ПОСЛЕ ОЗНАКОМЛЕНИЯ</div>
+  <div class="ticket-date">СОТРУДНИК КГБ: ________</div>
+</div>
 
 <!-- ЛАМПА "ЗАПИСЬ" -->
 <div id="recordLamp" class="record-lamp">
@@ -2282,7 +2281,7 @@
     </div>
   </div>
 </div>
- 
+
 <!-- ЭКСТРЕННАЯ КНОПКА -->
 <div class="emergency-btn" id="emergencyBtn">ЧС</div>
 <div id="emergencyOverlay" class="emergency-overlay">
@@ -2295,473 +2294,263 @@
 
 <!-- ЗВУКИ -->
 <audio id="clickSound" preload="auto">
-    <source src="click.mp3" type="audio/mpeg">
+  <source src="https://www.soundjay.com/misc/sounds/button-click-01.mp3" type="audio/mpeg">
 </audio>
-<audio id="bgMusic" preload="auto" loop>
-    <source src="ambient.mp3" type="audio/mpeg">
-</audio>
-<audio id="alarmSound" preload="auto">   <!-- ДОБАВЬТЕ ЭТО -->
-    <source src="alarm.mp3" type="audio/mpeg">
+<audio id="alarmSound" preload="auto">
+  <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" type="audio/mpeg">
 </audio>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-       // === ДРОЖАНИЕ ЭКРАНА ПРИ ЗАГРУЗКЕ ===
+    // === ДРОЖАНИЕ ЭКРАНА ПРИ ЗАГРУЗКЕ ===
     document.body.classList.add('shake-screen');
     setTimeout(() => {
       document.body.classList.remove('shake-screen');
     }, 200);
+    
     // === ПОЛУЧАЕМ ЭЛЕМЕНТЫ ===
     const recordLamp = document.getElementById('recordLamp');
     const wrapper = document.querySelector('.wrapper');
     const emergencyBtn = document.getElementById('emergencyBtn');
     const emergencyOverlay = document.getElementById('emergencyOverlay');
     const emergencyOff = document.getElementById('emergencyOff');
-    
-    // === ЗВУКИ ===
-    let soundEnabled = false;
-    let bgMusicPlaying = false;
-    
-    function playSound(audioId) {
-        if (!soundEnabled) return;
-        const audio = document.getElementById(audioId);
-        if (audio) {
-            audio.currentTime = 0;
-            audio.play().catch(e => console.log('Sound error:', e));
-        }
-    }
-    
-    function initSound() {
-        if (soundEnabled) return;
-        soundEnabled = true;
-        const unlockBtn = document.getElementById('unlockSoundBtn');
-        if (unlockBtn) unlockBtn.remove();
-        
-        // Запускаем фоновую музыку
-        const bgMusic = document.getElementById('bgMusic');
-        if (bgMusic) {
-            bgMusic.volume = 0.25;
-            bgMusic.play().catch(e => console.log('Music error:', e));
-            bgMusicPlaying = true;
-        }
-        
-        const msg = document.createElement('div');
-        msg.textContent = 'ЗВУК АКТИВИРОВАН';
-        msg.style.cssText = 'position:fixed; bottom:10px; left:50%; transform:translateX(-50%); background:#8b0000; color:#fff; padding:2px 10px; font-size:8px; z-index:10000; font-family:monospace;';
-        document.body.appendChild(msg);
-        setTimeout(() => msg.remove(), 1500);
-        
-        // Короткий щелчок для подтверждения
-        playSound('clickSound');
-    }
-    
-    const unlockBtn = document.createElement('div');
-    unlockBtn.id = 'unlockSoundBtn';
-    unlockBtn.textContent = 'АКТИВИРОВАТЬ ЗВУКИ';
-    unlockBtn.className = 'sound-unlock';
-    unlockBtn.onclick = initSound;
-    document.body.appendChild(unlockBtn);
-    
-    // === ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ ===
     const buttons = document.querySelectorAll('.nav-btn');
     
-    buttons.forEach(button => {
-        button.addEventListener('click', function() {
-            const pageId = this.getAttribute('data-page');
-            
-            // Звук клика
-            playSound('clickSound');
-            
-            // Анимация лампы
-            if (recordLamp) {
-                recordLamp.classList.remove('active');
-                void recordLamp.offsetWidth;
-                recordLamp.classList.add('active');
-            }
-            
-            // Мерцание страницы
-            if (wrapper) {
-                wrapper.classList.add('page-transition');
-                setTimeout(() => {
-                    wrapper.classList.remove('page-transition');
-                }, 200);
-            }
-            
-            // Переключение
-            buttons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active-page'));
-            document.getElementById('page-' + pageId).classList.add('active-page');
-        });
-    });
-    
-    // === ЭКРАН ЗАГРУЗКИ — ТЕРМИНАЛ С АНИМАЦИЕЙ ПЕЧАТИ ===
-    const terminalOverlay = document.getElementById('loadingOverlay');
-    const terminalContainer = document.getElementById('terminalLines');
-    const skipBtn = document.getElementById('skipTerminalBtn');
-    
-    if (terminalOverlay && terminalContainer) {
-      // Строки для вывода (каждая строка — объект)
-      const lines = [
-        { text: "> sudo access_archive --level=alpha", delay: 0, typeSpeed: 30 },
-        { text: "> Введите код доступа: ██████", delay: 0, typeSpeed: 20 },
-        { text: "> Доступ РАЗРЕШЁН. Приветствую, сотрудник.", delay: 0, typeSpeed: 25, class: "success-green" },
-        { text: "> Загрузка досье: /КГБ/КПМ/ДОСЬЕ/ТИНЪЮНЬ.exe", delay: 0, typeSpeed: 15, class: "path-green" },
-        { text: "> Расшифровка биометрических данных...", delay: 0, typeSpeed: 20 },
-        { text: "> Досье успешно ЗАГРУЖЕНО.", delay: 0, typeSpeed: 25, class: "success-green" },
-        { text: "> Добро пожаловать в архив КГБ.", delay: 0, typeSpeed: 20 },
-        { text: "> _", delay: 0, typeSpeed: 100, isCursor: true }
-      ];
-      
-      let currentLineIndex = 0;
-      let skipRequested = false;
-      let typingTimeouts = [];
-      
-      // Функция анимации печати одной строки
-      function typeLine(lineObj, lineElement, callback) {
-        let i = 0;
-        const text = lineObj.text;
-        
-        function typeNextChar() {
-          if (skipRequested) {
-            lineElement.textContent = text;
-            if (callback) callback();
-            return;
-          }
-          
-          if (i < text.length) {
-            lineElement.textContent += text[i];
-            i++;
-            setTimeout(typeNextChar, lineObj.typeSpeed || 25);
-          } else {
-            if (callback) callback();
-          }
-        }
-        
-        lineElement.textContent = '';
-        typeNextChar();
-      }
-      
-      // Функция запуска последовательного вывода строк
-      function startTyping() {
-        if (currentLineIndex >= lines.length) {
-          finishLoading();
-          return;
-        }
-        
-        const lineObj = lines[currentLineIndex];
-        const lineElement = document.createElement('div');
-        lineElement.className = 'terminal-line';
-        if (lineObj.class) {
-          lineElement.classList.add(lineObj.class);
-        }
-        terminalContainer.appendChild(lineElement);
-        
-        // Добавляем курсор в конце, если это последняя строка с курсором
-        if (lineObj.isCursor) {
-          typeLine(lineObj, lineElement, () => {
-            // После последней строки с курсором — задержка и закрытие
-            setTimeout(() => {
-              if (!skipRequested) finishLoading();
-            }, 800);
-          });
-        } else {
-          typeLine(lineObj, lineElement, () => {
-            // Задержка между строками
-            const lineDelay = 400;
-            currentLineIndex++;
-            setTimeout(startTyping, lineDelay);
-          });
-        }
-      }
-      
-      function finishLoading() {
-        terminalOverlay.classList.add('fade-out');
-        setTimeout(() => {
-          if (terminalOverlay) terminalOverlay.style.display = 'none';
-        }, 500);
-      }
-      
-      // Обработчик кнопки пропуска
-      if (skipBtn) {
-        skipBtn.addEventListener('click', function() {
-          skipRequested = true;
-          finishLoading();
-        });
-      }
-      
-      // Запускаем анимацию
-      startTyping();
-    }
-    
-    // === ЖИВЫЕ ДАТА И ВРЕМЯ (С ФИКСИРОВАННЫМ 2033 ГОДОМ) ===
-    function updateDateTime() {
-        const now = new Date();
-        const day = String(now.getDate()).padStart(2, '0');
-        const month = String(now.getMonth() + 1).padStart(2, '0');
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const seconds = String(now.getSeconds()).padStart(2, '0');
-        
-        const dateTimeString = `${day}.${month}.2033 | ${hours}:${minutes}:${seconds}`;
-        
-        const dateTimeElement = document.getElementById('liveDateTime');
-        if (dateTimeElement) {
-            dateTimeElement.textContent = dateTimeString;
-        }
-    }
-    
-    updateDateTime();
-    setInterval(updateDateTime, 1000);
-    
-    // === ЭКСТРЕННАЯ КНОПКА ЧС ===
-    let emergencyTimer = null;
-    let wasSoundEnabled = false;
-    let currentAlarmSound = null;
-    
-    if (emergencyBtn) {
-        emergencyBtn.addEventListener('click', function() {
-            // Сохраняем состояние звука
-            wasSoundEnabled = soundEnabled;
-            
-            // Останавливаем фоновую музыку если звук был включён
-            if (wasSoundEnabled) {
-                const bgMusic = document.getElementById('bgMusic');
-                if (bgMusic) {
-                    bgMusic.pause();
-                    bgMusic.currentTime = 0; // Сбрасываем фоновую музыку на начало
-                }
-            }
-            
-            // Показываем панель
-            emergencyOverlay.classList.add('active');
-            
-            // Воспроизводим звук тревоги из файла alarm.mp3
-            if (wasSoundEnabled) {
-                const alarmSound = document.getElementById('alarmSound');
-                if (alarmSound) {
-                    alarmSound.pause(); // Останавливаем если играл
-                    alarmSound.currentTime = 0;
-                    alarmSound.volume = 0.2;
-                    alarmSound.loop = false;
-                    alarmSound.play().catch(e => console.log('Alarm error:', e));
-                    currentAlarmSound = alarmSound;
-                }
-            }
-            
-            // Устанавливаем таймер на автоматическое восстановление через 6 секунд
-            if (emergencyTimer) clearTimeout(emergencyTimer);
-            emergencyTimer = setTimeout(resetEmergency, 6000);
-        });
-    }
-    
-    function resetEmergency() {
-        // Скрываем панель
-        emergencyOverlay.classList.remove('active');
-        
-        // ОСТАНАВЛИВАЕМ ЗВУК ТРЕВОГИ (ПРИНУДИТЕЛЬНО)
-        if (currentAlarmSound) {
-            currentAlarmSound.pause();
-            currentAlarmSound.currentTime = 0;
-            currentAlarmSound = null;
-        }
-        
-        // ДОПОЛНИТЕЛЬНАЯ ЗАЩИТА: останавливаем ВСЕ возможные звуки тревоги
-        const alarmSoundElement = document.getElementById('alarmSound');
-        if (alarmSoundElement && !alarmSoundElement.paused) {
-            alarmSoundElement.pause();
-            alarmSoundElement.currentTime = 0;
-        }
-        
-        // Возвращаем музыку если она была включена
-        if (wasSoundEnabled) {
-            const bgMusic = document.getElementById('bgMusic');
-            if (bgMusic) {
-                bgMusic.currentTime = 0; // Начинаем с начала
-                bgMusic.volume = 0.25;
-                bgMusic.play().catch(e => console.log('Music resume error:', e));
-            }
-        }
-        
-        if (emergencyTimer) clearTimeout(emergencyTimer);
-        emergencyTimer = null;
-    }
-    
-    if (emergencyOff) {
-        emergencyOff.addEventListener('click', function() {
-            if (emergencyTimer) clearTimeout(emergencyTimer);
-            resetEmergency();
-        });
-    }
-       // === ФИЛЬТРАЦИЯ ОПЕРАЦИЙ ===
+    // === ФИЛЬТРАЦИЯ ОПЕРАЦИЙ ===
     const filterBtns = document.querySelectorAll('.filter-btn');
     const operationItems = document.querySelectorAll('.operation-item');
     
     if (filterBtns.length && operationItems.length) {
       filterBtns.forEach(btn => {
         btn.addEventListener('click', function() {
-          // Убираем активный класс со всех кнопок
           filterBtns.forEach(b => b.classList.remove('active'));
           this.classList.add('active');
-          
           const filterValue = this.getAttribute('data-filter');
-          
           operationItems.forEach(item => {
             if (filterValue === 'all') {
               item.classList.remove('hidden');
             } else if (filterValue === 'completed') {
-              if (item.classList.contains('completed')) {
-                item.classList.remove('hidden');
-              } else {
-                item.classList.add('hidden');
-              }
+              item.classList.contains('completed') ? item.classList.remove('hidden') : item.classList.add('hidden');
             } else if (filterValue === 'active') {
-              if (item.classList.contains('active')) {
-                item.classList.remove('hidden');
-              } else {
-                item.classList.add('hidden');
-              }
+              item.classList.contains('active') ? item.classList.remove('hidden') : item.classList.add('hidden');
             }
           });
         });
       });
     }
-
-       // === ИНТЕРАКТИВНАЯ ЗВЕЗДА (ВЗРЫВ ЗВЁЗДОЧЕК) ===
-    const star = document.getElementById('clickableStar');
     
-    if (star) {
-      star.addEventListener('click', function(e) {
-        // Анимация звезды
-        this.classList.add('star-click');
-        setTimeout(() => {
-          this.classList.remove('star-click');
-        }, 300);
+    // === ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ ===
+    buttons.forEach(button => {
+      button.addEventListener('click', function() {
+        const pageId = this.getAttribute('data-page');
         
-        // Звук (если звук включён)
-        if (soundEnabled) {
-          const starSound = new Audio();
-          starSound.src = 'https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3';
-          starSound.volume = 0.3;
-          starSound.play().catch(e => console.log('Star sound error:', e));
+        // Анимация лампы
+        if (recordLamp) {
+          recordLamp.classList.remove('active');
+          void recordLamp.offsetWidth;
+          recordLamp.classList.add('active');
         }
         
-        // Создаём разлетающиеся звёздочки
+        // Мерцание страницы
+        if (wrapper) {
+          wrapper.classList.add('page-transition');
+          setTimeout(() => wrapper.classList.remove('page-transition'), 200);
+        }
+        
+        // Переключение
+        buttons.forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+        document.querySelectorAll('.page').forEach(page => page.classList.remove('active-page'));
+        document.getElementById('page-' + pageId).classList.add('active-page');
+      });
+    });
+    
+    // === ЭФФЕКТ ПАПКИ ПРИ НАВЕДЕНИИ ===
+    buttons.forEach(btn => {
+      const defaultIcon = btn.getAttribute('data-default');
+      const hoverIcon = btn.getAttribute('data-hover');
+      if (defaultIcon && hoverIcon) {
+        btn.addEventListener('mouseenter', () => btn.textContent = hoverIcon);
+        btn.addEventListener('mouseleave', () => btn.textContent = defaultIcon);
+      }
+    });
+    
+    // === ЭКРАН ЗАГРУЗКИ — ТЕРМИНАЛ ===
+    const terminalOverlay = document.getElementById('loadingOverlay');
+    const terminalContainer = document.getElementById('terminalLines');
+    const skipBtn = document.getElementById('skipTerminalBtn');
+    
+    if (terminalOverlay && terminalContainer) {
+      const lines = [
+        { text: "> sudo access_archive --level=alpha", typeSpeed: 30 },
+        { text: "> Введите код доступа: ██████", typeSpeed: 20 },
+        { text: "> Доступ РАЗРЕШЁН. Приветствую, сотрудник.", typeSpeed: 25, class: "success-green" },
+        { text: "> Загрузка досье: /КГБ/КПМ/ДОСЬЕ/ТИНЪЮНЬ.exe", typeSpeed: 15, class: "path-green" },
+        { text: "> Расшифровка биометрических данных...", typeSpeed: 20 },
+        { text: "> Досье успешно ЗАГРУЖЕНО.", typeSpeed: 25, class: "success-green" },
+        { text: "> Добро пожаловать в архив КГБ.", typeSpeed: 20 },
+        { text: "> _", typeSpeed: 100, isCursor: true }
+      ];
+      
+      let currentLineIndex = 0;
+      let skipRequested = false;
+      
+      function typeLine(lineObj, lineElement, callback) {
+        let i = 0;
+        const text = lineObj.text;
+        function typeNextChar() {
+          if (skipRequested) {
+            lineElement.textContent = text;
+            if (callback) callback();
+            return;
+          }
+          if (i < text.length) {
+            lineElement.textContent += text[i];
+            i++;
+            setTimeout(typeNextChar, lineObj.typeSpeed || 25);
+          } else if (callback) callback();
+        }
+        lineElement.textContent = '';
+        typeNextChar();
+      }
+      
+      function startTyping() {
+        if (currentLineIndex >= lines.length) {
+          finishLoading();
+          return;
+        }
+        const lineObj = lines[currentLineIndex];
+        const lineElement = document.createElement('div');
+        lineElement.className = 'terminal-line';
+        if (lineObj.class) lineElement.classList.add(lineObj.class);
+        terminalContainer.appendChild(lineElement);
+        
+        if (lineObj.isCursor) {
+          typeLine(lineObj, lineElement, () => setTimeout(() => { if (!skipRequested) finishLoading(); }, 800));
+        } else {
+          typeLine(lineObj, lineElement, () => {
+            currentLineIndex++;
+            setTimeout(startTyping, 400);
+          });
+        }
+      }
+      
+      function finishLoading() {
+        terminalOverlay.classList.add('fade-out');
+        setTimeout(() => { if (terminalOverlay) terminalOverlay.style.display = 'none'; }, 500);
+      }
+      
+      if (skipBtn) skipBtn.addEventListener('click', () => { skipRequested = true; finishLoading(); });
+      startTyping();
+    }
+    
+    // === ЖИВЫЕ ДАТА И ВРЕМЯ ===
+    function updateDateTime() {
+      const now = new Date();
+      const dateTimeElement = document.getElementById('liveDateTime');
+      if (dateTimeElement) {
+        dateTimeElement.textContent = `${String(now.getDate()).padStart(2,'0')}.${String(now.getMonth()+1).padStart(2,'0')}.2033 | ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`;
+      }
+    }
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+    
+    // === ЭКСТРЕННАЯ КНОПКА ===
+    let emergencyTimer = null;
+    let wasSoundEnabled = false;
+    let currentAlarmSound = null;
+    
+    if (emergencyBtn) {
+      emergencyBtn.addEventListener('click', function() {
+        wasSoundEnabled = true;
+        const bgMusic = document.getElementById('bgMusic');
+        if (bgMusic) bgMusic.pause();
+        emergencyOverlay.classList.add('active');
+        const alarmSound = document.getElementById('alarmSound');
+        if (alarmSound) {
+          alarmSound.currentTime = 0;
+          alarmSound.volume = 0.2;
+          alarmSound.play().catch(e => console.log('Alarm error:', e));
+          currentAlarmSound = alarmSound;
+        }
+        if (emergencyTimer) clearTimeout(emergencyTimer);
+        emergencyTimer = setTimeout(resetEmergency, 6000);
+      });
+    }
+    
+    function resetEmergency() {
+      emergencyOverlay.classList.remove('active');
+      if (currentAlarmSound) {
+        currentAlarmSound.pause();
+        currentAlarmSound.currentTime = 0;
+        currentAlarmSound = null;
+      }
+      const bgMusic = document.getElementById('bgMusic');
+      if (bgMusic && wasSoundEnabled) bgMusic.play().catch(e => console.log('Music resume error:', e));
+      if (emergencyTimer) clearTimeout(emergencyTimer);
+      emergencyTimer = null;
+    }
+    
+    if (emergencyOff) emergencyOff.addEventListener('click', () => { if (emergencyTimer) clearTimeout(emergencyTimer); resetEmergency(); });
+    
+    // === ИНТЕРАКТИВНАЯ ЗВЕЗДА ===
+    const star = document.getElementById('clickableStar');
+    if (star) {
+      star.addEventListener('click', function(e) {
+        this.classList.add('star-click');
+        setTimeout(() => this.classList.remove('star-click'), 300);
+        
         const starRect = this.getBoundingClientRect();
         const starCenterX = starRect.left + starRect.width / 2;
         const starCenterY = starRect.top + starRect.height / 2;
-        
         for (let i = 0; i < 12; i++) {
           const sparkle = document.createElement('div');
           sparkle.className = 'sparkle';
           const angle = (i / 12) * Math.PI * 2;
           const distance = 60 + Math.random() * 40;
-          const tx = Math.cos(angle) * distance;
-          const ty = Math.sin(angle) * distance;
-          sparkle.style.setProperty('--tx', tx + 'px');
-          sparkle.style.setProperty('--ty', ty + 'px');
+          sparkle.style.setProperty('--tx', Math.cos(angle) * distance + 'px');
+          sparkle.style.setProperty('--ty', Math.sin(angle) * distance + 'px');
           sparkle.style.left = (starCenterX - 3) + 'px';
           sparkle.style.top = (starCenterY - 3) + 'px';
           document.body.appendChild(sparkle);
-          
-          setTimeout(() => {
-            sparkle.remove();
-          }, 600);
+          setTimeout(() => sparkle.remove(), 600);
         }
-        
-        // Показываем сообщение
         const message = document.createElement('div');
         message.className = 'star-message';
         message.textContent = 'КГБ НАБЛЮДАЕТ ★';
         document.body.appendChild(message);
-        
-        setTimeout(() => {
-          message.remove();
-        }, 1500);
+        setTimeout(() => message.remove(), 1500);
       });
     }
-
-    // === ИНТЕРАКТИВНЫЙ КОНТРОЛЬНЫЙ ТАЛОН ===
-    const ticket = document.getElementById('controlTicket');
-    let ticketTimeout = null;
     
+    // === ИНТЕРАКТИВНЫЙ ТАЛОН ===
+    const ticket = document.getElementById('controlTicket');
     if (ticket) {
-      // Обычный клик — тряска и сообщение
       ticket.addEventListener('click', function(e) {
-        // Предотвращаем срабатывание двойного клика
-        if (ticketTimeout) clearTimeout(ticketTimeout);
-        
-        ticket.classList.add('ticket-shake');
-        setTimeout(() => {
-          ticket.classList.remove('ticket-shake');
-        }, 200);
-        
-        // Меняем текст временно
+        if (e.shiftKey) {
+          const originalText = this.innerHTML;
+          this.classList.add('ticket-shake');
+          this.innerHTML = '<div class="ticket-number">⚠️ ДОСТУП ЗАПРЕЩЁН ⚠️</div><div>ПОПЫТКА ВЗЛОМА<br>ЗАФИКСИРОВАНА</div><div class="ticket-date">КГБ УВЕДОМЛЕН</div>';
+          setTimeout(() => { this.classList.remove('ticket-shake'); this.innerHTML = originalText; }, 2000);
+          return;
+        }
+        this.classList.add('ticket-shake');
+        setTimeout(() => this.classList.remove('ticket-shake'), 200);
         const originalText = this.innerHTML;
         this.innerHTML = '<div class="ticket-number">ДОС-КЛ-2033-089</div><div>КОНТРОЛЬНЫЙ ТАЛОН<br>АННУЛИРОВАН</div><div class="ticket-date">СОТРУДНИК КГБ: ________</div>';
-        
-        setTimeout(() => {
-          this.innerHTML = originalText;
-        }, 1500);
+        setTimeout(() => { this.innerHTML = originalText; }, 1500);
       });
-      
-      // Двойной клик — уезжает за экран и возвращается
-      ticket.addEventListener('dblclick', function(e) {
-        // Убираем возможные предыдущие анимации
+      ticket.addEventListener('dblclick', function() {
         this.classList.remove('ticket-slide-in');
-        
-        // Уезжаем
         this.classList.add('ticket-slide-out');
-        
-        // Возвращаем через 1 секунду
         setTimeout(() => {
           this.classList.remove('ticket-slide-out');
           this.classList.add('ticket-slide-in');
-          
-          // Убираем класс возврата после анимации
-          setTimeout(() => {
-            if (this) this.classList.remove('ticket-slide-in');
-          }, 400);
+          setTimeout(() => this.classList.remove('ticket-slide-in'), 400);
         }, 1000);
       });
-      
-      // Клик с зажатым Shift — тряска + предупреждение
-      ticket.addEventListener('click', function(e) {
-        if (e.shiftKey) {
-          e.preventDefault();
-          
-          const originalText = this.innerHTML;
-          this.classList.add('ticket-shake');
-          
-          this.innerHTML = '<div class="ticket-number">⚠️ ДОСТУП ЗАПРЕЩЁН ⚠️</div><div>ПОПЫТКА ВЗЛОМА<br>ЗАФИКСИРОВАНА</div><div class="ticket-date">КГБ УВЕДОМЛЕН</div>';
-          
-          setTimeout(() => {
-            this.classList.remove('ticket-shake');
-            this.innerHTML = originalText;
-          }, 2000);
-        }
-      });
     }
-   
   });
-
-     // === ЭФФЕКТ ПАПКИ ПРИ НАВЕДЕНИИ ===
-    const navButtons = document.querySelectorAll('.nav-btn');
-    
-    navButtons.forEach(btn => {
-      const defaultIcon = btn.getAttribute('data-default');
-      const hoverIcon = btn.getAttribute('data-hover');
-      
-      if (defaultIcon && hoverIcon) {
-        btn.addEventListener('mouseenter', () => {
-          btn.textContent = hoverIcon;
-        });
-        
-        btn.addEventListener('mouseleave', () => {
-          btn.textContent = defaultIcon;
-        });
-      }
-    });
 </script>
 
 </body>
