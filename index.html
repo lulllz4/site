@@ -3025,7 +3025,7 @@
       }
     }
     
-    // Следим за секретной страницей
+       // Следим за секретной страницей
     const secretPageObserver = new MutationObserver(function() {
       const secretPageActive = secretPage && secretPage.classList.contains('active-page');
       if (secretPageActive) {
@@ -3038,12 +3038,6 @@
     if (secretPage) {
       secretPageObserver.observe(secretPage, { attributes: true, attributeFilter: ['class'] });
     }
-    });
-    
-    if (secretPage) {
-      secretPageObserver.observe(secretPage, { attributes: true, attributeFilter: ['class'] });
-    }
-  
     
   });
 </script>
