@@ -2437,131 +2437,6 @@
       document.body.classList.remove('shake-screen');
     }, 200);
     
-    // === ЗВУКИ ===
-    let soundEnabled = false;
-    let bgMusicElement = document.getElementById('bgMusic');
-    
-    function playSound(audioId) {
-      if (!soundEnabled) return;
-      const audio = document.getElementById(audioId);
-      if (audio) {
-        audio.currentTime = 0;
-        audio.volume = 0.3;
-        audio.play().catch(e => console.log('Sound error:', e));
-      }
-    }
-    
-    // === ЗВУКИ ===
-    let soundEnabled = false;
-    let bgMusicElement = document.getElementById('bgMusic');
-    
-    function playSound(audioId) {
-      if (!soundEnabled) return;
-      const audio = document.getElementById(audioId);
-      if (audio) {
-        audio.currentTime = 0;
-        audio.volume = 0.3;
-        audio.play().catch(e => console.log('Sound error:', e));
-      }
-    }
-    
-    function initSound() {
-      if (soundEnabled) return;
-      soundEnabled = true;
-      
-      if (bgMusicElement) {
-        bgMusicElement.volume = 0.15;
-        bgMusicElement.loop = true;
-        bgMusicElement.play().catch(e => console.log('Music error:', e));
-      }
-      
-      playSound('clickSound');
-      
-      // === КНОПКА ИСЧЕЗАЕТ ПОСЛЕ НАЖАТИЯ ===
-      const btn = document.getElementById('unlockSoundBtn');
-      if (btn) {
-        btn.style.transition = 'opacity 0.3s ease';
-        btn.style.opacity = '0';
-        setTimeout(() => {
-          btn.style.display = 'none';
-        }, 300);
-      }
-      
-      const msg = document.createElement('div');
-      msg.textContent = 'ЗВУК АКТИВИРОВАН';
-      msg.style.cssText = 'position:fixed; bottom:10px; left:50%; transform:translateX(-50%); background:#22a84a; color:#000; padding:4px 12px; font-size:8px; z-index:10000; font-family:monospace;';
-      document.body.appendChild(msg);
-      setTimeout(() => msg.remove(), 1500);
-    }
-    
-    const unlockSoundBtn = document.getElementById('unlockSoundBtn');
-    if (unlockSoundBtn) {
-      unlockSoundBtn.onclick = initSound;
-    }
-    
-    // === ПОЛУЧАЕМ ЭЛЕМЕНТЫ ===
-    const recordLamp = document.getElementById('recordLamp');
-    const wrapper = document.querySelector('.wrapper');
-    const buttons = document.querySelectorAll('.nav-btn');
-    
-    // === ФИЛЬТРАЦИЯ ОПЕРАЦИЙ ===
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const operationItems = document.querySelectorAll('.operation-item');
-    
-    if (filterBtns.length && operationItems.length) {
-      filterBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-          filterBtns.forEach(b => b.classList.remove('active'));
-          this.classList.add('active');
-          const filterValue = this.getAttribute('data-filter');
-          operationItems.forEach(item => {
-            if (filterValue === 'all') {
-              item.classList.remove('hidden');
-            } else if (filterValue === 'completed') {
-              item.classList.contains('completed') ? item.classList.remove('hidden') : item.classList.add('hidden');
-            } else if (filterValue === 'active') {
-              item.classList.contains('active') ? item.classList.remove('hidden') : item.classList.add('hidden');
-            }
-          });
-        });
-      });
-    }
-    
-    // === ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ ===
-    buttons.forEach(button => {
-      button.addEventListener('click', function() {
-        const pageId = this.getAttribute('data-page');
-        
-        playSound('clickSound');
-        
-        if (recordLamp) {
-          recordLamp.classList.remove('active');
-          void recordLamp.offsetWidth;
-          recordLamp.classList.add('active');
-        }
-        
-        if (wrapper) {
-          wrapper.classList.add('page-transition');
-          setTimeout(() => wrapper.classList.remove('page-transition'), 200);
-        }
-        
-        buttons.forEach(btn => btn.classList.remove('active'));
-        this.classList.add('active');
-        document.querySelectorAll('.page').forEach(page => page.classList.remove('active-page'));
-        document.getElementById('page-' + pageId).classList.add('active-page');
-      });
-    });
-    
-    // === ЭФФЕКТ ПАПКИ ПРИ НАВЕДЕНИИ ===
-    buttons.forEach(btn => {
-      const defaultIcon = btn.getAttribute('data-default');
-      const hoverIcon = btn.getAttribute('data-hover');
-      if (defaultIcon && hoverIcon) {
-        btn.addEventListener('mouseenter', () => btn.textContent = hoverIcon);
-        btn.addEventListener('mouseleave', () => btn.textContent = defaultIcon);
-      }
-    });
-    
     // === ЭКРАН ЗАГРУЗКИ — ТЕРМИНАЛ ===
     const terminalOverlay = document.getElementById('loadingOverlay');
     const terminalContainer = document.getElementById('terminalLines');
@@ -2630,6 +2505,116 @@
       if (skipBtn) skipBtn.addEventListener('click', () => { skipRequested = true; finishLoading(); });
       startTyping();
     }
+    
+    // === ЗВУКИ (ОДИН РАЗ, БЕЗ ПОВТОРЕНИЙ) ===
+    let soundEnabled = false;
+    const bgMusicElement = document.getElementById('bgMusic');
+    
+    function playSound(audioId) {
+      if (!soundEnabled) return;
+      const audio = document.getElementById(audioId);
+      if (audio) {
+        audio.currentTime = 0;
+        audio.volume = 0.3;
+        audio.play().catch(e => console.log('Sound error:', e));
+      }
+    }
+    
+    function initSound() {
+      if (soundEnabled) return;
+      soundEnabled = true;
+      
+      if (bgMusicElement) {
+        bgMusicElement.volume = 0.15;
+        bgMusicElement.loop = true;
+        bgMusicElement.play().catch(e => console.log('Music error:', e));
+      }
+      
+      playSound('clickSound');
+      
+      const btn = document.getElementById('unlockSoundBtn');
+      if (btn) {
+        btn.style.transition = 'opacity 0.3s ease';
+        btn.style.opacity = '0';
+        setTimeout(() => {
+          btn.style.display = 'none';
+        }, 300);
+      }
+      
+      const msg = document.createElement('div');
+      msg.textContent = 'ЗВУК АКТИВИРОВАН';
+      msg.style.cssText = 'position:fixed; bottom:10px; left:50%; transform:translateX(-50%); background:#22a84a; color:#000; padding:4px 12px; font-size:8px; z-index:10000; font-family:monospace;';
+      document.body.appendChild(msg);
+      setTimeout(() => msg.remove(), 1500);
+    }
+    
+    const unlockSoundBtn = document.getElementById('unlockSoundBtn');
+    if (unlockSoundBtn) {
+      unlockSoundBtn.onclick = initSound;
+    }
+    
+    // === ОСТАЛЬНЫЕ ОБРАБОТЧИКИ ===
+    const recordLamp = document.getElementById('recordLamp');
+    const wrapper = document.querySelector('.wrapper');
+    const buttons = document.querySelectorAll('.nav-btn');
+    
+    // Фильтрация операций
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const operationItems = document.querySelectorAll('.operation-item');
+    
+    if (filterBtns.length && operationItems.length) {
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          const filterValue = this.getAttribute('data-filter');
+          operationItems.forEach(item => {
+            if (filterValue === 'all') {
+              item.classList.remove('hidden');
+            } else if (filterValue === 'completed') {
+              item.classList.contains('completed') ? item.classList.remove('hidden') : item.classList.add('hidden');
+            } else if (filterValue === 'active') {
+              item.classList.contains('active') ? item.classList.remove('hidden') : item.classList.add('hidden');
+            }
+          });
+        });
+      });
+    }
+    
+    // Переключение страниц
+    buttons.forEach(button => {
+      button.addEventListener('click', function() {
+        const pageId = this.getAttribute('data-page');
+        
+        playSound('clickSound');
+        
+        if (recordLamp) {
+          recordLamp.classList.remove('active');
+          void recordLamp.offsetWidth;
+          recordLamp.classList.add('active');
+        }
+        
+        if (wrapper) {
+          wrapper.classList.add('page-transition');
+          setTimeout(() => wrapper.classList.remove('page-transition'), 200);
+        }
+        
+        buttons.forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+        document.querySelectorAll('.page').forEach(page => page.classList.remove('active-page'));
+        document.getElementById('page-' + pageId).classList.add('active-page');
+      });
+    });
+    
+    // Эффект папки при наведении
+    buttons.forEach(btn => {
+      const defaultIcon = btn.getAttribute('data-default');
+      const hoverIcon = btn.getAttribute('data-hover');
+      if (defaultIcon && hoverIcon) {
+        btn.addEventListener('mouseenter', () => btn.textContent = hoverIcon);
+        btn.addEventListener('mouseleave', () => btn.textContent = defaultIcon);
+      }
+    });
     
     // === ЖИВЫЕ ДАТА И ВРЕМЯ ===
     function updateDateTime() {
@@ -2744,7 +2729,7 @@
       });
     }
 
-    // === СЕКРЕТНАЯ СТРАНИЦА С ТЕРМИНАЛОМ ===
+    // === СЕКРЕТНАЯ СТРАНИЦА ===
     const secretBtn = document.querySelector('.nav-btn[data-page="secret"]');
     const secretPage = document.getElementById('page-secret');
     let secretUnlocked = false;
