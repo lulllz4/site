@@ -1923,12 +1923,12 @@
           <div class="timeline-item">
             <div class="timeline-year">2022</div>
             <div class="timeline-dot"></div>
-            <div class="timeline-text">Помощник комиссара<br>«Добрынинская»</div>
+            <div class="timeline-text">Вступление в партию</div>
           </div>
           <div class="timeline-item">
             <div class="timeline-year">2024</div>
             <div class="timeline-dot"></div>
-            <div class="timeline-text">Вступление в партию</div>
+            <div class="timeline-text">Помощник комиссара<br>«Добрынинская»</div>
           </div>
           <div class="timeline-item">
             <div class="timeline-year">2026</div>
@@ -2627,24 +2627,28 @@
     }
     
     // === АКТИВАЦИЯ ЗВУКОВ ПО КНОПКЕ ===
-    function initSound() {
+       function initSound() {
       if (soundEnabled) return;
       soundEnabled = true;
       
-      if (bgMusicElement) {
-        bgMusicElement.volume = 0.2;
-        bgMusicElement.loop = true;
-        bgMusicElement.play().catch(e => console.log('Music error:', e));
+      // Запускаем обычную фоновую музыку
+      if (normalBgMusic) {
+        normalBgMusic.volume = 0.2;
+        normalBgMusic.loop = true;
+        normalBgMusic.play().catch(e => console.log('Music error:', e));
       }
       
       playSound('clickSound');
       
-      // Запускаем циклические звуки
-      if (!isOnSecretPage) {
-        if (ambientTimer) clearTimeout(ambientTimer);
-        ambientTimer = setTimeout(playRandomAmbientSound, 5000);
+      // Если после активации звуков мы уже на секретной странице — переключаем музыку
+      if (secretPage && secretPage.classList.contains('active-page')) {
+        // Небольшая задержка, чтобы обычная музыка успела запуститься
+        setTimeout(() => {
+          switchToSecretMusic();
+        }, 100);
       }
       
+      // Кнопка исчезает
       const btn = document.getElementById('unlockSoundBtn');
       if (btn) {
         btn.style.transition = 'opacity 0.3s ease';
@@ -2974,35 +2978,49 @@
     const normalBgMusic = document.getElementById('bgMusic');
     const secretBgMusic = document.getElementById('secretBgMusic');
     let wasNormalMusicPlaying = false;
+    let isSecretMusicActive = false;
     
     function switchToSecretMusic() {
+      // Если звуки не активированы — ничего не делаем
       if (!soundEnabled) return;
+      // Если уже на секретной музыке — не переключаем
+      if (isSecretMusicActive) return;
       
-      // Запоминаем, играла ли обычная музыка
-      if (normalBgMusic && !normalBgMusic.paused) {
-        wasNormalMusicPlaying = true;
-        normalBgMusic.pause();
-      } else {
-        wasNormalMusicPlaying = false;
+      // Запоминаем и останавливаем обычную музыку
+      if (normalBgMusic) {
+        if (!normalBgMusic.paused) {
+          wasNormalMusicPlaying = true;
+          normalBgMusic.pause();
+        } else {
+          wasNormalMusicPlaying = false;
+        }
       }
       
       // Запускаем секретную музыку
       if (secretBgMusic) {
         secretBgMusic.currentTime = 0;
         secretBgMusic.volume = 0.25;
+        secretBgMusic.loop = true;
         secretBgMusic.play().catch(e => console.log('Secret music error:', e));
+        isSecretMusicActive = true;
       }
     }
     
     function switchToNormalMusic() {
+      // Если звуки не активированы — ничего не делаем
+      if (!soundEnabled) return;
+      // Если секретная музыка неактивна — ничего не делаем
+      if (!isSecretMusicActive) return;
+      
       // Останавливаем секретную музыку
       if (secretBgMusic && !secretBgMusic.paused) {
         secretBgMusic.pause();
         secretBgMusic.currentTime = 0;
       }
+      isSecretMusicActive = false;
       
       // Возвращаем обычную музыку, если она играла до этого
-      if (wasNormalMusicPlaying && normalBgMusic && soundEnabled) {
+      if (wasNormalMusicPlaying && normalBgMusic) {
         normalBgMusic.play().catch(e => console.log('Normal music resume error:', e));
       }
     }
@@ -3015,6 +3033,11 @@
       } else {
         switchToNormalMusic();
       }
+    });
+    
+    if (secretPage) {
+      secretPageObserver.observe(secretPage, { attributes: true, attributeFilter: ['class'] });
+    }
     });
     
     if (secretPage) {
