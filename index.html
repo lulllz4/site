@@ -6,6 +6,7 @@
 <title>КГБ КПМ // ДОСЬЕ ТИНЪЮНЬ // ГРИФ "ОСОБОЙ ВАЖНОСТИ"</title>
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Press+Start+2P&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
+  /* ВЕСЬ ВАШ CSS ОСТАЁТСЯ БЕЗ ИЗМЕНЕНИЙ — он слишком большой, но я его сохраняю */
   * {
     margin: 0;
     padding: 0;
@@ -2535,7 +2536,15 @@
       startTyping();
     }
     
-    // === ЗВУКИ (ОДИН РАЗ, БЕЗ ПОВТОРЕНИЙ) ===
+    // === ОСНОВНЫЕ ПЕРЕМЕННЫЕ ===
+    const recordLamp = document.getElementById('recordLamp');
+    const wrapper = document.querySelector('.wrapper');
+    const buttons = document.querySelectorAll('.nav-btn');
+    const secretPage = document.getElementById('page-secret');
+    let secretUnlocked = false;
+    let isOnSecretPage = false;
+    
+    // === ЗВУКИ ===
     let soundEnabled = false;
     const bgMusicElement = document.getElementById('bgMusic');
     
@@ -2549,34 +2558,68 @@
       }
     }
     
-   function initSound() {
+    // === ЦИКЛИЧНЫЕ ФОНОВЫЕ ЗВУКИ ===
+    const writingAudio = document.getElementById('writingSound');
+    const printerAudio = document.getElementById('printerSound');
+    const trainAudio = document.getElementById('trainSound');
+    let ambientTimer = null;
+    let currentAmbientSound = null;
+    
+    function stopCurrentAmbientSound() {
+      if (currentAmbientSound) {
+        currentAmbientSound.pause();
+        currentAmbientSound.currentTime = 0;
+        currentAmbientSound = null;
+      }
+    }
+    
+    function playRandomAmbientSound() {
+      if (isOnSecretPage) return;
+      if (!soundEnabled) return;
+      
+      stopCurrentAmbientSound();
+      
+      const sounds = [writingAudio, printerAudio, trainAudio].filter(s => s && s.src);
+      if (sounds.length === 0) return;
+      
+      const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
+      currentAmbientSound = randomSound;
+      
+      if (randomSound) {
+        randomSound.currentTime = 0;
+        randomSound.volume = 0.15;
+        randomSound.play().catch(e => console.log('Ambient sound error:', e));
+      }
+      
+      const nextDelay = 45000 + Math.random() * 45000;
+      if (ambientTimer) clearTimeout(ambientTimer);
+      ambientTimer = setTimeout(playRandomAmbientSound, nextDelay);
+    }
+    
+    // === АКТИВАЦИЯ ЗВУКОВ ПО КНОПКЕ ===
+    function initSound() {
       if (soundEnabled) return;
       soundEnabled = true;
       
       if (bgMusicElement) {
-        bgMusicElement.volume = 1;
+        bgMusicElement.volume = 0.2;
         bgMusicElement.loop = true;
         bgMusicElement.play().catch(e => console.log('Music error:', e));
       }
       
       playSound('clickSound');
-
-      // === ЗАПУСКАЕМ ЦИКЛИЧЕСКИЕ ФОНОВЫЕ ЗВУКИ ПОСЛЕ АКТИВАЦИИ ===
-      // Убедимся, что они не запустятся на секретной странице
-      if (ambientSoundsEnabled && !isOnSecretPage) {
-         // Небольшая задержка перед первым звуком
-         setTimeout(() => {
-            playRandomAmbientSound();
-         }, 1000);
+      
+      // Запускаем циклические звуки
+      if (!isOnSecretPage) {
+        if (ambientTimer) clearTimeout(ambientTimer);
+        ambientTimer = setTimeout(playRandomAmbientSound, 5000);
       }
       
       const btn = document.getElementById('unlockSoundBtn');
       if (btn) {
         btn.style.transition = 'opacity 0.3s ease';
         btn.style.opacity = '0';
-        setTimeout(() => {
-          btn.style.display = 'none';
-        }, 300);
+        setTimeout(() => { btn.style.display = 'none'; }, 300);
       }
       
       const msg = document.createElement('div');
@@ -2591,12 +2634,29 @@
       unlockSoundBtn.onclick = initSound;
     }
     
-    // === ОСТАЛЬНЫЕ ОБРАБОТЧИКИ ===
-    const recordLamp = document.getElementById('recordLamp');
-    const wrapper = document.querySelector('.wrapper');
-    const buttons = document.querySelectorAll('.nav-btn');
+    // === СЛЕЖЕНИЕ ЗА СЕКРЕТНОЙ СТРАНИЦЕЙ ===
+    const observer = new MutationObserver(function() {
+      const secretPageActive = secretPage && secretPage.classList.contains('active-page');
+      if (secretPageActive !== isOnSecretPage) {
+        isOnSecretPage = secretPageActive;
+        if (isOnSecretPage) {
+          if (ambientTimer) clearTimeout(ambientTimer);
+          ambientTimer = null;
+          stopCurrentAmbientSound();
+        } else {
+          if (soundEnabled) {
+            if (ambientTimer) clearTimeout(ambientTimer);
+            ambientTimer = setTimeout(playRandomAmbientSound, 10000);
+          }
+        }
+      }
+    });
     
-    // Фильтрация операций
+    if (secretPage) {
+      observer.observe(secretPage, { attributes: true, attributeFilter: ['class'] });
+    }
+    
+    // === ФИЛЬТРАЦИЯ ОПЕРАЦИЙ ===
     const filterBtns = document.querySelectorAll('.filter-btn');
     const operationItems = document.querySelectorAll('.operation-item');
     
@@ -2619,7 +2679,7 @@
       });
     }
     
-    // Переключение страниц
+    // === ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ ===
     buttons.forEach(button => {
       button.addEventListener('click', function() {
         const pageId = this.getAttribute('data-page');
@@ -2644,7 +2704,7 @@
       });
     });
     
-    // Эффект папки при наведении
+    // === ЭФФЕКТ ПАПКИ ПРИ НАВЕДЕНИИ ===
     buttons.forEach(btn => {
       const defaultIcon = btn.getAttribute('data-default');
       const hoverIcon = btn.getAttribute('data-hover');
@@ -2767,13 +2827,10 @@
       });
     }
 
-    // === СЕКРЕТНАЯ СТРАНИЦА ===
+    // === СЕКРЕТНАЯ СТРАНИЦА С ТЕРМИНАЛОМ ===
     const secretBtn = document.querySelector('.nav-btn[data-page="secret"]');
-    const secretPage = document.getElementById('page-secret');
-    let secretUnlocked = false;
     
     function createTerminalModal() {
-      // Блокируем скролл фона
       document.body.style.overflow = 'hidden';
       
       const modal = document.createElement('div');
@@ -2803,14 +2860,12 @@
       const errorDiv = document.getElementById('terminalError');
       const mainPageBtn = document.querySelector('.nav-btn[data-page="main"]');
       
-      // Функция возврата на первую страницу
       function redirectToMainPage() {
         document.body.style.overflow = '';
         if (modal) modal.remove();
         secretUnlocked = false;
         secretPage.classList.remove('active-page');
         
-        // Активируем первую страницу
         document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
         if (mainPageBtn) mainPageBtn.classList.add('active');
         document.querySelectorAll('.page').forEach(page => page.classList.remove('active-page'));
@@ -2826,14 +2881,12 @@
         if (e.key === 'Enter') {
           const enteredCode = codeInput.value.trim();
           if (enteredCode === '17012018') {
-            // Правильный код — открываем секретную страницу
             document.body.style.overflow = '';
             modal.classList.remove('active');
             setTimeout(() => modal.remove(), 300);
             secretUnlocked = true;
             secretPage.classList.add('active-page');
             
-            // Специальный звук для секретной страницы
             const computerAlert = document.getElementById('computerAlertSound');
             if (computerAlert && soundEnabled) {
               computerAlert.currentTime = 0;
@@ -2852,7 +2905,6 @@
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active-page'));
             secretPage.classList.add('active-page');
           } else {
-            // Неправильный код
             errorDiv.textContent = 'ОШИБКА: НЕВЕРНЫЙ КОД ДОСТУПА. ДОСТУП ЗАПРЕЩЁН.';
             codeInput.value = '';
             codeInput.focus();
@@ -2868,19 +2920,15 @@
       modal.classList.add('active');
     }
     
-        // Обработчик нажатия на секретную кнопку
     if (secretBtn) {
       secretBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        
-        // Если страница уже разблокирована, просто переключаемся
         if (secretUnlocked) {
           document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
           secretBtn.classList.add('active');
           document.querySelectorAll('.page').forEach(page => page.classList.remove('active-page'));
           secretPage.classList.add('active-page');
         } else {
-          // Показываем терминал только если он ещё не открыт
           const existingModal = document.getElementById('terminalModal');
           if (!existingModal) {
             createTerminalModal();
@@ -2888,100 +2936,7 @@
         }
       });
     }
-
-       // === ЦИКЛИЧНЫЕ ФОНОВЫЕ ЗВУКИ (writing, printer, train) ===
-    const writingAudio = document.getElementById('writingSound');
-    const printerAudio = document.getElementById('printerSound');
-    const trainAudio = document.getElementById('trainSound');
     
-    let ambientSoundsEnabled = false;
-    let ambientTimer = null;
-    let currentAmbientSound = null;
-    let isOnSecretPage = false;
-    
-    // Функция остановки текущего фонового звука
-    function stopCurrentAmbientSound() {
-      if (currentAmbientSound) {
-        currentAmbientSound.pause();
-        currentAmbientSound.currentTime = 0;
-        currentAmbientSound = null;
-      }
-    }
-    
-    // Функция воспроизведения случайного звука
-    function playRandomAmbientSound() {
-      // Не играем на секретной странице
-      if (isOnSecretPage) return;
-      
-      // Не играем, если звуки ещё не активированы пользователем
-      if (!soundEnabled) return;
-      
-      // Останавливаем текущий звук
-      stopCurrentAmbientSound();
-      
-      // Выбираем случайный звук
-      const sounds = [writingAudio, printerAudio, trainAudio];
-      const validSounds = sounds.filter(s => s && s.src);
-      if (validSounds.length === 0) return;
-      
-      const randomSound = validSounds[Math.floor(Math.random() * validSounds.length)];
-      currentAmbientSound = randomSound;
-      
-      if (randomSound) {
-        randomSound.currentTime = 0;
-        randomSound.volume = 0.2;  // Тихий фон
-        randomSound.play().catch(e => console.log('Ambient sound error:', e));
-      }
-      
-      // Следующий запуск через случайное время (от 45 до 90 секунд)
-      const nextDelay = 45000 + Math.random() * 45000;
-      if (ambientTimer) clearTimeout(ambientTimer);
-      ambientTimer = setTimeout(playRandomAmbientSound, nextDelay);
-    }
-    
-    // Первый запуск через 15 секунд после загрузки
-    setTimeout(() => {
-      ambientSoundsEnabled = true;
-      // Запускаем только если звуки активированы и не на секретной странице
-      if (soundEnabled && !isOnSecretPage) {
-        playRandomAmbientSound();
-      }
-    }, 15000);
-    
-    // Следим за включением звуков (если пользователь активировал позже)
-    const originalInitSound = initSound;
-    window.initSound = function() {
-      originalInitSound();
-      if (ambientSoundsEnabled && !isOnSecretPage) {
-        playRandomAmbientSound();
-      }
-    };
-    
-    // Следим за переключением на секретную страницу
-    const observer = new MutationObserver(function() {
-      const secretPageActive = secretPage && secretPage.classList.contains('active-page');
-      if (secretPageActive !== isOnSecretPage) {
-        isOnSecretPage = secretPageActive;
-        if (isOnSecretPage) {
-          // На секретной странице — останавливаем звуки
-          if (ambientTimer) clearTimeout(ambientTimer);
-          ambientTimer = null;
-          stopCurrentAmbientSound();
-        } else {
-          // Покинули секретную страницу — перезапускаем цикл
-          if (soundEnabled && ambientSoundsEnabled) {
-            if (ambientTimer) clearTimeout(ambientTimer);
-            const randomDelay = 10000 + Math.random() * 20000;
-            ambientTimer = setTimeout(playRandomAmbientSound, randomDelay);
-          }
-        }
-      }
-    });
-    
-    if (secretPage) {
-      observer.observe(secretPage, { attributes: true, attributeFilter: ['class'] });
-    }
-   
   });
 </script>
 </body>
