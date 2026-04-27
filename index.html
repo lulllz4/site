@@ -1753,6 +1753,23 @@
     margin-top: 10px;
     font-size: 11px;
   }
+
+   /* ========== ИНДИКАТОР ФОНОВЫХ ЗВУКОВ ========== */
+  .ambient-indicator {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    font-size: 7px;
+    color: #5a4a3a;
+    font-family: monospace;
+    z-index: 9999;
+    background: rgba(0,0,0,0.5);
+    padding: 2px 6px;
+    border-radius: 3px;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+ 
 </style>
 </head>
 <body class="crt">
@@ -2431,6 +2448,15 @@
  <audio id="computerAlertSound" preload="auto">
   <source src="computer-alert-sound.mp3" type="audio/mpeg">
 </audio>
+ <audio id="writingSound" preload="auto">
+  <source src="writing.mp3" type="audio/mpeg">
+</audio>
+<audio id="printerSound" preload="auto">
+  <source src="printer.mp3" type="audio/mpeg">
+</audio>
+<audio id="trainSound" preload="auto">
+  <source src="train.mp3" type="audio/mpeg">
+</audio>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -2853,6 +2879,100 @@
         }
       });
     }
+
+       // === ЦИКЛИЧНЫЕ ФОНОВЫЕ ЗВУКИ (writing, printer, train) ===
+    const writingAudio = document.getElementById('writingSound');
+    const printerAudio = document.getElementById('printerSound');
+    const trainAudio = document.getElementById('trainSound');
+    
+    let ambientSoundsEnabled = false;
+    let ambientTimer = null;
+    let currentAmbientSound = null;
+    let isOnSecretPage = false;
+    
+    // Функция остановки текущего фонового звука
+    function stopCurrentAmbientSound() {
+      if (currentAmbientSound) {
+        currentAmbientSound.pause();
+        currentAmbientSound.currentTime = 0;
+        currentAmbientSound = null;
+      }
+    }
+    
+    // Функция воспроизведения случайного звука
+    function playRandomAmbientSound() {
+      // Не играем на секретной странице
+      if (isOnSecretPage) return;
+      
+      // Не играем, если звуки ещё не активированы пользователем
+      if (!soundEnabled) return;
+      
+      // Останавливаем текущий звук
+      stopCurrentAmbientSound();
+      
+      // Выбираем случайный звук
+      const sounds = [writingAudio, printerAudio, trainAudio];
+      const validSounds = sounds.filter(s => s && s.src);
+      if (validSounds.length === 0) return;
+      
+      const randomSound = validSounds[Math.floor(Math.random() * validSounds.length)];
+      currentAmbientSound = randomSound;
+      
+      if (randomSound) {
+        randomSound.currentTime = 0;
+        randomSound.volume = 0.2;  // Тихий фон
+        randomSound.play().catch(e => console.log('Ambient sound error:', e));
+      }
+      
+      // Следующий запуск через случайное время (от 45 до 90 секунд)
+      const nextDelay = 45000 + Math.random() * 45000;
+      if (ambientTimer) clearTimeout(ambientTimer);
+      ambientTimer = setTimeout(playRandomAmbientSound, nextDelay);
+    }
+    
+    // Первый запуск через 15 секунд после загрузки
+    setTimeout(() => {
+      ambientSoundsEnabled = true;
+      // Запускаем только если звуки активированы и не на секретной странице
+      if (soundEnabled && !isOnSecretPage) {
+        playRandomAmbientSound();
+      }
+    }, 15000);
+    
+    // Следим за включением звуков (если пользователь активировал позже)
+    const originalInitSound = initSound;
+    window.initSound = function() {
+      originalInitSound();
+      if (ambientSoundsEnabled && !isOnSecretPage) {
+        playRandomAmbientSound();
+      }
+    };
+    
+    // Следим за переключением на секретную страницу
+    const observer = new MutationObserver(function() {
+      const secretPageActive = secretPage && secretPage.classList.contains('active-page');
+      if (secretPageActive !== isOnSecretPage) {
+        isOnSecretPage = secretPageActive;
+        if (isOnSecretPage) {
+          // На секретной странице — останавливаем звуки
+          if (ambientTimer) clearTimeout(ambientTimer);
+          ambientTimer = null;
+          stopCurrentAmbientSound();
+        } else {
+          // Покинули секретную страницу — перезапускаем цикл
+          if (soundEnabled && ambientSoundsEnabled) {
+            if (ambientTimer) clearTimeout(ambientTimer);
+            const randomDelay = 10000 + Math.random() * 20000;
+            ambientTimer = setTimeout(playRandomAmbientSound, randomDelay);
+          }
+        }
+      }
+    });
+    
+    if (secretPage) {
+      observer.observe(secretPage, { attributes: true, attributeFilter: ['class'] });
+    }
+   
   });
 </script>
 </body>
