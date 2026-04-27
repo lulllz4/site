@@ -1770,7 +1770,28 @@
     pointer-events: none;
     opacity: 0.5;
   }
- 
+
+  /* ========== СТИЛИ ДЛЯ ПЕРСОНАЛЬНЫХ ДАННЫХ НА СЕКРЕТНОЙ СТРАНИЦЕ ========== */
+  .secret-person {
+    background: rgba(0,0,0,0.4);
+    border: 1px solid #8b0000;
+    padding: 12px;
+    margin: 16px 0;
+  }
+
+  .secret-person-row {
+    font-family: monospace;
+    font-size: 11px;
+    line-height: 1.6;
+    color: #ffbbbb;
+  }
+
+  .secret-person-label {
+    color: #ff6666;
+    min-width: 130px;
+    display: inline-block;
+  }
+  
 </style>
 </head>
 <body class="crt">
@@ -2365,18 +2386,25 @@
     <div class="card secret-card">
       <div class="card-header"><span class="header-icon">☠</span> [ ДЕЛО № 17-01-2018 ]</div>
       <div class="card-body">
-        <div class="secret-title">АКТ О ЛИКВИДАЦИИ СТАНЦИИ «НАГАТИНСКАЯ»</div>
-        <div class="secret-date">2015 год. Рассекречено через 18 лет. Копия № 7.</div>
+        <div class="secret-title">АКТ О ЛИКВИДАЦИИ</div>
         
         <div class="secret-content">
-          <p><span class="blink-red">Постановление Политбюро № 017 от 12.04.2015.</span> Станция «Нагатинская» признана не подлежащей эвакуации. Причина: <span class="redacted">[вырезано цензурой]</span>. Приказ об уничтожении подписан лично <span class="redacted">[имя удалено]</span>.</p>
+          <div class="secret-person">
+            <div class="secret-person-row"><span class="secret-person-label">ФИО:</span> Волкова Анна Михайловна</div>
+            <div class="secret-person-row"><span class="secret-person-label">Дата рождения:</span> 15.03.1980</div>
+            <div class="secret-person-row"><span class="secret-person-label">Статус:</span> гражданское лицо, опекун Линь Тинъюнь</div>
+          </div>
           
-          <p>Полевой отряд Красной линии получил приказ: <span class="blink-red">не допускать прорыва</span>. Гражданское население — <span class="redacted">уровень эвакуации признан нецелесообразным</span>. Потери среди мирного населения: <span class="blink-red">оценочно 400–600 человек</span>.</p>
+          <p><span class="blink-red">Постановление Политбюро № <span class="redacted">[вырезано цензурой]</span> от 14.08.2018.</span></p>
           
-          <p>Тинъюнь Линь, возрастом 8 лет, была включена в список эвакуируемых <span class="blink-red">по личному указанию Корбута</span>. Причина не зафиксирована. Допрошенные свидетели показали: <span class="redacted">[дальнейшее засекречено]</span>.</p>
+          <p>Признать Волкову А.М. носителем информации, не подлежащей разглашению, в связи с осведомлённостью об истинных обстоятельствах <span class="redacted">[вырезано цензурой]</span>.</p>
+          
+          <p>Основание: показания агента <span class="redacted">[позывной удалён]</span>. Волкова А.М. намеревалась <span class="redacted">[дальнейшее засекречено]</span>.</p>
+          
+          <p>Решение: <span class="blink-red">ликвидация под видом естественной смерти</span>. Метод: <span class="redacted">[вырезано цензурой]</span>.</p>
           
           <div class="secret-warning">
-            <span class="blink-red">ПРЕДУПРЕЖДЕНИЕ:</span> Объект Тинъюнь НЕ ДОЛЖЕН узнать о существовании данного документа. Разглашение информации приведёт к <span class="blink-red">непредсказуемым последствиям</span> для лояльности сотрудника.
+            <span class="blink-red">Исполнение:</span> 19.09.2018, медицинский блок станции «Площадь Революции». Смерть наступила 22.09.2018.
           </div>
           
           <p class="secret-signature">Подпись: <span class="redacted">[неразборчиво]</span><br>Печать: <span class="blink-red">КГБ КРАСНОЙ ЛИНИИ. ОСОБЫЙ СЕКТОР.</span></p>
