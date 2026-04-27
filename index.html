@@ -1619,6 +1619,36 @@
   .success-green {
     color: #22a84a;
   }
+
+  /* ========== СТАТУС ЗДОРОВЬЯ (ПОД ФОТО) ========== */
+  .status-banner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    background: rgba(10, 12, 16, 0.7);
+    border: 1px solid #2a1a1a;
+    padding: 12px 16px;
+    margin-bottom: 25px;
+    font-family: monospace;
+  }
+
+  .status-item {
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+
+  .status-label {
+    color: #8b0000;
+    text-transform: uppercase;
+  }
+
+  .status-value {
+    color: #b8c6db;
+  }
+
+  .success-green {
+    color: #22a84a;
+  }
   
 </style>
 </head>
@@ -2153,52 +2183,53 @@
   <div id="page-medical" class="page">
     <div class="warning-footer blink-red">[ МЕДИЦИНСКАЯ КАРТА // СОВ. СЕКРЕТНО // ВРАЧЕБНАЯ ТАЙНА ]</div>
 
-    <!-- ФОТО НА ВСЮ ШИРИНУ -->
-    <div class="photo-container" style="width: 100%; margin-bottom: 25px;">
-      <div class="kgb-stamp">КГБ</div>
-      <img src="photo.jpg" alt="Фото Тинъюнь">
-      <div class="stamp-overlay">
-        <div class="stamp-text">ПОДТВЕРЖДЕНО КГБ</div>
+    <!-- ФОТО + ФИЗИЧЕСКИЕ ХАРАКТЕРИСТИКИ -->
+    <div class="photo-big">
+      <div class="photo-container">
+        <div class="kgb-stamp">КГБ</div>
+        <img src="photo.jpg" alt="Фото Тинъюнь">
+        <div class="stamp-overlay">
+          <div class="stamp-text">ПОДТВЕРЖДЕНО КГБ</div>
+        </div>
+        <div class="photo-stamp blink-red">АРХИВ // 2033</div>
       </div>
-      <div class="photo-stamp blink-red">АРХИВ // 2033</div>
-    </div>
-
-    <!-- ФИЗИЧЕСКИЕ ХАРАКТЕРИСТИКИ (ПОД ФОТО) -->
-    <div class="card">
-      <div class="card-header"><span class="header-icon">›</span> [ ФИЗИЧЕСКИЕ ХАРАКТЕРИСТИКИ ]</div>
-      <div class="card-body">
-        <div class="med-grid">
-          <div class="med-row"><div class="med-label">Возраст</div><div class="med-value">26 лет</div></div>
-          <div class="med-row"><div class="med-label">Рост</div><div class="med-value">162 см</div></div>
-          <div class="med-row"><div class="med-label">Вес</div><div class="med-value">50 кг</div></div>
-          <div class="med-row"><div class="med-label">Телосложение</div><div class="med-value">Худощавое, пропорциональное. Визуально хрупкое</div></div>
-          <div class="med-row"><div class="med-label">Раса / тип</div><div class="med-value">Метиска (отец — китаец, мать — русская). Восточные черты преобладают</div></div>
-          <div class="med-row"><div class="med-label">Волосы</div><div class="med-value">Шатенка (тёмно-русые с тёплым каштановым оттенком), длинные, прямые. Чёлка длинная, слегка ниже бровей. Чаще собраны в высокий хвост</div></div>
-          <div class="med-row"><div class="med-label">Глаза</div><div class="med-value">Тёпло-зелёные, миндалевидные. Внешний уголок слегка приподнят. Взгляд спокойный</div></div>
-          <div class="med-row"><div class="med-label">Форма лица</div><div class="med-value">Овальная, слегка вытянутая</div></div>
-          <div class="med-row"><div class="med-label">Скулы</div><div class="med-value">Средней высоты, невыраженные</div></div>
-          <div class="med-row"><div class="med-label">Нос</div><div class="med-value">Прямой, средней длины. Переносица ближе к европейскому типу. Кончик округлый</div></div>
-          <div class="med-row"><div class="med-label">Брови</div><div class="med-value">Средней ширины, с лёгким изломом. Цвет на тон темнее волос</div></div>
-          <div class="med-row"><div class="med-label">Губы</div><div class="med-value">Средней полноты, верхняя тоньше нижней. Контур чёткий</div></div>
-          <div class="med-row"><div class="med-label">Кожа</div><div class="med-value">Светлая. Без шрамов и татуировок</div></div>
-          <div class="med-row"><div class="med-label">Подбородок</div><div class="med-value">Округлый, средней выраженности</div></div>
-          <div class="med-row"><div class="med-label">Шея</div><div class="med-value">Тонкая, средней длины</div></div>
-          <div class="med-row"><div class="med-label">Особые приметы</div><div class="med-value blink-red">Родимое пятно 0,5 см на левой стороне шеи, ниже челюсти</div></div>
+      
+      <!-- ФИЗИЧЕСКИЕ ХАРАКТЕРИСТИКИ (справа от фото) -->
+      <div class="card">
+        <div class="card-header"><span class="header-icon">›</span> [ ФИЗИЧЕСКИЕ ХАРАКТЕРИСТИКИ ]</div>
+        <div class="card-body">
+          <div class="med-grid">
+            <div class="med-row"><div class="med-label">Возраст</div><div class="med-value">26 лет</div></div>
+            <div class="med-row"><div class="med-label">Рост</div><div class="med-value">162 см</div></div>
+            <div class="med-row"><div class="med-label">Вес</div><div class="med-value">50 кг</div></div>
+            <div class="med-row"><div class="med-label">Телосложение</div><div class="med-value">Худощавое, пропорциональное</div></div>
+            <div class="med-row"><div class="med-label">Раса / тип</div><div class="med-value">Метиска, восточные черты преобладают</div></div>
+            <div class="med-row"><div class="med-label">Волосы</div><div class="med-value">Шатенка, длинные, прямые. Чаще собраны в хвост</div></div>
+            <div class="med-row"><div class="med-label">Глаза</div><div class="med-value">Тёпло-зелёные, миндалевидные</div></div>
+            <div class="med-row"><div class="med-label">Особые приметы</div><div class="med-value blink-red">Родимое пятно на левой стороне шеи</div></div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- ТАБЛИЦА 2: ОДЕЖДА И СНАРЯЖЕНИЕ -->
+    <!-- КРАТКИЙ СТАТУС ЗДОРОВЬЯ (ПОД ФОТО) -->
+    <div class="status-banner">
+      <div class="status-item"><span class="status-label">ОБЩЕЕ СОСТОЯНИЕ:</span> <span class="status-value blink-red">УДОВЛЕТВОРИТЕЛЬНОЕ</span></div>
+      <div class="status-item"><span class="status-label">ГОДЕН К СЛУЖБЕ:</span> <span class="status-value success-green">ДА</span></div>
+      <div class="status-item"><span class="status-label">КАТЕГОРИЯ:</span> <span class="status-value">А-2</span></div>
+      <div class="status-item"><span class="status-label">ПОСЛЕДНИЙ ОСМОТР:</span> <span class="status-value">15.02.2033</span></div>
+      <div class="status-item"><span class="status-label">СЛЕДУЮЩИЙ ОСМОТР:</span> <span class="status-value blink-red">15.02.2034</span></div>
+    </div>
+
+    <!-- ОСТАЛЬНЫЕ КАРТОЧКИ -->
+    <!-- ОДЕЖДА И СНАРЯЖЕНИЕ -->
     <div class="card">
       <div class="card-header"><span class="header-icon">›</span> [ ОДЕЖДА И СНАРЯЖЕНИЕ ]</div>
       <div class="card-body">
         <div class="med-grid">
-          <div class="med-row"><div class="med-label">Служебная одежда</div><div class="med-value">Форменный китель тёмно-бордового цвета, чёрные брюки (устав Отдела внешних связей Красной линии)</div></div>
-          <div class="med-row"><div class="med-label">Отличительный знак</div><div class="med-value blink-red">Нашивка на левом рукаве — лисья морда внутри красной звезды (личный знак, не предусмотрен уставом)</div></div>
-          <div class="med-row"><div class="med-label">Повседневная одежда</div><div class="med-value">Тёмная куртка, свитер, чёрные брюки. Без следов износа</div></div>
-          <div class="med-row"><div class="med-label">Обувь</div><div class="med-value">Армейские ботинки на толстой подошве, размер 37. Всегда начищены</div></div>
-          <div class="med-row"><div class="med-label">Очки</div><div class="med-value">Не носит</div></div>
-          <div class="med-row"><div class="med-label">Украшения</div><div class="med-value">Не зафиксировано</div></div>
+          <div class="med-row"><div class="med-label">Служебная одежда</div><div class="med-value">Форменный китель тёмно-бордового цвета, чёрные брюки</div></div>
+          <div class="med-row"><div class="med-label">Отличительный знак</div><div class="med-value blink-red">Нашивка на левом рукаве — лисья морда внутри красной звезды</div></div>
+          <div class="med-row"><div class="med-label">Обувь</div><div class="med-value">Армейские ботинки на толстой подошве, размер 37</div></div>
         </div>
       </div>
     </div>
@@ -2210,12 +2241,9 @@
         <div class="card-body">
           <div class="med-row"><div class="med-label">Группа крови</div><div class="med-value">2 (II), резус-фактор положительный</div></div>
           <div class="med-row"><div class="med-label">Хронические заболевания</div><div class="med-value">Не выявлены</div></div>
-          <div class="med-row"><div class="med-label">Инфекции в анамнезе</div><div class="med-value">Ветряная оспа (2009, лёгкая форма)</div></div>
-          <div class="med-row"><div class="med-label">Аллергии</div><div class="med-value blink-red">Пенициллин (кожная сыпь, подтверждено пробой 2028)</div></div>
-          <div class="med-row"><div class="med-label">Операции</div><div class="med-value">Не было</div></div>
-          <div class="med-row"><div class="med-label">Психическое здоровье</div><div class="med-value">На учёте не состоит. Жалоб не предъявляет</div></div>
-          <div class="med-row"><div class="med-label">Физическое развитие</div><div class="med-value">Соответствует возрасту. Дефицита массы нет</div></div>
-          <div class="med-row"><div class="med-label">Вредные привычки</div><div class="med-value">Табак — нет. Алкоголь — редко, до 50 мл крепкого. Наркотики — отрицает</div></div>
+          <div class="med-row"><div class="med-label">Аллергии</div><div class="med-value blink-red">Пенициллин (кожная сыпь)</div></div>
+          <div class="med-row"><div class="med-label">Психическое здоровье</div><div class="med-value">На учёте не состоит</div></div>
+          <div class="med-row"><div class="med-label">Вредные привычки</div><div class="med-value">Табак — нет. Алкоголь — редко</div></div>
         </div>
       </div>
 
@@ -2224,11 +2252,8 @@
         <div class="card-header"><span class="header-icon">›</span> [ ТРАВМЫ ]</div>
         <div class="card-body">
           <div class="timeline-card" style="margin-bottom: 8px;"><div class="title">Перелом левой ключицы (2016)</div></div>
-          <div class="timeline-card" style="margin-bottom: 8px;"><div class="title">Рваная рана правого предплечья (6 см) (2019)</div></div>
-          <div class="timeline-card" style="margin-bottom: 8px;"><div class="title">Ушиб рёбер (2021)</div></div>
-          <div class="timeline-card" style="margin-bottom: 8px;"><div class="title">Глубокая ссадина левой голени (термический ожог 2-й степени) (2024)</div></div>
+          <div class="timeline-card" style="margin-bottom: 8px;"><div class="title">Рваная рана правого предплечья (2019)</div></div>
           <div class="timeline-card" style="margin-bottom: 8px;"><div class="title">Сотрясение головного мозга (лёгкое) (2027)</div></div>
-          <div class="timeline-card" style="margin-bottom: 8px;"><div class="title">Растяжение связок левого голеностопа (2029)</div></div>
         </div>
       </div>
     </div>
@@ -2237,14 +2262,13 @@
     <div class="card">
       <div class="card-header"><span class="header-icon">›</span> [ СПЕЦИАЛЬНЫЕ ОТМЕТКИ ]</div>
       <div class="card-body">
-        <div class="med-row"><div class="med-label">Аллергия</div><div class="med-value blink-red">Аллергия на пенициллин внесена в личную карту и дублируется в экстренной выписке.</div></div>
-        <div class="med-row"><div class="med-label">Зрение</div><div class="med-value">Нарушений слуха и зрения не выявлено. Острота зрения — 0,9 на оба глаза.</div></div>
-        <div class="med-row"><div class="med-label">Стоматология</div><div class="med-value">2 пломбы. Удалённых зубов нет.</div></div>
-        <div class="med-row"><div class="med-label">Гинекология</div><div class="med-value">Цикл нерегулярный (стресс, недоедание). Беременностей не было.</div></div>
+        <div class="med-row"><div class="med-label">Аллергия</div><div class="med-value blink-red">Аллергия на пенициллин внесена в личную карту</div></div>
+        <div class="med-row"><div class="med-label">Зрение</div><div class="med-value">Острота зрения — 0,9 на оба глаза</div></div>
+        <div class="med-row"><div class="med-label">Гинекология</div><div class="med-value">Цикл нерегулярный (стресс, недоедание)</div></div>
       </div>
     </div>
 
-    <div class="warning-footer blink-red">[ ЗАКЛЮЧЕНИЕ МЕДИЦИНСКОЙ КОМИССИИ: ОБЪЕКТ ГОДЕН К СЛУЖБЕ. РЕКОМЕНДОВАНО ЕЖЕГОДНОЕ УГЛУБЛЁННОЕ ОБСЛЕДОВАНИЕ ]</div>
+    <div class="warning-footer blink-red">[ ЗАКЛЮЧЕНИЕ МЕДИЦИНСКОЙ КОМИССИИ: ОБЪЕКТ ГОДЕН К СЛУЖБЕ. РЕКОМЕНДОВАНО ЕЖЕГОДНОЕ ОБСЛЕДОВАНИЕ ]</div>
   </div>
     <div class="warning-footer blink-red">[ ОПЕРАТИВНОЕ ЗАМЕЧАНИЕ: ЛИЧНОСТЬ ОБЪЕКТА ПОДЛЕЖИТ ЗАЩИТЕ ]</div>
   </div>
