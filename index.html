@@ -2428,6 +2428,9 @@
 <audio id="alarmSound" preload="auto">
   <source src="alarm.mp3" type="audio/mpeg">
 </audio>
+ <audio id="computerAlertSound" preload="auto">
+  <source src="computer-alert-sound.mp3" type="audio/mpeg">
+</audio>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -2774,6 +2777,14 @@
             setTimeout(() => modal.remove(), 300);
             secretUnlocked = true;
             secretPage.classList.add('active-page');
+            
+            // === СПЕЦИАЛЬНЫЙ ЗВУК ДЛЯ СЕКРЕТНОЙ СТРАНИЦЫ ===
+            const computerAlert = document.getElementById('computerAlertSound');
+            if (computerAlert && soundEnabled) {
+              computerAlert.currentTime = 0;
+              computerAlert.volume = 0.4;
+              computerAlert.play().catch(e => console.log('Computer alert error:', e));
+            }
             
             const msg = document.createElement('div');
             msg.textContent = 'ДОСТУП РАЗРЕШЁН. АРХИВ ОТКРЫТ.';
