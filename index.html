@@ -2738,6 +2738,9 @@
     let secretUnlocked = false;
     
     function createTerminalModal() {
+      // Блокируем скролл фона
+      document.body.style.overflow = 'hidden';
+      
       const modal = document.createElement('div');
       modal.className = 'terminal-modal';
       modal.id = 'terminalModal';
@@ -2763,22 +2766,39 @@
       const closeBtn = document.getElementById('terminalCloseBtn');
       const codeInput = document.getElementById('codeInput');
       const errorDiv = document.getElementById('terminalError');
+      const mainPageBtn = document.querySelector('.nav-btn[data-page="main"]');
+      
+      // Функция возврата на первую страницу
+      function redirectToMainPage() {
+        document.body.style.overflow = '';
+        if (modal) modal.remove();
+        secretUnlocked = false;
+        secretPage.classList.remove('active-page');
+        
+        // Активируем первую страницу
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+        if (mainPageBtn) mainPageBtn.classList.add('active');
+        document.querySelectorAll('.page').forEach(page => page.classList.remove('active-page'));
+        const mainPage = document.getElementById('page-main');
+        if (mainPage) mainPage.classList.add('active-page');
+      }
       
       closeBtn.addEventListener('click', () => {
-        modal.classList.remove('active');
-        setTimeout(() => modal.remove(), 300);
+        redirectToMainPage();
       });
       
       codeInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
           const enteredCode = codeInput.value.trim();
           if (enteredCode === '17012018') {
+            // Правильный код — открываем секретную страницу
+            document.body.style.overflow = '';
             modal.classList.remove('active');
             setTimeout(() => modal.remove(), 300);
             secretUnlocked = true;
             secretPage.classList.add('active-page');
             
-            // === СПЕЦИАЛЬНЫЙ ЗВУК ДЛЯ СЕКРЕТНОЙ СТРАНИЦЫ ===
+            // Специальный звук для секретной страницы
             const computerAlert = document.getElementById('computerAlertSound');
             if (computerAlert && soundEnabled) {
               computerAlert.currentTime = 0;
@@ -2797,6 +2817,7 @@
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active-page'));
             secretPage.classList.add('active-page');
           } else {
+            // Неправильный код
             errorDiv.textContent = 'ОШИБКА: НЕВЕРНЫЙ КОД ДОСТУПА. ДОСТУП ЗАПРЕЩЁН.';
             codeInput.value = '';
             codeInput.focus();
@@ -2812,16 +2833,23 @@
       modal.classList.add('active');
     }
     
+        // Обработчик нажатия на секретную кнопку
     if (secretBtn) {
       secretBtn.addEventListener('click', (e) => {
         e.preventDefault();
+        
+        // Если страница уже разблокирована, просто переключаемся
         if (secretUnlocked) {
           document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
           secretBtn.classList.add('active');
           document.querySelectorAll('.page').forEach(page => page.classList.remove('active-page'));
           secretPage.classList.add('active-page');
         } else {
-          createTerminalModal();
+          // Показываем терминал только если он ещё не открыт
+          const existingModal = document.getElementById('terminalModal');
+          if (!existingModal) {
+            createTerminalModal();
+          }
         }
       });
     }
