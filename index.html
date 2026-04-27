@@ -1614,7 +1614,12 @@
 .nav-btn {
   transition: all 0.2s;
 }
- 
+
+  /* ========== ДЛЯ СТАТУСА ЗДОРОВЬЯ ========== */
+  .success-green {
+    color: #22a84a;
+  }
+  
 </style>
 </head>
 <body class="crt">
@@ -2148,7 +2153,7 @@
   <div id="page-medical" class="page">
     <div class="warning-footer blink-red">[ МЕДИЦИНСКАЯ КАРТА // СОВ. СЕКРЕТНО // ВРАЧЕБНАЯ ТАЙНА ]</div>
 
-    <div class="photo-big">
+        <div class="photo-big">
       <div class="photo-container">
         <div class="kgb-stamp">КГБ</div>
         <img src="photo.jpg" alt="Фото Тинъюнь">
@@ -2158,27 +2163,41 @@
         <div class="photo-stamp blink-red">АРХИВ // 2033</div>
       </div>
       
-      <!-- ФИЗИЧЕСКИЕ ХАРАКТЕРИСТИКИ (ПЕРЕНЕСЕНО НА МЕСТО УДАЛЁННОЙ КАРТОЧКИ) -->
-      <div class="card">
-        <div class="card-header"><span class="header-icon">›</span> [ ФИЗИЧЕСКИЕ ХАРАКТЕРИСТИКИ ]</div>
-        <div class="card-body">
-          <div class="med-grid">
-            <div class="med-row"><div class="med-label">Возраст</div><div class="med-value">26 лет</div></div>
-            <div class="med-row"><div class="med-label">Рост</div><div class="med-value">162 см</div></div>
-            <div class="med-row"><div class="med-label">Вес</div><div class="med-value">50 кг</div></div>
-            <div class="med-row"><div class="med-label">Телосложение</div><div class="med-value">Худощавое, пропорциональное. Визуально хрупкое</div></div>
-            <div class="med-row"><div class="med-label">Раса / тип</div><div class="med-value">Метиска (отец — китаец, мать — русская). Восточные черты преобладают</div></div>
-            <div class="med-row"><div class="med-label">Волосы</div><div class="med-value">Шатенка (тёмно-русые с тёплым каштановым оттенком), длинные, прямые. Чёлка длинная, слегка ниже бровей. Чаще собраны в высокий хвост</div></div>
-            <div class="med-row"><div class="med-label">Глаза</div><div class="med-value">Тёпло-зелёные, миндалевидные. Внешний уголок слегка приподнят. Взгляд спокойный</div></div>
-            <div class="med-row"><div class="med-label">Форма лица</div><div class="med-value">Овальная, слегка вытянутая</div></div>
-            <div class="med-row"><div class="med-label">Скулы</div><div class="med-value">Средней высоты, невыраженные</div></div>
-            <div class="med-row"><div class="med-label">Нос</div><div class="med-value">Прямой, средней длины. Переносица ближе к европейскому типу. Кончик округлый</div></div>
-            <div class="med-row"><div class="med-label">Брови</div><div class="med-value">Средней ширины, с лёгким изломом. Цвет на тон темнее волос</div></div>
-            <div class="med-row"><div class="med-label">Губы</div><div class="med-value">Средней полноты, верхняя тоньше нижней. Контур чёткий</div></div>
-            <div class="med-row"><div class="med-label">Кожа</div><div class="med-value">Светлая. Без шрамов и татуировок</div></div>
-            <div class="med-row"><div class="med-label">Подбородок</div><div class="med-value">Округлый, средней выраженности</div></div>
-            <div class="med-row"><div class="med-label">Шея</div><div class="med-value">Тонкая, средней длины</div></div>
-            <div class="med-row"><div class="med-label">Особые приметы</div><div class="med-value blink-red">Родимое пятно 0,5 см на левой стороне шеи, ниже челюсти</div></div>
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <!-- СТАТУС ЗДОРОВЬЯ (краткая сводка) -->
+        <div class="card">
+          <div class="card-header"><span class="header-icon">🏥</span> [ СТАТУС ЗДОРОВЬЯ ]</div>
+          <div class="card-body">
+            <div class="med-row"><div class="med-label">Общее состояние</div><div class="med-value blink-red">Удовлетворительное</div></div>
+            <div class="med-row"><div class="med-label">Годен к службе</div><div class="med-value success-green">ДА</div></div>
+            <div class="med-row"><div class="med-label">Категория годности</div><div class="med-value">А-2 (годен с незначительными ограничениями)</div></div>
+            <div class="med-row"><div class="med-label">Последний осмотр</div><div class="med-value">15.02.2033</div></div>
+            <div class="med-row"><div class="med-label">Следующий осмотр</div><div class="med-value blink-red">15.02.2034</div></div>
+          </div>
+        </div>
+        
+        <!-- ФИЗИЧЕСКИЕ ХАРАКТЕРИСТИКИ -->
+        <div class="card">
+          <div class="card-header"><span class="header-icon">›</span> [ ФИЗИЧЕСКИЕ ХАРАКТЕРИСТИКИ ]</div>
+          <div class="card-body">
+            <div class="med-grid">
+              <div class="med-row"><div class="med-label">Возраст</div><div class="med-value">26 лет</div></div>
+              <div class="med-row"><div class="med-label">Рост</div><div class="med-value">162 см</div></div>
+              <div class="med-row"><div class="med-label">Вес</div><div class="med-value">50 кг</div></div>
+              <div class="med-row"><div class="med-label">Телосложение</div><div class="med-value">Худощавое, пропорциональное. Визуально хрупкое</div></div>
+              <div class="med-row"><div class="med-label">Раса / тип</div><div class="med-value">Метиска (отец — китаец, мать — русская). Восточные черты преобладают</div></div>
+              <div class="med-row"><div class="med-label">Волосы</div><div class="med-value">Шатенка (тёмно-русые с тёплым каштановым оттенком), длинные, прямые. Чёлка длинная, слегка ниже бровей. Чаще собраны в высокий хвост</div></div>
+              <div class="med-row"><div class="med-label">Глаза</div><div class="med-value">Тёпло-зелёные, миндалевидные. Внешний уголок слегка приподнят. Взгляд спокойный</div></div>
+              <div class="med-row"><div class="med-label">Форма лица</div><div class="med-value">Овальная, слегка вытянутая</div></div>
+              <div class="med-row"><div class="med-label">Скулы</div><div class="med-value">Средней высоты, невыраженные</div></div>
+              <div class="med-row"><div class="med-label">Нос</div><div class="med-value">Прямой, средней длины. Переносица ближе к европейскому типу. Кончик округлый</div></div>
+              <div class="med-row"><div class="med-label">Брови</div><div class="med-value">Средней ширины, с лёгким изломом. Цвет на тон темнее волос</div></div>
+              <div class="med-row"><div class="med-label">Губы</div><div class="med-value">Средней полноты, верхняя тоньше нижней. Контур чёткий</div></div>
+              <div class="med-row"><div class="med-label">Кожа</div><div class="med-value">Светлая. Без шрамов и татуировок</div></div>
+              <div class="med-row"><div class="med-label">Подбородок</div><div class="med-value">Округлый, средней выраженности</div></div>
+              <div class="med-row"><div class="med-label">Шея</div><div class="med-value">Тонкая, средней длины</div></div>
+              <div class="med-row"><div class="med-label">Особые приметы</div><div class="med-value blink-red">Родимое пятно 0,5 см на левой стороне шеи, ниже челюсти</div></div>
+            </div>
           </div>
         </div>
       </div>
